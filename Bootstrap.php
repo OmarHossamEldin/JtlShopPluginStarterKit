@@ -1,18 +1,19 @@
-<?php declare(strict_types=1);
+<?php
 
-namespace Plugin\JtlShopStarterKite;
+declare(strict_types=1);
+
+namespace Plugin\JtlShopPluginStarterKit;
 
 use JTL\Events\Dispatcher;
 use JTL\Link\LinkInterface;
 use JTL\Plugin\Bootstrapper;
 use JTL\Smarty\JTLSmarty;
-use Plugin\JtlShopStarterKite\AdminRender;
-use Plugin\JtlShopStarterKite\Src\Database\Migrations\PostsTable;
-use Plugin\JtlShopStarterKite\Src\Support\Route;
+use Plugin\JtlShopPluginStarterKit\Src\Services\InstallService;
+use Plugin\JtlShopPluginStarterKit\Src\Services\RoutesService;
 
 /**
  * Class Bootstrap
- * @package Plugin\JtlShopStarterKite
+ * @package Plugin\JtlShopPluginStarterKit
  */
 class Bootstrap extends Bootstrapper
 {
@@ -31,8 +32,8 @@ class Bootstrap extends Bootstrapper
     {
         parent::installed();
 
-        $postsTable = new PostsTable;
-        $postsTable->up();
+        $withInstall = new InstallService;
+        $withInstall->install();
     }
 
     /**
@@ -42,14 +43,13 @@ class Bootstrap extends Bootstrapper
 
     public function enabled()
     {
-        
     }
 
     public function uninstalled(bool $deleteData = false)
     {
         if ($deleteData === true) {
-            $postsTable = new PostsTable;
-            $postsTable->down();
+            $deleteTables = new InstallService;
+            $deleteTables->unInstall();
         }
     }
     /**
@@ -59,10 +59,11 @@ class Bootstrap extends Bootstrapper
      */
     public function renderAdminMenuTab(string $template, int $menuID, JTLSmarty $smarty): string
     {
-        Route::get('PostController@index', $smarty);
-        
+        $routes = new RoutesService;
+        $routes->adminRoutes($this->getPlugin());
+
         $render = new AdminRender($this->getPlugin());
-        return $render->renderPage($template, $menuID, $smarty);
+        return $render->renderPage($template, $smarty);
     }
 
     /**
@@ -70,11 +71,11 @@ class Bootstrap extends Bootstrapper
      */
     public function prepareFrontend(LinkInterface $link, JTLSmarty $smarty): bool
     {
-        // Route::group(['VerifyAjaxRequest'], [
-        //     ''
-        // ]);
-
         parent::prepareFrontend($link, $smarty);
+
+        $routes = new RoutesService;
+        $routes->frontEndRoutes($this->getPlugin());
+
         return true;
     }
 }
