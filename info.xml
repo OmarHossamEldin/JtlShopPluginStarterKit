@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding="UTF-8"?>
 <jtlshopplugin>
-    <Name>JtlShopStarterKite</Name>
+    <Name>JtlShopPluginStarterKit</Name>
     <Description> starter kite inspired by Laravel framework and mvc pattern and it's wrap for Jtlshop built in classes</Description>
     <Author>Omar Hossam El-Din Kandil</Author>
     <URL>https://www.linkedin.com/in/omar-hossameldin-kandil-74633a1bb/</URL>
-    <PluginID>JtlShopStarterKite</PluginID>
+    <PluginID>JtlShopPluginStarterKit</PluginID>
     <XMLVersion>100</XMLVersion>
     <ShopVersion>5.0.0</ShopVersion>
     <Version>1.0.0</Version>
@@ -15,18 +15,21 @@
             <Customlink sort="1">
                 <Name>All_Posts</Name>
             </Customlink>
+            <Customlink sort="2">
+                <Name>Create_Post</Name>
+            </Customlink>
         </Adminmenu>
         <FrontendLink>
             <Link>
                 <Name>point_router</Name>
                 <Template>point_router.tpl</Template>                
                 <LinkLanguage iso="GER">
-                    <Seo>resource</Seo>
-                    <Name>resource</Name>
-                    <Title>resource</Title>
-                    <MetaTitle>resource</MetaTitle>
-                    <MetaKeywords>resource</MetaKeywords>
-                    <MetaDescription>resource</MetaDescription>
+                    <Seo>ressource</Seo>
+                    <Name>ressource</Name>
+                    <Title>ressource</Title>
+                    <MetaTitle>ressource</MetaTitle>
+                    <MetaKeywords>ressource</MetaKeywords>
+                    <MetaDescription>ressource</MetaDescription>
                 </LinkLanguage>
             </Link>
         </FrontendLink>
@@ -37,6 +40,11 @@
             </file>
         </CSS>
         <JS>
+            <file>
+                <name>HttpRequest.js</name>
+                <priority>1</priority>
+                <position>body</position>
+            </file>
             <file>
                 <name>main.js</name>
                 <priority>1</priority>

@@ -1,12 +1,15 @@
-<?php declare(strict_types=1);
+<?php
 
-namespace Plugin\JtlShopStarterKite;
+declare(strict_types=1);
+
+namespace Plugin\JtlShopPluginStarterKit;
 
 use InvalidArgumentException;
+use JTL\Smarty\JTLSmarty;
 
 /**
  * Class AdminRender
- * @package Plugin\JtlShopStarterKite
+ * @package Plugin\JtlShopPluginStarterKit
  */
 class AdminRender
 {
@@ -37,12 +40,14 @@ class AdminRender
      * @return string
      * @throws \SmartyException
      */
-    public function renderPage(string $template, int $menuID, Object $smarty): string
+    public function renderPage(string $template, JTLSmarty $smarty): string
     {
-        $smarty->assign('menuID', $menuID);
-        switch($template){
-            case "All_Posts":       
+        switch ($template) {
+            case "All_Posts":
                 $template = 'post/index.tpl';
+                break;
+            case "Create_Post":
+                $template = 'post/create.tpl';
                 break;
             default:
                 throw new InvalidArgumentException('Cannot render tab ' . $template);
