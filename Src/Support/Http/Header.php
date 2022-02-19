@@ -21,4 +21,9 @@ class Header
         header("$key: $content");
         return $this;
     }
+
+    public function statusCode(int $statusCode)
+    {
+        http_response_code($statusCode);
+    }
 }
