@@ -1,25 +1,24 @@
 <?php
 
-namespace Plugin\JtlShopStarterKite\Src\Database\Migrations;
+namespace Plugin\JtlShopPluginStarterKit\Src\Database\Migrations;
 
-use Plugin\JtlShopStarterKite\Src\Database\Initialization\Schema;
-use Plugin\JtlShopStarterKite\Src\Database\Initialization\Table;
+use Plugin\JtlShopPluginStarterKit\Src\Database\Initialization\Schema;
+use Plugin\JtlShopPluginStarterKit\Src\Database\Initialization\Table;
 
-class PostsTable  
+class PostsTable
 {
     public function up()
     {
-        $table =  new Table('posts');
-        $table->id();
-        $table->string('title');
-        $table->string('body');
-        $table->timestamps();
-        $table->primaryKey('id');
-        Schema::create($table);
+        Schema::create('tec_see_posts', function (Table $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('body');
+            $table->timestamps();
+        });
     }
 
     public function down()
     {
-        Schema::dropIfExistsdrop('posts');
+        Schema::dropIfExists('tec_see_posts');
     }
 }

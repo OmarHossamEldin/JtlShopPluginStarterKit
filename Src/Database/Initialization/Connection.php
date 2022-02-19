@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\JtlShopStarterKite\Src\Database\Initialization;
+namespace Plugin\JtlShopPluginStarterKit\Src\Database\Initialization;
 
 use JTL\Shop;
 
