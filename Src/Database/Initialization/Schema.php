@@ -1,30 +1,37 @@
 <?php
 
-namespace Plugin\JtlShopStarterKite\Src\Database\Initialization;
+namespace Plugin\JtlShopPluginStarterKit\Src\Database\Initialization;
 
-use Plugin\JtlShopStarterKite\Src\Database\Initialization\Connection;
+use Plugin\JtlShopPluginStarterKit\Src\Database\Initialization\Connection;
+use Plugin\JtlShopPluginStarterKit\Src\Exceptions\DatabaseQueryException;
 
-class Schema 
+class Schema extends Connection
 {
-    public static function create($table, $engine = 'ENGINE=InnoDB COLLATE utf8_general_ci')
+    private static function get_db_connect(): Connection
     {
-        $tableName = $table->getTableName();
-        $columns = $table->columnsToString();
+        return (new Connection);
+    }
+
+    public static function create($tableName, callable $callable, $engine = 'ENGINE=InnoDB COLLATE utf8_general_ci')
+    {
+        $table = new Table($tableName, $engine);
+        call_user_func($callable, $table);
+        $tableName = $table->get_table_name();
+        $columns = $table->columns_to_string();
         $query = <<<QUERY
-            CREATE TABLE IF NOT EXISTS $tableName 
+            CREATE TABLE IF NOT EXISTS $tableName
                 ($columns) $engine
         QUERY;
-        $connection = new Connection;
-        try {
-            $connection->getDb()->executeExQuery($query);
-        } catch (\Exception $e) {
-            return $e->getMessage();
+
+        if (!self::get_db_connect()->db->executeExQuery($query)) {
+            throw new DatabaseQueryException();
         }
     }
 
-    public static function dropIfExistsdrop(String $tableName)
+    public static function dropIfExists(String $tableName)
     {
-        $connection = new Connection;
-        $connection->getDb()->executeExQuery("DROP TABLE IF EXISTS $tableName");
+        if (!self::get_db_connect()->db->executeExQuery("DROP TABLE IF EXISTS $tableName")) {
+            throw new DatabaseQueryException();
+        }
     }
 }
