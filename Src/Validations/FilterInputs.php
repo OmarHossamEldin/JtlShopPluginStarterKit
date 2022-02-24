@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\JtlShopStarterKite\Src\Validations;
+namespace Plugin\JtlShopPluginStarterKit\Src\Validations;
 
 class FilterInputs
 {

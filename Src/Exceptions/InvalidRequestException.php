@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Exceptions;
+namespace Plugin\TecseeHotelBooking\Src\Exceptions;
 
 class InvalidRequestException extends \Exception
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Plugin\JtlShopStarterKite\Src\Validations;
+namespace Plugin\JtlShopPluginStarterKit\Src\Validations;
 
-use Plugin\JtlShopStarterKite\Src\Helpers\Redirect;
+use Plugin\JtlShopPluginStarterKit\Src\Helpers\Redirect;
 use JTL\Alert\Alert;
 use JTL\Shop;
 

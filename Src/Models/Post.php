@@ -1,10 +1,12 @@
 <?php
 
-namespace Plugin\JtlShopStarterKite\Src\Models;
+namespace Plugin\JtlShopPluginStarterKit\Src\Models;
+
+use Plugin\JtlShopPluginStarterKit\Src\Database\Initialization\Model;
 
 class Post extends Model
 {
-    protected $table    = 'posts';
+    protected $table = 'tec_see_posts';
     
     protected $primaryKey  = 'id';
 

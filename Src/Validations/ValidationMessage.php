@@ -1,8 +1,8 @@
 <?php
 
-namespace Plugin\JtlShopStarterKite\Src\Validations;
+namespace Plugin\JtlShopPluginStarterKit\Src\Validations;
 
-use Plugin\JtlShopStarterKite\Src\Support\Lang;
+use Plugin\JtlShopPluginStarterKit\Src\Support\Lang;
 
 class ValidationMessage
 {
