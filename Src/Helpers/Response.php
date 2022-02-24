@@ -1,13 +1,17 @@
 <?php
 
-namespace Plugin\JtlShopStarterKite\Src\Helpers;
+namespace Plugin\JtlShopPluginStarterKit\Src\Helpers;
 
-class Response 
+use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Header;
+
+class Response
 {
-    public static function json($data, $statusCode=200)
+    public static function json($data, $statusCode = 200)
     {
-        header('Content-Type: application/json; charset=utf-8');
-        http_response_code($statusCode);
-        return json_encode($data);
+        $header = new Header();
+        $header->set('Content-Type', 'application/json; charset=utf-8')
+        ->statusCode($statusCode);
+        echo json_encode($data);
+        exit;
     }
 }

@@ -4,12 +4,18 @@ namespace Plugin\JtlShopPluginStarterKit\Src\Support\Http;
 
 class Server
 {
-    public const BASE_URL = isset($_SERVER['HTTPS']) ? 'https://' : 'http://' . $_SERVER['HTTP_HOST'];
+    public static function base_url(): string
+    {
+        return isset($_SERVER['HTTPS']) ? 'https://' : 'http://' . $_SERVER['HTTP_HOST'];
+    }
 
-    public const PREVIOUS_URL = $_SERVER['HTTP_REFERER'];
+    public static function previous_url(): string
+    {
+        return $_SERVER['HTTP_REFERER'];
+    }
 
     public static function make_link($url): string
     {
-        return self::BASE_URL . $url;
+        return self::base_url() . $url;
     }
 }

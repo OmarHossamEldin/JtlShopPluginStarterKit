@@ -1,9 +1,9 @@
 <?php
 
-namespace Plugin\JtlShopStarterKite\Src\Validations;
+namespace Plugin\JtlShopPluginStarterKit\Src\Validations;
 
-use Plugin\JtlShopStarterKite\Src\Support\Lang;
-use Plugin\JtlShopStarterKite\Src\Helpers\Response;
+use Plugin\JtlShopPluginStarterKit\Src\Support\Lang;
+use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
 
 class ValidateInputs extends FilterInputs
 {
@@ -30,9 +30,6 @@ class ValidateInputs extends FilterInputs
                 }
             }
         });
-        if ($inputs['jtl_token'] && $inputs['kPluginAdminMenu']) {
-            unset($inputs['jtl_token'], $inputs['kPluginAdminMenu']);
-        }
         return $inputs;
     }
 

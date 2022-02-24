@@ -1,8 +1,10 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Support\Http;
+namespace Plugin\TecseeHotelBooking\Src\Support\Http;
 
-use Plugin\JtlShopPluginStarterKit\Src\Exceptions\InvalidRequestException;
+use Plugin\TecseeHotelBooking\Src\Exceptions\InvalidRequestException;
+use Plugin\TecseeHotelBooking\Src\Exceptions\UnsupportedAuthenticationType;
+use Plugin\TecseeHotelBooking\Src\Exceptions\UnsupportedRequestType;
 
 class HttpRequest
 {
@@ -14,13 +16,6 @@ class HttpRequest
     private $curl;
 
     /**
-     * method type
-     *
-     * @var string
-     */
-    private string $method;
-
-    /**
      * headers of the request
      *
      * @var array
@@ -28,19 +23,92 @@ class HttpRequest
     private array $headers;
 
     /**
-     * url
+     * baseUrl of the request
      *
-     * @var string
+     * @var array
      */
+    private string $baseUrl;
 
-    private string $url;
-
-    public function __construct(array $headers, string $method, string $url)
+    public function __construct(string $baseUrl, array $headers = ['Content-type' => 'application/json'])
     {
         $this->curl = curl_init();
         $this->headers = $headers;
-        $this->method = $method;
-        $this->url = $url;
+        $this->baseUrl = $baseUrl;
+    }
+
+    /**
+     * get Request
+     *
+     * @param string $url
+     * @param array $data
+     * @param array $headers
+     * @return void
+     */
+    public function get(string $url , array $data = [], array $headers = ['Content-type' => 'application/json'])
+    {
+        $url = $this->baseUrl + $url;
+        $this->headers = $headers;
+        return $this->send_request($url, $data,'GET');
+    }
+
+    /**
+     * POST Request
+     *
+     * @param string $url
+     * @param array $data
+     * @param array $headers
+     * @return void
+     */
+    public function post(string $url , array $data = [], array $headers = ['Content-type' => 'application/json'])
+    {
+        $url = $this->baseUrl + $url;
+        $this->headers = $headers;
+        return $this->send_request($url, $data,'POST');
+    }
+
+    /**
+     * PATCH Request
+     *
+     * @param string $url
+     * @param array $data
+     * @param array $headers
+     * @return void
+     */
+    public function patch(string $url , array $data = [], array $headers = ['Content-type' => 'application/json'])
+    {
+        $url = $this->baseUrl + $url;
+        $this->headers = $headers;
+        return $this->send_request($url, $data,'PATCH');
+    }
+
+    /**
+     * PUT Request
+     *
+     * @param string $url
+     * @param array $data
+     * @param array $headers
+     * @return void
+     */
+    public function put(string $url , array $data = [], array $headers = ['Content-type' => 'application/json'])
+    {
+        $url = $this->baseUrl + $url;
+        $this->headers = $headers;
+        return $this->send_request($url, $data,'PUT');
+    }
+
+    /**
+     * DELETE Request
+     *
+     * @param string $url
+     * @param array $data
+     * @param array $headers
+     * @return void
+     */
+    public function delete(string $url , array $data = [], array $headers = ['Content-type' => 'application/json'])
+    {
+        $url = $this->baseUrl + $url;
+        $this->headers = $headers;
+        return $this->send_request($url, $data,'DELETE');
     }
 
     /**
@@ -50,49 +118,44 @@ class HttpRequest
      * @param boolean $token
      * @return array $response
      */
-    public function send_request(array $data, string $authType = null)
+    public function send_request(string $url, array $data, string $method,string $authType = null)
     {
-        switch ($this->method) {
+        curl_setopt($this->curl, CURLOPT_URL, $url);
+        curl_setopt($this->curl, CURLOPT_HTTPHEADER, $this->headers);
+        switch ($method) {
             case 'POST':
-                curl_setopt($this->curl, CURLOPT_POST, true);
-                break;
             case 'PUT':
             case 'PATCH':
-            case 'DELETE':
-                curl_setopt($this->curl, CURLOPT_CUSTOMREQUEST, $this->method, true);
+                $data = json_encode($data);
+                curl_setopt($this->curl, CURLOPT_CUSTOMREQUEST, $method, true);
+                curl_setopt($this->curl, CURLOPT_POSTFIELDS, $data);
                 break;
+            case 'GET':
+            case 'DELETE':
+                curl_setopt($this->curl, CURLOPT_POSTFIELDS, http_build_query($data));
             default:
-                $this->url = $this->url;
+                throw new UnsupportedRequestType();
         }
-        curl_setopt($this->curl, CURLOPT_URL, $this->url);
 
-        if (($authType === 'Bearer') && ($this->method !== 'GET')) {
-
-            curl_setopt($this->curl, CURLOPT_HTTPAUTH, CURLAUTH_BEARER);
-            curl_setopt($this->curl, CURLOPT_HTTPHEADER, $this->headers);
-            $data = json_encode($data);
-            curl_setopt($this->curl, CURLOPT_POSTFIELDS, $data);
-        } else if (($authType === 'Basic') && ($this->method !== 'GET')) {
-
-            curl_setopt($this->curl, CURLOPT_HTTPHEADER, $this->headers);
-            curl_setopt($this->curl, CURLOPT_POSTFIELDS, http_build_query($data));
-        } else if (($authType === 'Bearer') && ($this->method === 'GET')) {
-            curl_setopt($this->curl, CURLOPT_HTTPHEADER, $this->headers);
-        } else {
-            $data = json_encode($data);
-            curl_setopt($this->curl, CURLOPT_POSTFIELDS, $data);
+        switch ($authType) {
+            case 'Bearer':
+                curl_setopt($this->curl, CURLOPT_HTTPAUTH, CURLAUTH_BEARER);
+                break;
+            case 'Basic':
+                curl_setopt($this->curl, CURLOPT_HTTPHEADER, $this->headers);
+            default:
+            throw new UnsupportedAuthenticationType();
         }
 
         curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
 
         $response = curl_exec($this->curl);
-
-        if ($response === false) {
+        curl_close($this->curl);
+        if (!$response) {
             throw new InvalidRequestException();
         }
         $response = json_decode($response, true);
 
-        curl_close($this->curl);
         return $response;
     }
 }
