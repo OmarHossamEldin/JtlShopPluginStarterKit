@@ -8,7 +8,7 @@ use JTL\Shop;
 
 class Alerts
 {
-    public static function show(String $type, String $message, String $key)
+    public static function show(string $type, array $messages): void
     {
         switch ($type) {
             case 'warning':
@@ -33,11 +33,13 @@ class Alerts
                 $type = Alert::TYPE_PRIMARY;
                 break;
         }
-        $alertHelper = Shop::Container()->getAlertService();
-        $alertHelper->addAlert($type, "$key $message", $key, [
-            'dismissable' => true,
-            'saveInSession'=> true
-        ]);
-        Redirect::to($_SERVER['REQUEST_URI']);
+        $alert = Shop::Container()->getAlertService();
+        foreach ($messages as $key => $message) {
+            $alert->addAlert($type, "$key $message", $key, [
+                'dismissable' => true,
+                'saveInSession' => true
+            ]);
+        }
+        Redirect::back();
     }
 }

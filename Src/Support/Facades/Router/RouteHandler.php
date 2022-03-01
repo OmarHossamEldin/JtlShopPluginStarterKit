@@ -1,8 +1,6 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Support\Facades;
-
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Request;
+namespace Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Router;
 
 class RouteHandler
 {
@@ -10,14 +8,15 @@ class RouteHandler
 
     public static function call($handler, int $pluginId = null)
     {
-        $request = new Request();
         if (is_array($handler)) {
             [$class, $method] = $handler;
             $class = self::CONTROLLERS_NAMESPACE  . $class;
             if (class_exists($class)) {
-                $class = new $class;
+                $class = new $class();
+                $paramsHandler = new ParamsHandler($class);
                 if (method_exists($class, $method)) {
-                    return call_user_func_array([$class, $method], [$request, $pluginId]);
+                    $params = $paramsHandler->get_method_params($method, $pluginId);
+                    return call_user_func_array([$class, $method], $params);
                 }
             }
         }
@@ -25,15 +24,16 @@ class RouteHandler
             [$class, $method] = explode('@', $handler);
             $class = self::CONTROLLERS_NAMESPACE . $class;
             if (class_exists($class)) {
-                
-                $class = new $class;
+                $class = new $class();
+                $paramsHandler = new ParamsHandler($class);
                 if (method_exists($class, $method)) {
-                    return call_user_func_array([$class, $method], [$request, $pluginId]);
+                    $params = $paramsHandler->get_method_params($method, $pluginId);
+                    return call_user_func_array([$class, $method], $params);
                 }
             }
         }
-        if (is_callable($handler)) {   
-            return call_user_func_array($handler, [$request, $pluginId]);
+        if (is_callable($handler)) {
+            return call_user_func($handler);
         }
     }
 }

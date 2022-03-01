@@ -1,10 +1,10 @@
 <?php
 
-namespace Plugin\TecseeHotelBooking\Src\Support\Http;
+namespace Plugin\JtlShopPluginStarterKit\Src\Support\Http;
 
-use Plugin\TecseeHotelBooking\Src\Exceptions\InvalidRequestException;
-use Plugin\TecseeHotelBooking\Src\Exceptions\UnsupportedAuthenticationType;
-use Plugin\TecseeHotelBooking\Src\Exceptions\UnsupportedRequestType;
+use Plugin\JtlShopPluginStarterKit\Src\Exceptions\InvalidRequestException;
+use Plugin\JtlShopPluginStarterKit\Src\Exceptions\UnsupportedAuthenticationType;
+use Plugin\JtlShopPluginStarterKit\Src\Exceptions\UnsupportedRequestType;
 
 class HttpRequest
 {
