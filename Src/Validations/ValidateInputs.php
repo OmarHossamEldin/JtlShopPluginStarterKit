@@ -2,62 +2,47 @@
 
 namespace Plugin\JtlShopPluginStarterKit\Src\Validations;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Lang;
-use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
+use Plugin\JtlShopPluginStarterKit\Src\Exceptions\UnsupportedValidationRuleException;
+use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Localization\Translate;
+use Plugin\JtlShopPluginStarterKit\Src\Helpers\ArrayValidator;
 
-class ValidateInputs extends FilterInputs
+class ValidateInputs
 {
+    private array $inputs = [];
+    private array $errors = [];
 
-    public function passingInputsThrowValidationRules($rules)
+    public function __construct($inputs)
     {
-        $inputs = $this->filtered();
-        array_walk($inputs, function (&$input, $key) use ($rules) {
-            if (array_key_exists($key, $rules) !== false) {
-                switch ($rules[$key]) {
-                    case 'required':
-                        if ($input) {
-                            $input = $input;
-                        } else {
-                            Alerts::show('warning', ValidationMessage::get('required'), $key);
-                        }
-                        break;
-                    case 'nullable':
-                        $input = !!$input ? $input : '';
-                        break;
-                    default:
-                        $input = 'not supported validation rule';
-                        break;
-                }
-            }
-        });
-        return $inputs;
+        $this->inputs = $inputs;
     }
 
-    public function passingAjaxRequestThrowValidationRules($rules)
+    public function passing_inputs_throw_validation_rules($rules): bool
     {
-        $inputs = $this->filtered();
-        array_walk($inputs, function (&$input, $key) use ($rules) {
-            if (array_key_exists($key, $rules) !== false) {
-                switch ($rules[$key]) {
+        $arrayValidator = new ArrayValidator($rules);
+        foreach ($rules as $key => $rule) {
+            if ($arrayValidator->array_keys_exists($key) !== false) {
+                switch ($rule) {
                     case 'required':
-                        if ($input) {
-                            $input = $input;
-                        } else {
-                            echo Response::json([
-                                $key => Lang::get('validations', 'required')
-                            ], 422);
-                            exit();
-                        }
+                        !!$this->inputs[$key] ? $this->inputs[$key] = $this->inputs[$key] : $this->errors[$key] = Translate::translate('validations', $rule);
                         break;
                     case 'nullable':
-                        $input = !!$input ? $input : '';
                         break;
                     default:
-                        $input = 'not supported validation rule';
+                        throw new UnsupportedValidationRuleException();
                         break;
                 }
             }
-        });
-        return $inputs;
+        }
+        return true;
+    }
+
+    public function get_errors(): array
+    {
+        return $this->errors;
+    }
+
+    public function get_validated_inputs(): array
+    {
+        return $this->inputs;
     }
 }

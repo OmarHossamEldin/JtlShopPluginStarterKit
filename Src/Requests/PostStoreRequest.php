@@ -1,23 +1,22 @@
 <?php
 
-namespace Plugin\JtlShopStarterKite\Src\Requests;
+namespace Plugin\JtlShopPluginStarterKit\Src\Requests;
 
-use Plugin\JtlShopStarterKite\Src\Validations\ValidateInputs;
+use Plugin\JtlShopPluginStarterKit\Src\Traits\ValidationTrait;
+use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Request;
 
-class PostStoreRequest
+class PostStoreRequest extends Request
 {
+    use ValidationTrait;
+
+    public string $type = 'form';
+    
     public function rules()
     {
         return [
             'title' => 'required',
-            'body' => 'required'
+            'body' => 'nullable'
         ];
     }
-
-    public function validate(Array $data)
-    {
-        $validator     = new ValidateInputs($data);
-        $validatedData = $validator->passingInputsThrowValidationRules($this->rules());
-        return $validatedData;
-    }
+    
 }

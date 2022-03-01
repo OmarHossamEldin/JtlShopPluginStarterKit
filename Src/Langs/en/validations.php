@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'required' => 'This field is required',
+    'required' => 'is required',
 ];
