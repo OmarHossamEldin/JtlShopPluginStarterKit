@@ -16,12 +16,13 @@ class VerifyFormCsrfToken
             $request = new Request();
             $requestData = $request->all();
             $arrayValidator = new ArrayValidator($requestData);
-            if($arrayValidator->array_keys_exists('jtl_token')){
+            if ($arrayValidator->array_keys_exists('jtl_token')) {
                 if (!CsrfAuthentication::validate_token($requestData['jtl_token'])) {
                     Alerts::show('danger', ['message' => Translate::translate('messages', 'unauthenticated')]);
                 }
+            } else {
+                Alerts::show('danger', ['message' => Translate::translate('messages', 'unauthenticated')]);
             }
-            Alerts::show('danger', ['message' => Translate::translate('messages', 'unauthenticated')]);
         }
     }
 }
