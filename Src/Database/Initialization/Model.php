@@ -6,7 +6,7 @@ use JTL\DB\ReturnType;
 use Plugin\JtlShopPluginStarterKit\Src\Exceptions\DatabaseQueryException;
 use Plugin\JtlShopPluginStarterKit\Src\Exceptions\RelationClassException;
 
-class Model extends Connection
+abstract class Model extends Connection
 {
     /**
      * table name $table

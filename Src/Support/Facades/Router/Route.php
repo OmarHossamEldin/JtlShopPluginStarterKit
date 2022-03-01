@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Support\Facades;
+namespace Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Router;
 
 use Plugin\JtlShopPluginStarterKit\Src\Exceptions\RouteNotFoundException;
 
@@ -81,9 +81,9 @@ class Route
      * @param  $action
      * @return void
      */
-    public static function register(string $route, string $Request, $action): void
+    public static function register(string $route, string $requestType, $action): void
     {
-        self::$routes[$Request][$route] = $action;
+        self::$routes[$requestType][$route] = $action;
     }
 
     /**
@@ -93,9 +93,9 @@ class Route
      * @param [string] $Request
      * @return RouteHandler
      */
-    public static function resolve(string $fetch, string $request, ?int $pluginId = null)
+    public static function resolve(string $fetch, string $requestType, ?int $pluginId = null)
     {
-        if (!!strpos($fetch, '?') === false) {
+        if (!!stripos($fetch, '?') === false) {
             return;
         }
         $fetch = explode('?', $fetch)[1] ?? null;
@@ -103,27 +103,40 @@ class Route
             return;
         }
 
-        if (strpos($fetch, 'return') === 0) {
+        if (stripos($fetch, 'return') === 0) {
             $fetch = explode('=', $fetch)[1];
             $route = explode('&', $fetch)[0];
-            $action = self::$routes[$request][$route] ?? null;
+            $action = self::$routes[$requestType][$route] ?? null;
 
+            if (!$action) {
+                throw new RouteNotFoundException();
+            }
+            return RouteHandler::call($action,$pluginId);
+        }
+
+        if (stripos($fetch, 'redirect') === 0) {
+            $fetch = explode('=', $fetch)[1];
+            $route = explode('&', $fetch)[0];
+
+            $action = self::$routes[$requestType][$route] ?? null;
+        
             if (!$action) {
                 throw new RouteNotFoundException();
             }
             return RouteHandler::call($action, $pluginId);
         }
-        if (!!strpos($fetch, '&') === true) {
+
+        if (!!stripos($fetch, '&') === true) {
             $fetch = explode('&', $fetch)[1];
         } else {
             $route = explode('=', $fetch)[1];
-            if ($pluginId === (int)$route) {
+            if ((int)$pluginId === (int)$route) {
                 return;
             }
         }
         $route = explode('=', $fetch)[1];
-
-        $action = self::$routes[$request][$route] ?? null;
+     
+        $action = self::$routes[$requestType][$route] ?? null;
 
         if (!$action) {
             throw new RouteNotFoundException();

@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Support\Facades;
+namespace Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Router;
 
 class MiddlewareHandler
 {

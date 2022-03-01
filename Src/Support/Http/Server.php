@@ -11,7 +11,7 @@ class Server
 
     public static function previous_url(): string
     {
-        return $_SERVER['HTTP_REFERER'];
+        return $_SERVER['HTTP_REFERER'] ?? self::base_url();
     }
 
     public static function make_link($url): string
