@@ -2,12 +2,15 @@
 
 namespace Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Localization;
 
+use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Filesystem\Directory;
+
 class Translate
 {
     public static function translate($fileName,$key)
     { 
         $lang = Lang::get();
-        $fileName = require_once(__DIR__ . "/../Langs/{$lang}/{$fileName}.php");
+        $directory= new Directory();
+        $fileName = require_once("{$directory->pluginRoot}/Src/Langs/{$lang}/{$fileName}.php");
         return $fileName[$key];
 
     }
@@ -15,7 +18,8 @@ class Translate
     public static function getTranslations($fileName)
     {
         $lang = Lang::get();
-        $fileName = require_once(__DIR__ . "/../Langs/{$lang}/{$fileName}.php");
+        $directory= new Directory();
+        $fileName = require_once("{$directory->pluginRoot}/Src/Langs/{$lang}/{$fileName}.php");
         return $fileName;
     }
 }
