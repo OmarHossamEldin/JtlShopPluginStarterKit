@@ -171,6 +171,14 @@ abstract class Model extends Connection
         return $this;
     }
 
+    public function or(String $column, $value)
+    {
+        $this->query .= <<<QUERY
+            OR $column >= $value
+        QUERY;
+        return $this;
+    }
+
     public function count(String $column)
     {
         $query = <<<QUERY
