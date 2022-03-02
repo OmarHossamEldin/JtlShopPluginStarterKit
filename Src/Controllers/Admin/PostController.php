@@ -6,7 +6,7 @@ use Plugin\JtlShopPluginStarterKit\Src\Requests\PostStoreRequest;
 use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Request;
 use Plugin\JtlShopPluginStarterKit\Src\Models\Post;
 use JTL\Shop;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Debug\Debugger;
+use Plugin\JtlShopPluginStarterKit\Src\Validations\Alerts;
 
 class PostController
 {
@@ -36,8 +36,8 @@ class PostController
     public function store(PostStoreRequest $request, int $pluginId)
     {
         $validatedData = $request->validated();
-        $smarty   = Shop::Smarty();
         $post = new Post();
         $post->create($validatedData);
+        Alerts::show('success', ['post' => 'is created successfully']);
     }
 }

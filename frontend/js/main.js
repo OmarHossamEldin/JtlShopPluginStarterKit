@@ -1,3 +1,3 @@
 const basUrl = `${location.protocol}://${location.host}`,
       httpRequest = new HttpRequest(basUrl);
-      httpRequest.get('/point_router');
+      httpRequest.get('/ressource','?fetch=posts');

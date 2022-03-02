@@ -13,6 +13,7 @@ class PostsTable
             $table->id();
             $table->string('title');
             $table->string('body');
+            $table->string('image_path');
             $table->timestamps();
         });
     }
