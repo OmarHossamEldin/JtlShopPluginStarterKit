@@ -145,6 +145,14 @@ abstract class Model extends Connection
         return $this;
     }
 
+    public function whereNotBetween(String $column, String $start, String $end)
+    {
+        $this->query .= <<<QUERY
+            WHERE $column NOT BETWEEN $start AND $end
+        QUERY;
+        return $this;
+    }
+
     public function whereAnd(String $firstColumn, String $start, String $secondColumn, String $end)
     {
         $this->query .= <<<QUERY
