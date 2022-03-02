@@ -121,4 +121,9 @@ class Table
         $this->columns[$column] = "$column DOUBLE";
         return $this;
     }
+    public function boolean($column)
+    {
+        $this->columns[$column] = "$column BOOLEAN DEFAULT false";
+        return $this;
+    }
 }
