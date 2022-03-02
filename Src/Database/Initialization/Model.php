@@ -121,6 +121,14 @@ abstract class Model extends Connection
         return $this;
     }
 
+    public function whereGreaterThan(String $column, String $value)
+    {
+        $this->query .= <<<QUERY
+            WHERE $column >= $value
+        QUERY;
+        return $this;
+    }
+
     public function whereLike(String $column, String $value)
     {
         $this->query .= <<<QUERY
