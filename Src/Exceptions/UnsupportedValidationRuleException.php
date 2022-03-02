@@ -2,11 +2,9 @@
 
 namespace Plugin\JtlShopPluginStarterKit\Src\Exceptions;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Debug\Debugger;
-
-class UnsupportedRequestType extends \Exception
+class UnsupportedValidationRuleException extends \Exception
 {
-    protected $message = "Unsupported Request Type";
+    protected $message = "Unsupported Validation Rule Has Been Used";
 
     public function __construct()
     {

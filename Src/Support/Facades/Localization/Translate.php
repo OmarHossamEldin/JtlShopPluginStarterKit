@@ -10,7 +10,7 @@ class Translate
     {
         $lang = Lang::get();
         $directory = new Directory();
-        $fileName = require_once("{$directory->pluginRoot}/Src/Langs/{$lang}/{$fileName}.php");
+        $fileName = require("{$directory->pluginRoot}/Src/Langs/{$lang}/{$fileName}.php");
         return $fileName[$key];
     }
 
@@ -18,7 +18,7 @@ class Translate
     {
         $lang = Lang::get();
         $directory = new Directory();
-        $fileName = require_once("{$directory->pluginRoot}/Src/Langs/{$lang}/{$fileName}.php");
+        $fileName = require("{$directory->pluginRoot}/Src/Langs/{$lang}/{$fileName}.php");
         return $fileName;
     }
 }

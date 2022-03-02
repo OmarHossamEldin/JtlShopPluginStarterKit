@@ -25,13 +25,15 @@
 │   ├───js
 │   └───template
 │       └───layout
+├───Logs
 └───Src
     ├───Controllers
     │   ├───Admin
     │   └───Frontend
     ├───Database
     │   ├───Initialization
-    │   └───Migrations
+    │   ├───Migrations
+    │   └───Seeders
     ├───Exceptions
     ├───Helpers
     ├───Langs
@@ -40,14 +42,19 @@
     ├───Middlewares
     ├───Models
     ├───Requests
+    ├───Resources
     ├───Services
     ├───Support
+    │   ├───Debug
     │   ├───Facades
     │   │   ├───Authentication
     │   │   ├───Cli
-    │   │   ├───Filesystems
-    │   │   └───Localization
+    │   │   ├───Faker
+    │   │   ├───Filesystem
+    │   │   ├───Localization
+    │   │   └───Router
     │   └───Http
+    ├───Traits
     └───Validations
 ```
 

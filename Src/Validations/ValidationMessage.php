@@ -2,7 +2,7 @@
 
 namespace Plugin\JtlShopPluginStarterKit\Src\Validations;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Lang;
+use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Localization\Lang;
 
 class ValidationMessage
 {
