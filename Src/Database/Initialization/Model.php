@@ -153,6 +153,16 @@ abstract class Model extends Connection
         return $this;
     }
 
+    public function whereNotIn(String $column, array $values)
+    {
+        $data = implode(",", $values);
+
+        $this->query .= <<<QUERY
+            WHERE $column NOT IN($data)
+        QUERY;
+        return $this;
+    }
+
     public function whereAnd(String $firstColumn, String $start, String $secondColumn, String $end)
     {
         $this->query .= <<<QUERY
