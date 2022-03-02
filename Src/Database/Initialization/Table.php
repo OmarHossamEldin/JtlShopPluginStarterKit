@@ -115,4 +115,10 @@ class Table
         $this->columns[] = "FOREIGN KEY ($result) REFERENCES $table(id)";
         return $this;
     }
+
+    public function double($column)
+    {
+        $this->columns[$column] = "$column DOUBLE";
+        return $this;
+    }
 }
