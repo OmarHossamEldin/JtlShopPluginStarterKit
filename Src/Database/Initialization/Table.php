@@ -126,4 +126,13 @@ class Table
         $this->columns[$column] = "$column BOOLEAN DEFAULT false";
         return $this;
     }
+    public function enum($column, array $values)
+    {
+
+        $data = implode("','", $values);
+        $data = "'" . $data . "'";
+
+        $this->columns[$column] = "$column ENUM($data)";
+        return $this;
+    }
 }
