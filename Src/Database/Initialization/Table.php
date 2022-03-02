@@ -87,4 +87,32 @@ class Table
         $this->columns[$updatedAt] = "$updatedAt DATETIME NULL";
         return $this;
     }
+
+    public function foreignId($column)
+    {
+        $this->int($column)
+            ->notNullable($column);
+
+        return $this;
+    }
+
+    public function references($table, $id = 'id')
+    {
+        if ($id !== 'id') {
+            $result = $id;
+        } else {
+            if (str_ends_with($table, 'ies')) {
+                $remove = substr($table, 0, strlen($table) - 3);
+                $result = $remove . 'y' . '_' . $id;
+            } else if (str_ends_with($table, 's')) {
+                $remove = substr($table, 0, strlen($table) - 1);
+                $result = $remove . '_' . $id;
+            } else {
+                $result = $table . '_' . $id;
+            }
+        }
+
+        $this->columns[] = "FOREIGN KEY ($result) REFERENCES $table(id)";
+        return $this;
+    }
 }
