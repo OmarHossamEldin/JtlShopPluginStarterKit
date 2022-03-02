@@ -65,6 +65,14 @@ abstract class Model extends Connection
         return $this;
     }
 
+    public function selectMinimum(String $column)
+    {
+        $this->query = <<<QUERY
+        SELECT min($column) AS minimumValue FROM $this->table
+        QUERY;
+        return $this;
+    }
+    
     public function groupBy($table, String $column)
     {
         $this->query .= <<<QUERY
