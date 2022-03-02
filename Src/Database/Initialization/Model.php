@@ -65,6 +65,14 @@ abstract class Model extends Connection
         return $this;
     }
 
+    public function selectMinimum(String $column)
+    {
+        $this->query = <<<QUERY
+        SELECT min($column) AS minimumValue FROM $this->table
+        QUERY;
+        return $this;
+    }
+
     public function groupBy($table, String $column)
     {
         $this->query .= <<<QUERY
@@ -89,6 +97,38 @@ abstract class Model extends Connection
         return $this;
     }
 
+    public function and()
+    {
+        $this->query .= <<<QUERY
+            AND 
+        QUERY;
+        return $this;
+    }
+
+    public function isEqual(String $column, String $value)
+    {
+        $this->query .= <<<QUERY
+            $column='$value'
+        QUERY;
+        return $this;
+    }
+
+    public function greaterThan(String $column, String $value)
+    {
+        $this->query .= <<<QUERY
+            $column >= $value
+        QUERY;
+        return $this;
+    }
+
+    public function whereGreaterThan(String $column, String $value)
+    {
+        $this->query .= <<<QUERY
+            WHERE $column >= $value
+        QUERY;
+        return $this;
+    }
+
     public function whereLike(String $column, String $value)
     {
         $this->query .= <<<QUERY
@@ -105,10 +145,36 @@ abstract class Model extends Connection
         return $this;
     }
 
+    public function whereNotBetween(String $column, String $start, String $end)
+    {
+        $this->query .= <<<QUERY
+            WHERE $column NOT BETWEEN $start AND $end
+        QUERY;
+        return $this;
+    }
+
+    public function whereNotIn(String $column, array $values)
+    {
+        $data = implode(",", $values);
+
+        $this->query .= <<<QUERY
+            WHERE $column NOT IN($data)
+        QUERY;
+        return $this;
+    }
+
     public function whereAnd(String $firstColumn, String $start, String $secondColumn, String $end)
     {
         $this->query .= <<<QUERY
             WHERE $firstColumn >= '$start' AND  $secondColumn <= '$end'
+        QUERY;
+        return $this;
+    }
+
+    public function or(String $column, $value)
+    {
+        $this->query .= <<<QUERY
+            OR $column >= $value
         QUERY;
         return $this;
     }
@@ -377,5 +443,47 @@ abstract class Model extends Connection
             throw new DatabaseQueryException();
         }
         return $result;
+    }
+
+    public function attachWith($pivot, int $id, $foreignKey, array $additionalValues)
+    {
+
+        $keys = [];
+        $values = [];
+
+        foreach ($additionalValues as $key => $value) {
+            $keys[] = $key;
+            $values[] = $value;
+        }
+
+        $columns = implode(',', $keys);
+        $binds  = array_map(fn ($colum) => $colum = ":$colum", $keys);
+        $binds  = implode(',', $binds);
+
+
+
+            $this->query = <<<QUERY
+            INSERT INTO $pivot
+            ($foreignKey,$columns,created_at,updated_at) 
+            VALUES (:foreignKey,$binds,:created_at,:updated_at)
+            QUERY;
+
+            $additionalValues['foreignKey'] = $id;
+
+            $date = new \DateTime();
+            $additionalValues['created_at'] = $date->format('Y-m-d H:i:s');
+            $additionalValues['updated_at'] = $date->format('Y-m-d H:i:s');
+
+            try {
+                $rows = $this->db->queryPrepared(
+                    $this->query,
+                    $additionalValues,
+                    ReturnType::ARRAY_OF_OBJECTS
+                );
+            } catch (\Exception $e) {
+                return $e->getMessage();
+            }
+        
+        return $rows;
     }
 }
