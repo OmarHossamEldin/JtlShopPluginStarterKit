@@ -72,7 +72,7 @@ abstract class Model extends Connection
         QUERY;
         return $this;
     }
-    
+
     public function groupBy($table, String $column)
     {
         $this->query .= <<<QUERY
@@ -93,6 +93,14 @@ abstract class Model extends Connection
     {
         $this->query .= <<<QUERY
             WHERE $column='$value'
+        QUERY;
+        return $this;
+    }
+
+    public function and()
+    {
+        $this->query .= <<<QUERY
+            AND 
         QUERY;
         return $this;
     }
