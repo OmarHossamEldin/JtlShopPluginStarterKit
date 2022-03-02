@@ -444,4 +444,46 @@ abstract class Model extends Connection
         }
         return $result;
     }
+
+    public function attachWith($pivot, int $id, $foreignKey, array $additionalValues)
+    {
+
+        $keys = [];
+        $values = [];
+
+        foreach ($additionalValues as $key => $value) {
+            $keys[] = $key;
+            $values[] = $value;
+        }
+
+        $columns = implode(',', $keys);
+        $binds  = array_map(fn ($colum) => $colum = ":$colum", $keys);
+        $binds  = implode(',', $binds);
+
+
+
+            $this->query = <<<QUERY
+            INSERT INTO $pivot
+            ($foreignKey,$columns,created_at,updated_at) 
+            VALUES (:foreignKey,$binds,:created_at,:updated_at)
+            QUERY;
+
+            $additionalValues['foreignKey'] = $id;
+
+            $date = new \DateTime();
+            $additionalValues['created_at'] = $date->format('Y-m-d H:i:s');
+            $additionalValues['updated_at'] = $date->format('Y-m-d H:i:s');
+
+            try {
+                $rows = $this->db->queryPrepared(
+                    $this->query,
+                    $additionalValues,
+                    ReturnType::ARRAY_OF_OBJECTS
+                );
+            } catch (\Exception $e) {
+                return $e->getMessage();
+            }
+        
+        return $rows;
+    }
 }
