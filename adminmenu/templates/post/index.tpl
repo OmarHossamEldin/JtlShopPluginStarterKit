@@ -14,7 +14,7 @@
                     {foreach from=$posts item=post}
                         <tr>
                             <td>
-                                <input type="radio" id="updateBox" name="updateBox" onclick="handlePost('{$post->id}');" />
+                                <input type="radio" id="updateBox" name="updateBox" class="update-this-item" date-attributes='{$post->id}' />
                             </td>
                             <td>{$post->id}</td>
                             <td>{$post->title}</td>
