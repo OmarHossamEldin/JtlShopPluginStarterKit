@@ -15,18 +15,16 @@
             <Customlink sort="1">
                 <Name>All_Posts</Name>
             </Customlink>
-            <JS>
-                <file>
+                <File>
                     <name>/js/HttpRequest.js</name>
                     <priority>1</priority>
                     <position>body</position>
-                </file>
-                <file>
+                </File>
+                <File>
                     <name>/js/main.js</name>
                     <priority>1</priority>
                     <position>body</position>
-                </file>
-            </JS>
+                </File>
         </Adminmenu>
         <FrontendLink>
             <Link>
