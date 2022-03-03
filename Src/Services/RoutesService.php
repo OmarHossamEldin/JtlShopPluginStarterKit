@@ -17,7 +17,7 @@ class RoutesService
 
         Route::resolve(Request::uri(), Request::type(), $pluginId);
 
-        Route::execute('Admin\PostController@index', $pluginId);
+            Route::execute('Admin\PostController@index', $pluginId);
     }
 
     public function frontEndRoutes($plugin)
