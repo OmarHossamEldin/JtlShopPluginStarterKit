@@ -44,10 +44,7 @@ class AdminRender
     {
         switch ($template) {
             case "All_Posts":
-                $template = 'post/index.tpl';
-                break;
-            case "Create_Post":
-                $template = 'post/create.tpl';
+                $template = 'post/layout.tpl';
                 break;
             default:
                 throw new InvalidArgumentException('Cannot render tab ' . $template);
