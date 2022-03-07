@@ -14,7 +14,7 @@
                     {foreach from=$posts item=post}
                         <tr>
                             <td>
-                                <input type="radio" id="updateBox" name="updateBox" class="update-this-item" date-attributes='{$post->id}' />
+                                <input type="radio" id="updateBox" name="updateBox" class="update-this-item" date-attributes='{$post->id}' plugin-url='{$pluginURL}' />
                             </td>
                             <td>{$post->id}</td>
                             <td>{$post->title}</td>
@@ -25,4 +25,8 @@
             </table>
         </div>
     {/if}
+
+    <button type="button" hidden class="btn btn-info btn-lg" id="posteditmodal" data-toggle="modal"
+    data-target="#postModal"></button>
+
 </section>
