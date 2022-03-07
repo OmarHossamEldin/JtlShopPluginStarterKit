@@ -43,6 +43,9 @@ class AdminRender
     public function renderPage(string $template, JTLSmarty $smarty): string
     {
         $smarty->assign('pluginPath', $this->plugin->getPaths()->getAdminURL());
+
+        $smarty->assign('pluginURL', $this->plugin->getPaths()->getShopURL());
+
         switch ($template) {
             case "All_Posts":
                 $template = 'post/layout.tpl';
