@@ -14,10 +14,12 @@ class RoutesService
         Route::group(['VerifyFormCsrfToken'], function () {
             Route::post('posts', 'Admin\PostController@store');
         });
+        
+        //Route::get('get-post-data', 'Admin\PostController@getPostData');
 
         Route::resolve(Request::uri(), Request::type(), $pluginId);
 
-            Route::execute('Admin\PostController@index', $pluginId);
+        Route::execute('Admin\PostController@index', $pluginId);
     }
 
     public function frontEndRoutes($plugin)
@@ -26,7 +28,10 @@ class RoutesService
 
         Route::group(['VerifyAjaxRequest'], function () {
             Route::get('posts', 'Frontend\PostController@index');
+            Route::post('fathy', 'Admin\PostController@getPostData');
+
         });
+
 
         Route::resolve(Request::uri(), Request::type(), $pluginId);
     }
