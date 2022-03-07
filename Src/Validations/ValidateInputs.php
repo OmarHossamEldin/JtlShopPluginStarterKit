@@ -23,7 +23,7 @@ class ValidateInputs
             if ($arrayValidator->array_keys_exists($key) !== false) {
                 switch ($rule) {
                     case 'required':
-                        !!$this->inputs[$key] ? $this->inputs[$key] = $this->inputs[$key] : $this->errors[$key] = Translate::translate('validations', $rule);
+                        isset($this->inputs[$key]) && !empty($this->inputs[$key]) ? $this->inputs[$key] = $this->inputs[$key] : $this->errors[$key] = Translate::translate('validations', $rule);
                         break;
                     case 'nullable':
                         break;
