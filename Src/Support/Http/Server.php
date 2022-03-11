@@ -6,7 +6,9 @@ class Server
 {
     public static function base_url(): string
     {
-        return isset($_SERVER['HTTPS']) ? 'https://' : 'http://' . $_SERVER['HTTP_HOST'];
+        $protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
+        $host = $_SERVER['HTTP_HOST'];
+        return $protocol . $host;
     }
 
     public static function previous_url(): string
