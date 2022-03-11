@@ -44,11 +44,11 @@ class HttpRequest
      * @param array $headers
      * @return void
      */
-    public function get(string $url , array $data = [], array $headers = ['Content-type' => 'application/json'])
+    public function get(string $url, array $data = [], array $headers = ['Content-type' => 'application/json'], string $authType)
     {
-        $url = $this->baseUrl + $url;
+        $url = $this->baseUrl . $url;
         $this->headers = $headers;
-        return $this->send_request($url, $data,'GET');
+        return $this->send_request($url, $data, 'GET', $authType);
     }
 
     /**
@@ -59,11 +59,11 @@ class HttpRequest
      * @param array $headers
      * @return void
      */
-    public function post(string $url , array $data = [], array $headers = ['Content-type' => 'application/json'])
+    public function post(string $url, array $data = [], array $headers = ['Content-type' => 'application/json'], string $authType)
     {
-        $url = $this->baseUrl + $url;
+        $url = $this->baseUrl . $url;
         $this->headers = $headers;
-        return $this->send_request($url, $data,'POST');
+        return $this->send_request($url, $data, 'POST', $authType);
     }
 
     /**
@@ -74,11 +74,11 @@ class HttpRequest
      * @param array $headers
      * @return void
      */
-    public function patch(string $url , array $data = [], array $headers = ['Content-type' => 'application/json'])
+    public function patch(string $url, array $data = [], array $headers = ['Content-type' => 'application/json'], string $authType)
     {
-        $url = $this->baseUrl + $url;
+        $url = $this->baseUrl . $url;
         $this->headers = $headers;
-        return $this->send_request($url, $data,'PATCH');
+        return $this->send_request($url, $data, 'PATCH', $authType);
     }
 
     /**
@@ -89,11 +89,11 @@ class HttpRequest
      * @param array $headers
      * @return void
      */
-    public function put(string $url , array $data = [], array $headers = ['Content-type' => 'application/json'])
+    public function put(string $url, array $data = [], array $headers = ['Content-type' => 'application/json'], string $authType)
     {
-        $url = $this->baseUrl + $url;
+        $url = $this->baseUrl . $url;
         $this->headers = $headers;
-        return $this->send_request($url, $data,'PUT');
+        return $this->send_request($url, $data, 'PUT', $authType);
     }
 
     /**
@@ -104,11 +104,11 @@ class HttpRequest
      * @param array $headers
      * @return void
      */
-    public function delete(string $url , array $data = [], array $headers = ['Content-type' => 'application/json'])
+    public function delete(string $url, array $data = [], array $headers = ['Content-type' => 'application/json'], string $authType)
     {
-        $url = $this->baseUrl + $url;
+        $url = $this->baseUrl . $url;
         $this->headers = $headers;
-        return $this->send_request($url, $data,'DELETE');
+        return $this->send_request($url, $data, 'DELETE', $authType);
     }
 
     /**
@@ -118,17 +118,22 @@ class HttpRequest
      * @param boolean $token
      * @return array $response
      */
-    public function send_request(string $url, array $data, string $method,string $authType = null)
+    public function send_request(string $url, array $data, string $method, string $authType)
     {
         curl_setopt($this->curl, CURLOPT_URL, $url);
         curl_setopt($this->curl, CURLOPT_HTTPHEADER, $this->headers);
+
+        if ($method === 'POST') {
+            curl_setopt($this->curl, CURLOPT_POST, true);
+        }
         switch ($method) {
             case 'POST':
             case 'PUT':
             case 'PATCH':
-                $data = json_encode($data);
-                curl_setopt($this->curl, CURLOPT_CUSTOMREQUEST, $method, true);
-                curl_setopt($this->curl, CURLOPT_POSTFIELDS, $data);
+                //$data = json_encode($data);
+
+                curl_setopt($this->curl, CURLOPT_CUSTOMREQUEST, $method);
+                curl_setopt($this->curl, CURLOPT_POSTFIELDS, 'grant_type=client_credentials');
                 break;
             case 'GET':
             case 'DELETE':
@@ -136,15 +141,15 @@ class HttpRequest
             default:
                 throw new UnsupportedRequestType();
         }
-
         switch ($authType) {
             case 'Bearer':
                 curl_setopt($this->curl, CURLOPT_HTTPAUTH, CURLAUTH_BEARER);
                 break;
             case 'Basic':
                 curl_setopt($this->curl, CURLOPT_HTTPHEADER, $this->headers);
+                break;
             default:
-            throw new UnsupportedAuthenticationType();
+                throw new UnsupportedAuthenticationType();
         }
 
         curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
