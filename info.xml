@@ -13,6 +13,9 @@
         <FlushTags>CACHING_GROUP_CATEGORY, CACHING_GROUP_ARTICLE</FlushTags>
         <Adminmenu>
             <Customlink sort="1">
+                <Name>Api_Credentials</Name>
+            </Customlink>
+            <Customlink sort="2">
                 <Name>All_Posts</Name>
             </Customlink>
         </Adminmenu>
@@ -30,12 +33,6 @@
                 </LinkLanguage>
             </Link>
         </FrontendLink>
-        <CSS>
-            <file>
-                <name>style.css</name>
-                <priority>10</priority>
-            </file>
-        </CSS>
         <JS>
             <file>
                 <name>HttpRequest.js</name>
