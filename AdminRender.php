@@ -47,6 +47,9 @@ class AdminRender
         $smarty->assign('pluginURL', $this->plugin->getPaths()->getShopURL());
 
         switch ($template) {
+            case "Api_Credentials":
+                $template = 'apiCredentials/layout.tpl';
+                break;
             case "All_Posts":
                 $template = 'post/layout.tpl';
                 break;
