@@ -7,6 +7,7 @@ use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Request;
 use Plugin\JtlShopPluginStarterKit\Src\Models\Post;
 use JTL\Shop;
 use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
+use Plugin\JtlShopPluginStarterKit\Src\Middlewares\CheckApiCredentials;
 use Plugin\JtlShopPluginStarterKit\Src\Requests\getPostDetailsRequest;
 use Plugin\JtlShopPluginStarterKit\Src\Support\Debug\Debugger;
 use Plugin\JtlShopPluginStarterKit\Src\Validations\Alerts;
@@ -38,6 +39,8 @@ class PostController
      */
     public function store(PostStoreRequest $request, int $pluginId)
     {
+        $checkCredentials = new CheckApiCredentials;
+        $checkCredentials->handle();
 
         $validatedData = $request->validated();
         $post = new Post();
