@@ -1,9 +1,9 @@
 let updatePostEvent = document.querySelectorAll(".update-this-item");
 
-
 updatePostEvent.forEach((e) => {
 
     e.addEventListener("click", (e) => {
+
         e.preventDefault();
 
         let postId = e.target.getAttribute("date-attributes");
@@ -21,7 +21,7 @@ updatePostEvent.forEach((e) => {
         };
 
         let url = pluginUrl + 'ressource';
-        const basUrl = url + '?fetch=fathy',
+        const basUrl = url + '?fetch=get-post',
             httpRequest = new HttpRequest(basUrl, headers);
 
         const postData = httpRequest.post(basUrl, sentData);
@@ -34,6 +34,5 @@ updatePostEvent.forEach((e) => {
             document.getElementById("post-title").value = post.title;
             document.getElementById("post-body").textContent = post.body;
         });
-
     })
 })
