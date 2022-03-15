@@ -13,6 +13,8 @@ class RoutesService
         /* routes */
         Route::group(['VerifyFormCsrfToken'], function () {
             Route::post('posts', 'Admin\PostController@store');
+            Route::delete('posts', 'Admin\PostController@destroy');
+
 
             Route::post('api-credentials', 'Admin\ApiCredentialsController@create');
             Route::delete('api-credentials', 'Admin\ApiCredentialsController@destroy');
