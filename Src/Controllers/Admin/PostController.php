@@ -9,7 +9,9 @@ use JTL\Shop;
 use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
 use Plugin\JtlShopPluginStarterKit\Src\Middlewares\CheckApiCredentials;
 use Plugin\JtlShopPluginStarterKit\Src\Requests\getPostDetailsRequest;
+use Plugin\JtlShopPluginStarterKit\Src\Requests\PostDeleteRequest;
 use Plugin\JtlShopPluginStarterKit\Src\Support\Debug\Debugger;
+use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Session;
 use Plugin\JtlShopPluginStarterKit\Src\Validations\Alerts;
 
 class PostController
@@ -48,6 +50,20 @@ class PostController
         Alerts::show('success', ['post' => 'is created successfully']);
     }
 
+    /**
+     * delete a post
+     *
+     * @param PostDeleteRequest $request
+     * @param integer $pluginId
+     * @return void
+     */
+    public function destroy(PostDeleteRequest $request, int $pluginId)
+    {
+        $validatedData = $request->validated();
+        $post = new Post();
+        $post->delete($validatedData['postId']);
+        Alerts::show('success', ['post' => 'is deleted successfully']);
+    }
 
     /**
      * get post data
@@ -60,9 +76,9 @@ class PostController
     {
         $validatedData = $request->validated();
         $post = new Post();
-        $postData = $post->select('id','title','body')
-        ->where('id', $validatedData['post_id'])
-        ->get();
+        $postData = $post->select('id', 'title', 'body')
+            ->where('id', $validatedData['post_id'])
+            ->get();
 
         $post = (object)$postData[0];
         //post_id
@@ -70,7 +86,5 @@ class PostController
         return Response::json([
             'post' => $post,
         ], 200);
-
-
     }
 }
