@@ -1,5 +1,4 @@
-// start work in request
-// post request
+// start request
 async function toggleRequest(method, basUrl, data) {
   let postObject = {
     method: method,
@@ -23,7 +22,8 @@ async function toggleRequest(method, basUrl, data) {
     basUrl,
     method === "POST" ? postObject : getObject
   );
-  return response;
+
   // return content;
+  return response;
 }
-// end work in request
+// end request
