@@ -66,6 +66,7 @@ class Session
         $time = time();
         if (!!$item) {
             $result = $item[$key]['expiration'] <=> $time;
+
             if (($result === 0) || ($result === -1)) {
                 return 'this value is expired!';
             }
