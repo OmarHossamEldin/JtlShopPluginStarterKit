@@ -82,3 +82,34 @@ function requestValidation(response, needFunction) {
   }
 }
 // end work in validation
+
+// ========================================
+
+// start input filed validation
+function inputValidation(inputClassName, submitButtonId) {
+  let openButton = document.getElementById(submitButtonId);
+  let allInputFiled = document.querySelectorAll(inputClassName);
+  let flag = 0;
+  let requestData = {};
+
+  openButton.addEventListener("click", () => {
+    allInputFiled.forEach((e) => {
+      let objectKey = e.name;
+      let objectValue = e.value;
+
+      if (objectValue != "") {
+        requestData[objectKey] = objectValue;
+        flag++;
+      } else {
+        flag = 0;
+      }
+
+      if (flag === allInputFiled.length) {
+        console.log(requestData);
+      }
+    });
+  });
+}
+// end input filed validation
+
+// ========================================
