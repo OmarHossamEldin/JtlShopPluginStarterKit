@@ -35,7 +35,7 @@ class Alerts
         }
         $alert = Shop::Container()->getAlertService();
         foreach ($messages as $key => $message) {
-            $alert->addAlert($type, "$key $message", $key, [
+            $alert->addAlert($type, "$message", $key, [
                 'dismissable' => true,
                 'saveInSession' => true
             ]);

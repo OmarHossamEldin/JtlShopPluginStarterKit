@@ -65,12 +65,13 @@ class Session
         $item = $this->get_items($key);
         $time = time();
         if (!!$item) {
-            $result = $item['token']['expiration'] <=> $time;
+            $result = $item[$key]['expiration'] <=> $time;
+
             if (($result === 0) || ($result === -1)) {
                 return 'this value is expired!';
             }
             if ($result === 1) {
-                return $item['token']['value'];
+                return $item[$key]['value'];
             }
         }
     }

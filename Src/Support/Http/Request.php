@@ -23,7 +23,7 @@ class Request
             $data = json_decode($data, true);
             if ((is_array($data)) && (count($data) > 0)) {
                 foreach ($data as $key => $item) {
-                    self::$data[$key] = filter_input(INPUT_POST, $key,  FILTER_SANITIZE_SPECIAL_CHARS);
+                    self::$data[$key] = filter_var($item,  FILTER_SANITIZE_SPECIAL_CHARS);
                 }
             }
         }
