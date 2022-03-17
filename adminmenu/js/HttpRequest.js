@@ -7,49 +7,64 @@ class HttpRequest {
   set_headers(headers) {
     this.headers = headers;
   }
-  get(url, data = {}) {
+
+  get(url, data = "") {
     return this.request(url, "GET", data);
   }
-  post(url, data = {}) {
+
+  post(url, data = "") {
     return this.request(url, "POST", data);
   }
-  patch(url, data = {}) {
+
+  patch(url, data = "") {
     return this.request(url, "PATCH", data);
   }
-  put(url, data = {}) {
+
+  put(url, data = "") {
     return this.request(url, "PUT", data);
   }
-  delete(url, data = {}) {
+
+  delete(url, data = "") {
     return this.request(url, "DELETE", data);
   }
+
   async request(url, method, data) {
     let response = null;
     switch (method) {
       case "POST":
       case "PATCH":
       case "PUT":
-      case "DELETE":
-        response = await fetch(url, {
-          method,
-          headers: this.headers,
-          body: JSON.stringify(data),
-        });
-        return {
-          status: response.status,
-          data: await response.json(),
-        };
+        if (!!data) {
+          url = this.basUrl + url;
+          response = await fetch(url, {
+            method,
+            headers: this.headers,
+            body: JSON.stringify(data),
+          });
+        } else {
+          console.error("passed data should be not empty object");
+        }
+        break;
       case "GET":
-        url = data !== {} ? url + data : url;
+        url = this.basUrl + url;
         response = await fetch(url, {
           method,
           headers: this.headers,
         });
-        return {
-          status: response.status,
-          data: await response.json(),
-        };
+        break;
+      case "DELETE":
+        url = this.basUrl + url;
+        response = await fetch(url, {
+          method,
+          headers: this.headers,
+        });
+        return response;
       default:
-        return "un support request type";
+        console.error("un support request type");
     }
+    return {
+      status: response.status,
+      data: await response.json(),
+    };
   }
 }
