@@ -3,10 +3,6 @@
 namespace Plugin\JtlShopPluginStarterKit\Src\Services;
 
 use Plugin\JtlShopPluginStarterKit\Src\Database\Migrations\DataBaseMigrations;
-use Plugin\JtlShopPluginStarterKit\Src\Database\Migrations\PostsTable;
-use Plugin\JtlShopPluginStarterKit\Src\Database\Migrations\PaymentApiCredentialsTable;
-use Plugin\JtlShopPluginStarterKit\Src\Database\Migrations\TokenParametersTable;
-use Plugin\JtlShopPluginStarterKit\Src\Database\Migrations\OrderLinksTable;
 use Plugin\JtlShopPluginStarterKit\Src\Database\Seeders\DatabaseSeeder;
 use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Filesystem\Storage;
 
