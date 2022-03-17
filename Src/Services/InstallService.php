@@ -2,6 +2,7 @@
 
 namespace Plugin\JtlShopPluginStarterKit\Src\Services;
 
+use Plugin\JtlShopPluginStarterKit\Src\Database\Migrations\DataBaseMigrations;
 use Plugin\JtlShopPluginStarterKit\Src\Database\Migrations\PostsTable;
 use Plugin\JtlShopPluginStarterKit\Src\Database\Migrations\PaymentApiCredentialsTable;
 use Plugin\JtlShopPluginStarterKit\Src\Database\Migrations\TokenParametersTable;
@@ -18,17 +19,9 @@ class InstallService
 
     public function install()
     {
-        $postsTable = new PostsTable();
-        $postsTable->up();
 
-        $paymentTable = new PaymentApiCredentialsTable;
-        $paymentTable->up();
-
-        $tokenTable = new TokenParametersTable;
-        $tokenTable->up();
-
-        $linksTable = new OrderLinksTable;
-        $linksTable->up();
+        $databaseMigrations = new DataBaseMigrations;
+        $databaseMigrations->run_up();
 
         $runSeeder = new DatabaseSeeder();
         $runSeeder->run();
@@ -37,17 +30,9 @@ class InstallService
 
     public function unInstall()
     {
-        $postsTable = new PostsTable();
-        $postsTable->down();
 
-        $linksTable = new OrderLinksTable;
-        $linksTable->down();
-
-        $paymentTable = new PaymentApiCredentialsTable;
-        $paymentTable->down();
-
-        $tokenTable = new TokenParametersTable;
-        $tokenTable->down();
+        $databaseMigrations = new DataBaseMigrations;
+        $databaseMigrations->run_down();
 
         Storage::unload_resources();
     }
