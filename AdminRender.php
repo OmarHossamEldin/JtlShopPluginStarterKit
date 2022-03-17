@@ -42,12 +42,16 @@ class AdminRender
      */
     public function renderPage(string $template, JTLSmarty $smarty): string
     {
+        $smarty->assign('pluginPath', $this->plugin->getPaths()->getAdminURL());
+
+        $smarty->assign('pluginURL', $this->plugin->getPaths()->getShopURL());
+
         switch ($template) {
-            case "All_Posts":
-                $template = 'post/index.tpl';
+            case "Api_Credentials":
+                $template = 'apiCredentials/layout.tpl';
                 break;
-            case "Create_Post":
-                $template = 'post/create.tpl';
+            case "All_Posts":
+                $template = 'post/layout.tpl';
                 break;
             default:
                 throw new InvalidArgumentException('Cannot render tab ' . $template);

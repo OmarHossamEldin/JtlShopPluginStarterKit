@@ -107,7 +107,6 @@ class Route
             $fetch = explode('=', $fetch)[1];
             $route = explode('&', $fetch)[0];
             $action = self::$routes[$requestType][$route] ?? null;
-
             if (!$action) {
                 throw new RouteNotFoundException();
             }

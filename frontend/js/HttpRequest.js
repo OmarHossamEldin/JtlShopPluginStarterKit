@@ -7,21 +7,27 @@ class HttpRequest {
   set_headers(headers) {
     this.headers = headers;
   }
-  get(url, data = {}) {
+
+  get(url, data = '') {
     return this.request(url, "GET", data);
   }
-  post(url, data = {}) {
+
+  post(url, data = '') {
     return this.request(url, "POST", data);
   }
-  patch(url, data = {}) {
+
+  patch(url, data = '') {
     return this.request(url, "PATCH", data);
   }
-  put(url, data = {}) {
+
+  put(url, data = '') {
     return this.request(url, "PUT", data);
   }
-  delete(url, data = {}) {
+  
+  delete(url, data = '') {
     return this.request(url, "DELETE", data);
   }
+  
   async request(url, method, data) {
     let response = null;
     switch (method) {
@@ -29,27 +35,43 @@ class HttpRequest {
       case "PATCH":
       case "PUT":
       case "DELETE":
-        response = await fetch(url, {
-          method,
-          headers: this.headers,
-          body: JSON.stringify(data),
-        });
-        return {
-          status: response.status,
-          data: await response.json(),
-        };
+        if (typeof data === 'object') {
+          url = this.basUrl + url;
+          response = await fetch(url, {
+            method,
+            headers: this.headers,
+            body: JSON.stringify(data),
+          });
+          if (response.status > 302) {
+            return response;
+          } else {
+            return {
+              status: response.status,
+              data: await response.json(),
+            };
+          }
+        }
+        else {
+          console.error('passed data should be object');
+        }
+        break;
       case "GET":
-        url = data !== {} ? url + data : url;
+        url = !!data ? this.basUrl + url + data : this.basUrl + url;
         response = await fetch(url, {
           method,
           headers: this.headers,
         });
-        return {
-          status: response.status,
-          data: await response.json(),
-        };
+        break;
       default:
-        return "un support request type";
+        console.error('un support request type');
+    }
+    if (response.status > 302) {
+      return response;
+    } else {
+      return {
+        status: response.status,
+        data: await response.json(),
+      };
     }
   }
 }
