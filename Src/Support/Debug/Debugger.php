@@ -21,6 +21,14 @@ class Debugger
         exit;
     }
 
+    public static function print_r($variable): void
+    {
+        echo '<pre>';
+        print_r($variable);
+        echo '<pre>';
+        exit;
+    }
+
     public function log($text): void
     {
         $today = Carbon::today()->toDateString();
