@@ -10,7 +10,7 @@ use JTL\Plugin\Bootstrapper;
 use JTL\Smarty\JTLSmarty;
 use Plugin\JtlShopPluginStarterKit\Src\Services\InstallService;
 use Plugin\JtlShopPluginStarterKit\Src\Services\RoutesService;
-
+use JTL\Shop;
 /**
  * Class Bootstrap
  * @package Plugin\JtlShopPluginStarterKit
