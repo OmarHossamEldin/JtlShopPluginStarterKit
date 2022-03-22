@@ -23,7 +23,7 @@ class PostController
      * @param integer $pluginId
      * @return void
      */
-    public function index(Request $request, int $pluginId)
+    public function index(Request $request,int $pluginId)
     {
         $smarty   = Shop::Smarty();
         $post     = new Post();
@@ -39,7 +39,7 @@ class PostController
      * @param integer $pluginId
      * @return void
      */
-    public function store(PostStoreRequest $request, int $pluginId)
+    public function store(PostStoreRequest $request)
     {
         $checkCredentials = new CheckApiCredentials;
         $checkCredentials->handle();
@@ -57,7 +57,7 @@ class PostController
      * @param integer $pluginId
      * @return void
      */
-    public function destroy(PostDeleteRequest $request, int $pluginId)
+    public function destroy(PostDeleteRequest $request)
     {
         $validatedData = $request->validated();
         $post = new Post();
@@ -72,7 +72,7 @@ class PostController
      * @param integer $pluginId
      * @return void
      */
-    public function getPostData(getPostDetailsRequest $request, int $pluginId)
+    public function getPostData(getPostDetailsRequest $request)
     {
         $validatedData = $request->validated();
         $post = new Post();
