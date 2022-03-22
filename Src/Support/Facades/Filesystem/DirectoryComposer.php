@@ -29,6 +29,11 @@ class DirectoryComposer
         return "$this->shopRoot/mediafiles/";
     }
 
+    public function get_media(): string
+    {
+        return "$this->shopRoot/media/";
+    }
+
     public function get_logs(): string
     {
         return "$this->pluginRoot/Logs/";
