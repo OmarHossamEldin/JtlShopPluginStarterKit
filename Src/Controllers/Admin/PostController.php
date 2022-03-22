@@ -23,12 +23,11 @@ class PostController
      * @param integer $pluginId
      * @return void
      */
-    public function index(Request $request,int $pluginId)
+    public function index(Request $request)
     {
         $smarty   = Shop::Smarty();
         $post     = new Post();
         $posts    = $post->all();
-        $smarty->assign('pluginId', $pluginId);
         $smarty->assign('posts', $posts);
     }
 
