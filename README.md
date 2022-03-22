@@ -18,18 +18,23 @@
 
 ```bash
 ├───adminmenu
+│   ├───js
 │   └───templates
+│       ├───apiCredentials
+│       ├───layout
 │       └───post
 ├───frontend
 │   ├───css
 │   ├───js
 │   └───template
+│       ├───helpers-component
 │       └───layout
 ├───Logs
 └───Src
     ├───Controllers
     │   ├───Admin
-    │   └───Frontend
+    │   ├───Frontend
+    │   └───Repository
     ├───Database
     │   ├───Initialization
     │   ├───Migrations

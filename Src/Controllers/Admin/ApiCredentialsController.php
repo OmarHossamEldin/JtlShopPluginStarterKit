@@ -19,7 +19,7 @@ use Plugin\JtlShopPluginStarterKit\Src\Support\Http\HttpRequest as HttpHttpReque
 
 class ApiCredentialsController
 {
-    public function index(Request $request, int $pluginId)
+    public function index(Request $request)
     {
         $smarty   = Shop::Smarty();
 
@@ -35,7 +35,7 @@ class ApiCredentialsController
         return $smarty->assign('credentials', $credentials);
     }
 
-    public function create(ApiCredentialsStoreRequest $request, int $pluginId)
+    public function create(ApiCredentialsStoreRequest $request)
     {
         $validatedData = $request->validated();
 

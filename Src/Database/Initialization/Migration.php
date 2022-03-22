@@ -2,7 +2,6 @@
 
 namespace Plugin\JtlShopPluginStarterKit\Src\Database\Initialization;
 
-
 class Migration
 {
     public function call(array $tables, string $type)

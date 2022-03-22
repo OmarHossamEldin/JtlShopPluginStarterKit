@@ -6,21 +6,29 @@ use Plugin\JtlShopPluginStarterKit\Src\Validations\Alerts;
 
 class Storage
 {
-    public static function load_resources()
+    private DirectoryComposer $directoryComposer;
+
+    private DirectoryMaker $directoryMaker;
+
+    public function __construct()
     {
-        $loadingPathFrom = Directory::get_resources();
-        $loadingPathTo = Directory::get_root() . '/mediafiles/Resources';
-        if (!file_exists($loadingPathTo) && !is_dir($loadingPathTo)) {
-            exec("cp -r $loadingPathFrom $loadingPathTo");
-        } else {
-            $loadingPathFrom .= '/*';
-            exec("cp -r $loadingPathFrom $loadingPathTo");
+        $this->directoryComposer = new DirectoryComposer();
+        $this->directoryMaker = new DirectoryMaker();
+    }
+
+    public function load_resources($mainFolder, $folder)
+    {
+        $mainFolderPathTo = "{$this->directoryComposer->get_mediaFiles()}$mainFolder";
+        if ($this->directoryMaker->make_directory($mainFolderPathTo)) {
+            $loadingPathFrom = "{$this->directoryComposer->resources_root()}/$folder";
+            $loadingPathTo = "$mainFolderPathTo/$folder";
+            $this->directoryMaker->recurse_copy($loadingPathFrom, $loadingPathTo);
         }
     }
 
-    public static function unload_resources()
+    public function unload_resources($folder)
     {
-        $unLoadingPath = Directory::get_root() . '/mediafiles/Resources';
+        $unLoadingPath = $this->directoryComposer->get_mediaFiles() . $folder;
         exec("rm -r $unLoadingPath");
     }
 
@@ -44,7 +52,7 @@ class Storage
                     $fileNameNew = uniqid() . "." . $fileActualExt;
                     // check $folder is existed
 
-                    $uploadPath = $_SERVER['DOCUMENT_ROOT'] . '/mediafiles';
+                    $uploadPath = $this->directoryComposer->get_mediaFiles();
 
                     $dirname = $uploadPath . '/' . $folder . '/';
                     if (!file_exists($dirname)) {
