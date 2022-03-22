@@ -7,39 +7,38 @@ use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Request;
 
 class RoutesService
 {
-    public function adminRoutes($plugin)
+
+    public function backend_executions()
     {
-        $pluginId = $plugin->getId();
-        /* routes */
-        Route::group(['VerifyFormCsrfToken'], function () {
-            Route::post('posts', 'Admin\PostController@store');
-            Route::delete('posts', 'Admin\PostController@destroy');
-
-
-            Route::post('api-credentials', 'Admin\ApiCredentialsController@create');
-            Route::delete('api-credentials', 'Admin\ApiCredentialsController@destroy');
-            Route::put('api-credentials', 'Admin\ApiCredentialsController@update');
-        });
-        
-        //Route::get('get-post-data', 'Admin\PostController@getPostData');
-
-        Route::execute('Admin\ApiCredentialsController@index', $pluginId);
-
-        Route::resolve(Request::uri(), Request::type(), $pluginId);
-
-        Route::execute('Admin\PostController@index', $pluginId);
+        Route::execute('Admin\ApiCredentialsController@index');
+        Route::execute('Admin\PostController@index');
     }
 
-    public function frontEndRoutes($plugin)
+    public function backend_endpoints()
     {
-        $pluginId = $plugin->getId();
+        Route::post('posts', 'Admin\PostController@store');
+        Route::delete('posts', 'Admin\PostController@destroy');
 
-        Route::group(['VerifyAjaxRequest'], function () {
-            Route::get('posts', 'Frontend\PostController@index');
-            Route::post('get-post', 'Admin\PostController@getPostData');
-            Route::post('get-credential', 'Admin\ApiCredentialsController@getCredentialData');  
-        });
 
-        Route::resolve(Request::uri(), Request::type(), $pluginId);
+        Route::post('api-credentials', 'Admin\ApiCredentialsController@create');
+        Route::delete('api-credentials', 'Admin\ApiCredentialsController@destroy');
+        Route::put('api-credentials', 'Admin\ApiCredentialsController@update');
+
+        Route::resolveApi(Request::uri(), Request::type());
+    }
+
+    public function frontend_executions()
+    {
+        Route::execute('Frontend\PostController@index');
+    }
+
+
+    public function frontend_endpoints()
+    {
+
+        Route::post('/get-post/{id}', 'Admin\PostController@getPostData');
+        Route::post('/get-credential/{id}', 'Admin\ApiCredentialsController@getCredentialData');
+
+        Route::resolveApi(Request::uri(), Request::type());
     }
 }
