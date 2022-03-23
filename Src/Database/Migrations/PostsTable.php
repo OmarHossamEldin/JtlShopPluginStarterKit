@@ -13,7 +13,7 @@ class PostsTable
             $table->id();
             $table->string('title');
             $table->string('body');
-            $table->string('image_path');
+            $table->foreignId('tec_see_category_id')->references('tec_see_categories');
             $table->timestamps();
         });
     }
