@@ -54,7 +54,11 @@ class AdminRender
                 break;
             case "All_Posts":
                 $template = 'post/layout.tpl';
+                break;                
+            case "All_Categories":
+                $template = 'post/layout.tpl';
                 break;
+
             default:
                 throw new InvalidArgumentException('Cannot render tab ' . $template);
         }

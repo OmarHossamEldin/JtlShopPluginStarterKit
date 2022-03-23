@@ -18,6 +18,9 @@
             <Customlink sort="2">
                 <Name>All_Posts</Name>
             </Customlink>
+            <Customlink sort="2">
+                <Name>All_Categories</Name>
+            </Customlink>
         </Adminmenu>
         <FrontendLink>
             <Link>
