@@ -2,7 +2,7 @@
 
 namespace Plugin\JtlShopPluginStarterKit\Src\Models;
 
-use Plugin\JtlShopPluginStarterKit\Src\Database\Initialization\Model;
+use Plugin\JtlShopPluginStarterKit\Src\Database\Orm\Model;
 
 class ApiCredentials extends Model
 {
