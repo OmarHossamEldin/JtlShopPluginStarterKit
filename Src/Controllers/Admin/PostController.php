@@ -27,7 +27,10 @@ class PostController
     {
         $smarty   = Shop::Smarty();
         $post     = new Post();
-        $posts    = $post->all();
+
+
+        $posts    = $post->select('title', 'body')
+            ->with('category:name,description')->toSql();
         $smarty->assign('posts', $posts);
     }
 
