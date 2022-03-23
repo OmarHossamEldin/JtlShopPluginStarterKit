@@ -349,7 +349,7 @@ abstract class Model extends Connection
         $foreign ??= $primary_key;
 
         $this->query .= <<<QUERY
-          JOIN $table
+          LEFT JOIN $table
         ON  $this->table.$foreign = $table.$primary_key
         QUERY;
         $rows = $this->db->executeQuery($this->query, ReturnType::ARRAY_OF_OBJECTS);
