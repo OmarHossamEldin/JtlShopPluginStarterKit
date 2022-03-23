@@ -27,7 +27,7 @@ abstract class Model extends Connection
     /**
      * columns to select
      */
-    private $columns = '*';
+    private $columns = '';
 
     /**
      * timestamp
@@ -44,10 +44,11 @@ abstract class Model extends Connection
      */
     private $query = '';
 
+    private $secondTable = [];
+
     public function select(String ...$columns)
     {
-
-        $this->columns = implode(',', $columns);
+        $this->columns .= implode(',', $columns);
 
         $this->query = <<<QUERY
         SELECT $this->columns FROM $this->table
@@ -135,7 +136,7 @@ abstract class Model extends Connection
         return $this;
     }
 
-    public function whereBetweenOr(String $column, String $start, String $end,$value)
+    public function whereBetweenOr(String $column, String $start, String $end, $value)
     {
         $this->query .= <<<QUERY
             WHERE ($column BETWEEN $start AND $end OR $column >= $value)
@@ -318,8 +319,16 @@ abstract class Model extends Connection
     public function with(string ...$relations)
     {
         array_map(function ($relation) {
-            if (method_exists($this, $relation)) {
-                return call_user_func([$this, $relation]);
+            if (stripos($relation, ':') !== 0) {
+                [$relation, $columns] = explode(':', $relation);
+                $this->secondTable = explode(',', $columns);
+                if (method_exists($this, $relation)) {
+                    return call_user_func([$this, $relation]);
+                }
+            } else {
+                if (method_exists($this, $relation)) {
+                    return call_user_func([$this, $relation]);
+                }
             }
         }, $relations);
         return $this;
@@ -348,11 +357,27 @@ abstract class Model extends Connection
 
         $foreign ??= $primary_key;
 
+
+        if ($this->secondTable !== []) {
+            $query = explode('FROM', $this->query);
+
+
+            foreach($this->secondTable as $secondTableColumns){
+                
+                $secondTableColumns = $table . '.' . $secondTableColumns;
+                $query[0] .=  ',' . $secondTableColumns;
+            }
+
+            $this->query = implode(' FROM ', $query);
+        }
+
+
         $this->query .= <<<QUERY
-          LEFT JOIN $table
+         LEFT JOIN $table
         ON  $this->table.$foreign = $table.$primary_key
         QUERY;
         $rows = $this->db->executeQuery($this->query, ReturnType::ARRAY_OF_OBJECTS);
+
 
         return $rows;
     }
@@ -368,6 +393,20 @@ abstract class Model extends Connection
         }
 
         //$foreign ??= $primary_key;
+
+
+        if ($this->secondTable !== []) {
+            $query = explode('FROM', $this->query);
+
+
+            foreach($this->secondTable as $secondTableColumns){
+                
+                $secondTableColumns = $table . '.' . $secondTableColumns;
+                $query[0] .=  ',' . $secondTableColumns;
+            }
+
+            $this->query = implode(' FROM ', $query);
+        }
 
         $this->query .= <<<QUERY
           JOIN $table
@@ -388,8 +427,19 @@ abstract class Model extends Connection
             new RelationClassException();
         }
 
-        $this->query .= <<<QUERY
 
+        if ($this->secondTable !== []) {
+            $query = explode('FROM', $this->query);
+
+            foreach($this->secondTable as $secondTableColumns){
+                $secondTableColumns = $table . '.' . $secondTableColumns;
+                $query[0] .=  ',' . $secondTableColumns;
+            }
+
+            $this->query = implode(' FROM ', $query);
+        }
+
+        $this->query .= <<<QUERY
          JOIN  $pivot
         ON  $this->table.$this->primaryKey = $pivot.$foreignKey
         JOIN $table ON $pivot.$joiningTableForeignKey   = $table.$primary_key
@@ -461,28 +511,28 @@ abstract class Model extends Connection
 
 
 
-            $this->query = <<<QUERY
+        $this->query = <<<QUERY
             INSERT INTO $pivot
             ($foreignKey,$columns,created_at,updated_at) 
             VALUES (:foreignKey,$binds,:created_at,:updated_at)
             QUERY;
 
-            $additionalValues['foreignKey'] = $id;
+        $additionalValues['foreignKey'] = $id;
 
-            $date = new \DateTime();
-            $additionalValues['created_at'] = $date->format('Y-m-d H:i:s');
-            $additionalValues['updated_at'] = $date->format('Y-m-d H:i:s');
+        $date = new \DateTime();
+        $additionalValues['created_at'] = $date->format('Y-m-d H:i:s');
+        $additionalValues['updated_at'] = $date->format('Y-m-d H:i:s');
 
-            try {
-                $rows = $this->db->queryPrepared(
-                    $this->query,
-                    $additionalValues,
-                    ReturnType::ARRAY_OF_OBJECTS
-                );
-            } catch (\Exception $e) {
-                return $e->getMessage();
-            }
-        
+        try {
+            $rows = $this->db->queryPrepared(
+                $this->query,
+                $additionalValues,
+                ReturnType::ARRAY_OF_OBJECTS
+            );
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+
         return $rows;
     }
 }
