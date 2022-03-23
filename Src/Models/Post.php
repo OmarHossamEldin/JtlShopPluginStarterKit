@@ -13,6 +13,12 @@ class Post extends Model
     protected $fillable = [
         'title',
         'body',
-        'image_path'
+        'tec_see_category_id'
+        //'image_path'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'tec_see_category_id');
+    }
 }
