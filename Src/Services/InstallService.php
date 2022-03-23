@@ -21,15 +21,14 @@ class InstallService
 
         $runSeeder = new DatabaseSeeder();
         $runSeeder->run();
-        Storage::load_resources();
+        //(new Storage)->load_resources('Resources','images');
     }
 
     public function unInstall()
     {
-
         $databaseMigrations = new DataBaseMigrations;
         $databaseMigrations->run_down();
 
-        Storage::unload_resources();
+        //(new Storage)->unload_resources('images');
     }
 }
