@@ -48,6 +48,12 @@ abstract class Model extends Connection
 
     public function select(String ...$columns)
     {
+        
+        $columns = array_map(function ($column)  {
+            $column = $this->table . '.' . $column;
+            return $column;
+        }, $columns);
+
         $this->columns .= implode(',', $columns);
 
         $this->query = <<<QUERY
