@@ -11,6 +11,7 @@
                             <th>id</th>
                             <th>title</th>
                             <th>body</th>
+                            <th>category</th>
                             <th>delete</th>
                         <tr>
                             {foreach from=$posts item=post}
@@ -23,6 +24,8 @@
                                 <td>{$post->id}</td>
                                 <td>{$post->title}</td>
                                 <td>{$post->body}</td>
+                                <td>{$post->name}</td>
+
                                 <td>
                                     <form action="" method="get">
                                         <input type="hidden" name="kPlugin" value="{$pluginId}">
