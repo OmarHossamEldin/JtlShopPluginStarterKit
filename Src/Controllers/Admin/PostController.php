@@ -29,8 +29,8 @@ class PostController
         $post     = new Post();
 
 
-        $posts    = $post->select('title', 'body')
-            ->with('category:name,description')->toSql();
+        $posts    = $post->select('id','title', 'body')
+            ->with('category:name,description')->get();
         $smarty->assign('posts', $posts);
     }
 
