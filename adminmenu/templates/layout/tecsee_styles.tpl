@@ -18,6 +18,7 @@
     .tecSee-table-parent .tecSee-table-container .tecSee-remove-padding .tecSee-table tr td button.tecSee-button-click{ldelim}background-color: #5cbcf6;{rdelim}
     .tecSee-table-parent .tecSee-table-container .tecSee-remove-padding .tecSee-table tr td button.tecSee-button-edit{ldelim}background-color: #0b6aa2;{rdelim}
     .tecSee-table-parent .tecSee-table-container .tecSee-remove-padding .tecSee-table tr td button.tecSee-button-delete{ldelim}background-color: #e10505;{rdelim}
+    .tecSee-form .tecSee-invalid{ldelim}border: #ff4949 solid 2px{rdelim}
     .tecSee-form{ldelim}display: -webkit-box;display: -ms-flexbox;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;margin: 10px 0;{rdelim}
     .tecSee-form div,.tecSee-form .full-width{ldelim}margin: 0 10px 0 20px;-ms-flex-preferred-size: calc((100% - 60px) / 2);flex-basis: calc((100% - 60px) / 2);display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-orient: vertical;-webkit-box-direction: normal;-ms-flex-direction: column;flex-direction: column;gap: 20px;padding: 15px;{rdelim}
     .tecSee-form div.tecSee-break,.tecSee-form .full-width.tecSee-break{ldelim}-ms-flex-preferred-size: 100%;flex-basis: 100%;height: 0;{rdelim}
