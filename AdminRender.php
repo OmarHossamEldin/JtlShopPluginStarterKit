@@ -54,11 +54,16 @@ class AdminRender
                 break;
             case "All_Posts":
                 $template = 'post/layout.tpl';
-                break;                
+                break;
             case "All_Categories":
                 $template = 'post/layout.tpl';
                 break;
-
+            case "Email_Credentials":
+                $template = 'emailCredential/layout.tpl';
+                break;
+            case "Test_Email_Credentials":
+                $template = 'testCredentials/layout.tpl';
+                break;
             default:
                 throw new InvalidArgumentException('Cannot render tab ' . $template);
         }
