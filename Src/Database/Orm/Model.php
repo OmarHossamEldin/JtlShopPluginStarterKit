@@ -6,6 +6,7 @@ use JTL\DB\ReturnType;
 use Plugin\JtlShopPluginStarterKit\Src\Database\Initialization\Connection;
 use Plugin\JtlShopPluginStarterKit\Src\Exceptions\DatabaseQueryException;
 use Plugin\JtlShopPluginStarterKit\Src\Exceptions\RelationClassException;
+use Plugin\JtlShopPluginStarterKit\Src\Support\Debug\Debugger;
 
 abstract class Model extends Connection
 {
@@ -230,7 +231,7 @@ abstract class Model extends Connection
         $values['updated_at'] = $date->format('Y-m-d H:i:s');
 
         $result = $this->db->queryPrepared($this->query, $values, ReturnType::QUERYSINGLE);
-
+        
         if (!!$result->queryString === false) {
             throw new DatabaseQueryException();
         }
@@ -267,8 +268,8 @@ abstract class Model extends Connection
             WHERE $this->primaryKey=:$this->primaryKey
         QUERY;
 
-        $value['id'] = $id;
-        $result = $this->db->queryPrepared($this->query, $value, ReturnType::QUERYSINGLE);
+        $values['id'] = $id;
+        $result = $this->db->queryPrepared($this->query, $values, ReturnType::QUERYSINGLE);
         if (!!$result->queryString === false) {
             throw new DatabaseQueryException();
         }
@@ -283,18 +284,13 @@ abstract class Model extends Connection
             WHERE $this->primaryKey=:$this->primaryKey
         QUERY;
 
-        $data['id'] = $id;
+        $values['id'] = $id;
 
-        $result = $this->db->queryPrepared($this->query, $data, ReturnType::QUERYSINGLE);
+        $result = $this->db->queryPrepared($this->query, $values, ReturnType::QUERYSINGLE);
         if (!!$result->queryString === false) {
             throw new DatabaseQueryException();
         }
         return $result;
-    }
-
-    public function toSql(): string
-    {
-        return $this->query;
     }
 
     public function all()
@@ -306,6 +302,12 @@ abstract class Model extends Connection
         $result = $this->db->executeQuery($this->query, ReturnType::ARRAY_OF_OBJECTS);
         return $result;
     }
+
+    public function toSql(): string
+    {
+        return $this->query;
+    }
+
 
     public function get()
     {
@@ -366,10 +368,7 @@ abstract class Model extends Connection
 
         if ($this->secondTable !== []) {
             $query = explode('FROM', $this->query);
-
-
-            foreach($this->secondTable as $secondTableColumns){
-                
+            foreach($this->secondTable as $secondTableColumns){ 
                 $secondTableColumns = $table . '.' . $secondTableColumns;
                 $query[0] .=  ',' . $secondTableColumns;
             }
@@ -383,7 +382,6 @@ abstract class Model extends Connection
         ON  $this->table.$foreign = $table.$primary_key
         QUERY;
         $rows = $this->db->executeQuery($this->query, ReturnType::ARRAY_OF_OBJECTS);
-
 
         return $rows;
     }
