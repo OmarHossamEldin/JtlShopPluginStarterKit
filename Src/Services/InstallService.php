@@ -19,8 +19,8 @@ class InstallService
         $databaseMigrations = new DataBaseMigrations;
         $databaseMigrations->run_up();
 
-        $runSeeder = new DatabaseSeeder();
-        $runSeeder->run();
+/*         $runSeeder = new DatabaseSeeder();
+        $runSeeder->run(); */
         //(new Storage)->load_resources('Resources','images');
     }
 
