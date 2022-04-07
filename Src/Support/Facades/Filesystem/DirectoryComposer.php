@@ -18,20 +18,21 @@ class DirectoryComposer
 
         $this->shopRoot = dirname(__FILE__, self::LEVEL_TO_BACK_SHOP_PATH);
     }
+    
 
     public function resources_root(): string
     {
         return "$this->pluginRoot/Src/Resources";
     }
 
+    public function plugin_root(): string
+    {
+        return "$this->pluginRoot";
+    }
+
     public function get_mediaFiles(): string
     {
         return "$this->shopRoot/mediafiles/";
-    }
-
-    public function get_media(): string
-    {
-        return "$this->shopRoot/media/";
     }
 
     public function get_logs(): string
