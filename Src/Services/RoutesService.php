@@ -12,6 +12,7 @@ class RoutesService
     {
         Route::execute('Admin\ApiCredentialsController@index');
         Route::execute('Admin\PostController@index');
+        Route::execute('Admin\EmailCredentialsController@index');
     }
 
     public function backend_endpoints()
@@ -35,6 +36,10 @@ class RoutesService
 
     public function frontend_endpoints()
     {
+
+        Route::post('/store/email-credentials', 'Admin\EmailCredentialsController@store');
+        Route::post('/test/email', 'Admin\TestEmailCredentialsController@testEmailCredentials');
+
 
         Route::post('/get-post/{id}', 'Admin\PostController@getPostData');
         Route::post('/get-credential/{id}', 'Admin\ApiCredentialsController@getCredentialData');
