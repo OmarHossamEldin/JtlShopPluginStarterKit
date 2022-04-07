@@ -7,7 +7,7 @@ use Plugin\JtlShopPluginStarterKit\Src\Database\Initialization\Table;
 
 class OrderLinksTable
 {
-    public function up()
+    public function run_up()
     {
         Schema::create('tec_see_order_links', function (Table $table) {
             $table->id();
@@ -20,7 +20,7 @@ class OrderLinksTable
         });
     }
 
-    public function down()
+    public function run_down()
     {
         Schema::dropIfExists('tec_see_order_links');
     }
