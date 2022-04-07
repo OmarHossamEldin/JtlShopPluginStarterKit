@@ -14,7 +14,8 @@ class DataBaseMigrations extends Migration
             PaymentApiCredentialsTable::class,
             TokenParametersTable::class,
             OrderLinksTable::class,
-        ], 'up');
+            EmailCredentialsTable::class,
+        ], 'run_up');
     }
 
     public function run_down()
@@ -25,6 +26,7 @@ class DataBaseMigrations extends Migration
             PaymentApiCredentialsTable::class,
             PostsTable::class,
             CategoriesTable::class,
-        ], 'down');
+            EmailCredentialsTable::class,
+        ], 'run_down');
     }
 }
