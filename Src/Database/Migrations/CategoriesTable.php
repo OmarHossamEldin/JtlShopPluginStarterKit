@@ -7,7 +7,7 @@ use Plugin\JtlShopPluginStarterKit\Src\Database\Initialization\Table;
 
 class CategoriesTable
 {
-    public function up()
+    public function run_up()
     {
         Schema::create('tec_see_categories', function (Table $table) {
             $table->id();
@@ -17,7 +17,7 @@ class CategoriesTable
         });
     }
 
-    public function down()
+    public function run_down()
     {
         Schema::dropIfExists('tec_see_categories');
     }
