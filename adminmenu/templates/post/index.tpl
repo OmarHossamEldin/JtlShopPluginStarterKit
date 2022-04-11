@@ -17,7 +17,7 @@
                             {foreach from=$posts item=post}
                             <tr>
                                 <td>
-                                    <button class="fas fa-edit text-dark update-this-item" date-attributes='{$post->id}'
+                                    <button class="fas fa-edit text-dark update-this-post" date-attributes='{$post->id}'
                                         plugin-url='{$pluginURL}'>
                                     </button>
                                 </td>
@@ -27,15 +27,9 @@
                                 <td>{$post->name}</td>
 
                                 <td>
-                                    <form action="" method="get">
-                                        <input type="hidden" name="kPlugin" value="{$pluginId}">
-                                        <input type="hidden" name="fetch" value="posts">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="postId" value="{$post->id}">
-                                        {$jtl_token}
-                                        <button type="submit" class="btn btn-danger tecSee-button-delete"
-                                            style="font-weight: bold;">Delete</button>
-                                    </form>
+                                    <button class="btn btn-danger tecSee-button-delete delete-this-post"
+                                    delete-post-attributes='{$post->id}'>
+                                   Delete </button>
                                 </td>
                             </tr>
                         {/foreach}

@@ -11,7 +11,7 @@
             </div>
 
             <div class="modal-body">
-                <form class="tecSee-form" action="?kPlugin={$pluginId}&fetch=posts" method="POST" autocomplete="off"
+                <form class="tecSee-form update-post" action="?kPlugin={$pluginId}&fetch=posts" method="POST" autocomplete="off"
                     enctype="multipart/form-data">
                     {$jtl_token}
                     <input type="hidden" name="_method" value="PUT">
@@ -24,6 +24,17 @@
                     <label>Description</label>
                     <textarea type="text" name="Body" id="post-body" placeholder="Write post's description" required></textarea>
                 </div>
+
+                {if (isset($categories)) && (count($categories) > 0)}
+                    <div class="full-width">
+                        <label>Category</label>
+                        <select name="tec_see_category_id" id="category-name">
+                            {foreach from=$categories item=category}
+                            <option value="{($category->id)}"> {$category->name} </option>
+                            {/foreach}>
+                        </select>
+                    </div>
+            {/if}
                     <input type="submit" value="Edit">
                 </form>
             </div>
