@@ -2,7 +2,7 @@
     This data is used for business account</h2>
 <hr />
 
-<form class="tecSee-form" action="?kPlugin={$pluginId}&fetch=api-credentials" method="POST" autocomplete="off"
+<form class="tecSee-form store-api-credential" method="POST" autocomplete="off"
     enctype="multipart/form-data">
     {$jtl_token}
     <div>

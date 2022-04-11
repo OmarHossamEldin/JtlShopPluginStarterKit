@@ -32,23 +32,17 @@
                         {foreach from=$credentials item=credential}
                         <tr>
                             <td>
-                                <button class="fas fa-edit text-dark update-credentials"
-                                    credential-attributes="{$credential->id}" plugin-url='{$pluginURL}'></button>
-                            </td>
+                                <button class="fas fa-edit text-dark update-api-credentials"
+                                    api-attributes="{$credential->id}"></button>
+                            </td>3
                             <td>{$credential->id}</td>
                             <td>{$credential->business_account}</td>
                             <td>{$credential->client_id}</td>
                             <td>{$credential->secret_key}</td>
                             <td>
-                                <form action="" method="get">
-                                    <input type="hidden" name="kPlugin" value="{$pluginId}">
-                                    <input type="hidden" name="fetch" value="api-credentials">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <input type="hidden" name="credentialId" value="{$credential->id}">
-                                    {$jtl_token}
-                                    <button type="submit" class="btn btn-danger tecSee-button-delete"
-                                        style="font-weight: bold;">Delete</button>
-                                </form>
+                                <button class="btn btn-danger tecSee-button-delete delete-api-credential"
+                                delete-api-attributes='{$credential->id}'>
+                                    Delete </button>
                             </td>
                         </tr>
                     {/foreach}

@@ -11,7 +11,7 @@
             </div>
 
             <div class="modal-body">
-                <form class="tecSee-form" action="?kPlugin={$pluginId}&fetch=models" method="POST" autocomplete="off"
+                <form class="tecSee-form update-api-credential" method="POST" autocomplete="off"
                     enctype="multipart/form-data">
                     {$jtl_token}
                     <input type="hidden" name="_method" value="PUT">
