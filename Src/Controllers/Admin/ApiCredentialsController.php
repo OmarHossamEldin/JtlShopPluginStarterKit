@@ -13,9 +13,9 @@ use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Request;
 use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Server;
 use JTL\Shop;
 use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
+use Plugin\JtlShopPluginStarterKit\Src\Requests\ApiCredentialsDeleteRequest;
 use Plugin\JtlShopPluginStarterKit\Src\Requests\getCredentialRequest;
 use Plugin\JtlShopPluginStarterKit\Src\Support\Debug\Debugger;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\HttpRequest as HttpHttpRequest;
 
 class ApiCredentialsController
 {
@@ -24,7 +24,7 @@ class ApiCredentialsController
         $smarty   = Shop::Smarty();
 
         $credential     = new ApiCredentials;
-        $credentials    = $credential->all();
+        $credentials    = $credential->select('id','business_account','client_id','secret_key')->get();
 
         $successUrl = Server::make_link('/ressource?return=success');
         $cancelUrl = Server::make_link('/ressource?return=cancel');
@@ -35,7 +35,7 @@ class ApiCredentialsController
         return $smarty->assign('credentials', $credentials);
     }
 
-    public function create(ApiCredentialsStoreRequest $request)
+    public function store(ApiCredentialsStoreRequest $request)
     {
         $validatedData = $request->validated();
 
@@ -44,6 +44,8 @@ class ApiCredentialsController
 
         if (count($searchForExistedCredentials) >= 1) {
             Alerts::show('warning', ['Forbidden: You can only add one credential']);
+        //return Response::json(['message' => 'Credential is created successfully'], 201);
+
         }
 
         $username = $validatedData['client_id'];
@@ -54,14 +56,14 @@ class ApiCredentialsController
 
         $checkCredentials = $curl->post(
             "oauth2/token",
+            "Basic",
             [
                 "grant_type" => "client_credentials"
             ],
             [
                 "Content-Type: application/x-www-form-urlencoded",
                 "Authorization: Basic $auth",
-            ],
-            "Basic"
+            ]
         );
         
         if (isset($checkCredentials["error"])) {
@@ -87,13 +89,16 @@ class ApiCredentialsController
             ]
         );
 
-        Alerts::show('success', ['Created: Record is created successfully']);
+        return Response::json(['message' => 'Credential is created successfully'], 201);
+
     }
 
-    public function destroy(Request $request, int $pluginId)
+    public function destroy(ApiCredentialsDeleteRequest $request)
     {
+        $validatedData = $request->validated();
+
         $credential     = new ApiCredentials;
-        $credential->delete($request->all()['0']['credentialId']);
+        $credential->delete($validatedData['apiCredentialId']);
 
         $tokenParameter = new TokenParameter;
 
@@ -106,11 +111,12 @@ class ApiCredentialsController
         $tokenParameter->delete($tokenId);
 
 
-        Alerts::show('success', ['Deleted: Record is deleted successfully']);
+        return Response::json(['message' => 'Credential is deleted successfully'], 201);
+
     }
 
 
-    public function update(ApiCredentialsUpdateRequest $request, $smarty, $plugin)
+    public function update(ApiCredentialsUpdateRequest $request)
     {
         $validatedData = $request->validated();
 
@@ -123,14 +129,14 @@ class ApiCredentialsController
 
         $checkCredentials = $curl->post(
             'oauth2/token',
+            'Basic',
             [
                 'grant_type' => 'client_credentials'
             ],
             [
                 "Content-Type: application/x-www-form-urlencoded",
                 "Authorization: Basic $auth",
-            ],
-            'Basic'
+            ]
         );
 
         if (isset($checkCredentials['error'])) {
@@ -164,7 +170,7 @@ class ApiCredentialsController
             $validatedData['credentialId']
         );
 
-        Alerts::show('success', ['Updated: Record is updated successfully']);
+        return Response::json(['message' => 'Credential is updated successfully'], 206);
     }
 
         /**
@@ -179,7 +185,7 @@ class ApiCredentialsController
         $validatedData = $request->validated();
         $credential = new ApiCredentials();
         $credentialData = $credential->select('id','business_account','client_id','secret_key')
-        ->where('id', $validatedData['credential_id'])
+        ->where('id', $validatedData['apiCredentialId'])
         ->get();
 
         $credential = (object)$credentialData[0];
