@@ -56,7 +56,7 @@ class AdminRender
                 $template = 'post/layout.tpl';
                 break;
             case "All_Categories":
-                $template = 'post/layout.tpl';
+                $template = 'category/layout.tpl';
                 break;
             case "Email_Credentials":
                 $template = 'emailCredential/layout.tpl';
