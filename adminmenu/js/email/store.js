@@ -1,8 +1,5 @@
 
-//const baseUrl = `${location.protocol}//${location.host}/Admin/io.php`;
-const baseUrl = `http://localhost/shop-v5/io.php`;
-const fiber = new Fiber(baseUrl);
-const token = document.querySelector(".jtl_token").value;
+
 
 fiber.set_headers({
   "Content-lang": "en",
