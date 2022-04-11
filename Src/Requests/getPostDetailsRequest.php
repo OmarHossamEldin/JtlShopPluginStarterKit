@@ -12,7 +12,7 @@ class getPostDetailsRequest extends Request
     public function rules()
     {
         return [
-            'post_id' => 'required',
+            'postId' => 'required',
         ];
     }
     
