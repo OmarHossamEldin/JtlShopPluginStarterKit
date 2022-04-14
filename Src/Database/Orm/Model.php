@@ -6,6 +6,7 @@ use JTL\DB\ReturnType;
 use Plugin\JtlShopPluginStarterKit\Src\Database\Initialization\Connection;
 use Plugin\JtlShopPluginStarterKit\Src\Exceptions\DatabaseQueryException;
 use Plugin\JtlShopPluginStarterKit\Src\Exceptions\RelationClassException;
+use Plugin\JtlShopPluginStarterKit\Src\Support\Collections\Collection;
 use Plugin\JtlShopPluginStarterKit\Src\Support\Debug\Debugger;
 
 abstract class Model extends Connection
@@ -49,8 +50,8 @@ abstract class Model extends Connection
 
     public function select(String ...$columns)
     {
-        
-        $columns = array_map(function ($column)  {
+
+        $columns = array_map(function ($column) {
             $column = $this->table . '.' . $column;
             return $column;
         }, $columns);
@@ -215,14 +216,15 @@ abstract class Model extends Connection
         ];
     }
 
-    public function create(array $values)
+    public static function create(array $values): Collection
     {
-        array_push($this->fillable, $this->createdAt, $this->updatedAt);
-        $columns = implode(',', $this->fillable);
-        $binds  = array_map(fn ($colum) => $colum = ":$colum", $this->fillable);
+        $static = new static();
+        array_push($static->fillable, $static->createdAt, $static->updatedAt);
+        $columns = implode(',', $static->fillable);
+        $binds  = array_map(fn ($colum) => $colum = ":$colum", $static->fillable);
         $binds  = implode(',', $binds);
-        $this->query = <<<QUERY
-            INSERT INTO $this->table 
+        $static->query = <<<QUERY
+            INSERT INTO $static->table 
             ($columns) VALUES ($binds)
         QUERY;
 
@@ -230,12 +232,13 @@ abstract class Model extends Connection
         $values['created_at'] = $date->format('Y-m-d H:i:s');
         $values['updated_at'] = $date->format('Y-m-d H:i:s');
 
-        $result = $this->db->queryPrepared($this->query, $values, ReturnType::QUERYSINGLE);
-        
-        if (!!$result->queryString === false) {
+        $values['id'] = $static->db->queryPrepared($static->query, $values, ReturnType::LAST_INSERTED_ID);
+        $collection = new Collection($values);
+
+        if (!!$values['id'] === false) {
             throw new DatabaseQueryException();
         }
-        return $result;
+        return $collection;
     }
 
     public function update(array $values, int $id)
@@ -253,12 +256,13 @@ abstract class Model extends Connection
         QUERY;
 
         $values['id'] = $id;
-
         $result = $this->db->queryPrepared($this->query, $values, ReturnType::QUERYSINGLE);
+        $collection = new Collection($values);
+
         if (!!$result->queryString === false) {
             throw new DatabaseQueryException();
         }
-        return $result;
+        return $collection;
     }
 
     public function delete(int $id)
@@ -368,7 +372,7 @@ abstract class Model extends Connection
 
         if ($this->secondTable !== []) {
             $query = explode('FROM', $this->query);
-            foreach($this->secondTable as $secondTableColumns){ 
+            foreach ($this->secondTable as $secondTableColumns) {
                 $secondTableColumns = $table . '.' . $secondTableColumns;
                 $query[0] .=  ',' . $secondTableColumns;
             }
@@ -403,8 +407,8 @@ abstract class Model extends Connection
             $query = explode('FROM', $this->query);
 
 
-            foreach($this->secondTable as $secondTableColumns){
-                
+            foreach ($this->secondTable as $secondTableColumns) {
+
                 $secondTableColumns = $table . '.' . $secondTableColumns;
                 $query[0] .=  ',' . $secondTableColumns;
             }
@@ -435,7 +439,7 @@ abstract class Model extends Connection
         if ($this->secondTable !== []) {
             $query = explode('FROM', $this->query);
 
-            foreach($this->secondTable as $secondTableColumns){
+            foreach ($this->secondTable as $secondTableColumns) {
                 $secondTableColumns = $table . '.' . $secondTableColumns;
                 $query[0] .=  ',' . $secondTableColumns;
             }
