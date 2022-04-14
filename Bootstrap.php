@@ -26,9 +26,11 @@ class Bootstrap extends Bootstrapper
         if (Shop::isFrontend()) {
             $routes = new RoutesService();
             $dispatcher->listen('shop.hook.' . \HOOK_IO_HANDLE_REQUEST, fn (array $args) => $routes->frontend_endpoints(), 1);
-        }else{
+            $dispatcher->listen('shop.hook.' . \HOOK_SMARTY_FETCH_TEMPLATE, fn () => $routes->frontend_executions(), 1);
+        } else {
             $routes = new RoutesService();
             $dispatcher->listen('shop.hook.' . \HOOK_IO_HANDLE_REQUEST_ADMIN, fn (array $args) => $routes->backend_endpoints(), 1);
+            $dispatcher->listen('shop.hook.' . \HOOK_SMARTY_FETCH_TEMPLATE, fn () => $routes->backend_executions(), 1);
         }
     }
 
@@ -66,9 +68,8 @@ class Bootstrap extends Bootstrapper
      */
     public function renderAdminMenuTab(string $template, int $menuID, JTLSmarty $smarty): string
     {
-        $routes = new RoutesService;
-        $routes->backend_executions();
-
+/*         $routes = new RoutesService();
+        $routes->backend_executions(); */
         $render = new AdminRender($this->getPlugin());
         return $render->renderPage($template, $smarty);
     }
@@ -79,10 +80,6 @@ class Bootstrap extends Bootstrapper
     public function prepareFrontend(LinkInterface $link, JTLSmarty $smarty): bool
     {
         parent::prepareFrontend($link, $smarty);
-
-        $routes = new RoutesService;
-        $routes->frontend_executions();
-
         return true;
     }
 }
