@@ -18,12 +18,20 @@ use Plugin\JtlShopPluginStarterKit\Src\Support\Debug\Debugger;
 
 class EmailCredentialsController
 {
-    public function index()
+    public function index(Request $request)
     {
-        $smarty   = Shop::Smarty();
+        $currentPage = isset($request->all()['page']) ? $request->all()['page'] : 1;
         $emailCredential     = new EmailCredential();
-        $emailCredentials    = $emailCredential->select('id', 'email', 'mail_host', 'username', 'password', 'port')->get();
-        $smarty->assign('emailCredentials', $emailCredentials);
+        $emailCredentials    = $emailCredential->select(
+            'id',
+            'email',
+            'mail_host',
+            'username',
+            'password',
+            'port',
+        )->paginate(10, $currentPage);
+
+        return Response::json($emailCredentials, 200);
     }
 
 
@@ -32,23 +40,24 @@ class EmailCredentialsController
 
 
         $validatedData = $request->validated();
-        $emailCredential = new EmailCredential();
+        $emailCredentials = new EmailCredential();
 
-        $searchForExistedCredentials = $emailCredential->all();
+        $searchForExistedCredentials = $emailCredentials->all();
 
         if (count($searchForExistedCredentials) >= 1) {
             Alerts::show('warning', ['Forbidden: You can only add one credential']);
         }
-        $emailCredential = $emailCredential->create([
+        $emailCredentials->create([
             'email' => $validatedData['email'],
             'mail_host' => $validatedData['mail_host'],
             'username' => $validatedData['username'],
             'password' => $validatedData['password'],
             'port' => $validatedData['port'],
-
-        ]);
-
-        return Response::json(["message" => "Record is created successfully"], 201);
+        ])->first();
+        return Response::json([
+            'message' => 'email Credentials is created successfully',
+            'emailCredentials' => $emailCredentials,
+        ], 201);
     }
 
     /**
@@ -60,51 +69,29 @@ class EmailCredentialsController
      */
     public function update(EMailCredentialUpdateRequest $request)
     {
-        $checkCredentials = new CheckApiCredentials;
-        $checkCredentials->handle();
 
         $validatedData = $request->validated();
-        $post = new EmailCredential();
-        $post->update([
+        $params = $request->get_route_params();
+        $emailCredentials = new EmailCredential();
+        $emailCredentials = $emailCredentials->update([
             'email' => $validatedData['email'],
             'mail_host' => $validatedData['mail_host'],
             'username' => $validatedData['username'],
             'password' => $validatedData['password'],
             'port' => $validatedData['port'],
-        ], $validatedData['emailCredentialId']);
+        ], $params['id'])->first();
         return Response::json([
-            'message' => 'email credentials are updated successfully',
-        ], 201);
+            'message' => 'email Credentials updated successfully',
+            'emailCredentials' => $emailCredentials
+        ], 206);
     }
 
-    
-    public function destroy(deleteEmailCredentialsRequest $request)
+
+    public function destroy(Request $request)
     {
-        $validatedData = $request->validated();
+        $params = $request->get_route_params();
         $emailCredential = new EmailCredential();
-        $emailCredential->delete($validatedData['emailCredentialId']);
-        return Response::json(['message' => 'Mail Credentials Deleted Successfully.'], 204);
-    }
-
-    /**
-     * get email data
-     *
-     * @param getCredentialRequest $request
-     * @param integer $pluginId
-     * @return void
-     */
-    public function getEmailCredentials(getEmailCredentialsRequest $request)
-    {
-        $validatedData = $request->validated();
-        $credential = new EmailCredential();
-        $credentialData = $credential->select('id', 'email', 'mail_host', 'username', 'password', 'port')
-            ->where('id', $validatedData['emailCredentialId'])
-            ->get();
-
-        $emailCredential = (object)$credentialData[0];
-
-        return Response::json([
-            'emailCredential' => $emailCredential,
-        ], 200);
+        $emailCredential->delete($params['id']);
+        return Response::json([], 204);
     }
 }

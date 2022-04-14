@@ -23,16 +23,17 @@ class ApiCredentialsController
     {
         $smarty   = Shop::Smarty();
 
+        $currentPage = isset($request->all()['page']) ? $request->all()['page'] : 1;
         $credential     = new ApiCredentials;
-        $credentials    = $credential->select('id','business_account','client_id','secret_key')->get();
+        $credentials    = $credential->select(
+            'id',
+            'business_account',
+            'client_id',
+            'secret_key',
+        )->paginate(10, $currentPage);
 
-        $successUrl = Server::make_link('/ressource?return=success');
-        $cancelUrl = Server::make_link('/ressource?return=cancel');
+        return Response::json($credentials, 200);
 
-        $smarty->assign('successUrl', $successUrl);
-        $smarty->assign('cancelUrl', $cancelUrl);
-
-        return $smarty->assign('credentials', $credentials);
     }
 
     public function store(ApiCredentialsStoreRequest $request)
@@ -87,38 +88,42 @@ class ApiCredentialsController
                 'client_id' => $validatedData['client_id'],
                 'secret_key' => $validatedData['secret_key'],
             ]
-        );
+        )->first();
 
-        return Response::json(['message' => 'Credential is created successfully'], 201);
+        return Response::json([
+            'message' => 'Credential is created successfully',
+            'credential' => $credential,
+        ], 201);
 
     }
 
-    public function destroy(ApiCredentialsDeleteRequest $request)
+    public function destroy(Request $request)
     {
-        $validatedData = $request->validated();
+        $params = $request->get_route_params();
 
-        $credential     = new ApiCredentials;
-        $credential->delete($validatedData['apiCredentialId']);
-
+        
         $tokenParameter = new TokenParameter;
-
+        
         $searchForToken    = $tokenParameter
         ->select('id')
         ->orderBy('created_at', 'desc')->first();
-
+        
         $tokenId = $searchForToken[0]->id;
-
+        
         $tokenParameter->delete($tokenId);
+        
+        $credential     = new ApiCredentials;
+        $credential->delete($params['id']);
 
-
-        return Response::json(['message' => 'Credential is deleted successfully'], 201);
-
+        return Response::json([], 204);
     }
 
 
     public function update(ApiCredentialsUpdateRequest $request)
     {
         $validatedData = $request->validated();
+
+        $params = $request->get_route_params();
 
         $credential     = new ApiCredentials;
 
@@ -167,34 +172,9 @@ class ApiCredentialsController
                 'client_id' => $validatedData['client_id'],
                 'secret_key' => $validatedData['secret_key'],
             ],
-            $validatedData['credentialId']
+            $params['id']
         );
-
-        return Response::json(['message' => 'Credential is updated successfully'], 206);
-    }
-
-        /**
-     * get post data
-     *
-     * @param getCredentialRequest $request
-     * @param integer $pluginId
-     * @return void
-     */
-    public function getCredentialData(getCredentialRequest $request, int $pluginId)
-    {
-        $validatedData = $request->validated();
-        $credential = new ApiCredentials();
-        $credentialData = $credential->select('id','business_account','client_id','secret_key')
-        ->where('id', $validatedData['apiCredentialId'])
-        ->get();
-
-        $credential = (object)$credentialData[0];
-        //post_id
-
-        return Response::json([
-            'credential' => $credential,
-        ], 200);
-
+        return Response::json(['message' => 'Credential updated successfully', 'apiCredential' => $credential], 206);
 
     }
 }

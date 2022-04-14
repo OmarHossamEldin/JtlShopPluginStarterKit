@@ -7,6 +7,7 @@ use Plugin\JtlShopPluginStarterKit\Src\Models\Category;
 use JTL\Shop;
 use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
 use Plugin\JtlShopPluginStarterKit\Src\Middlewares\CheckApiCredentials;
+use Plugin\JtlShopPluginStarterKit\Src\Models\Post;
 use Plugin\JtlShopPluginStarterKit\Src\Requests\CategoryStoreRequest;
 use Plugin\JtlShopPluginStarterKit\Src\Requests\CategoryUpdateRequest;
 use Plugin\JtlShopPluginStarterKit\Src\Requests\deleteCategoryRequest;
@@ -26,11 +27,15 @@ class CategoryController
      */
     public function index(Request $request)
     {
-        $smarty   = Shop::Smarty();
+        $currentPage = isset($request->all()['page']) ? $request->all()['page'] : 1;
         $category     = new Category();
+        $categories    = $category->select(
+            'id',
+            'name',
+            'description',
+        )->paginate(10, $currentPage);
 
-        $categories    = $category->select('id','name', 'description')->get();
-        $smarty->assign('categories', $categories);
+        return Response::json($categories, 200);
     }
 
     /**
@@ -42,19 +47,21 @@ class CategoryController
      */
     public function store(CategoryStoreRequest $request)
     {
-        $checkCredentials = new CheckApiCredentials;
-        $checkCredentials->handle();
-
+        /*         $checkCredentials = new CheckApiCredentials;
+        $checkCredentials->handle(); */
         $validatedData = $request->validated();
-        $post = new Category();
-        $post->create([
+        $category = new Category();
+        $category->create([
             'name' => $validatedData['name'],
             'description' => $validatedData['description'],
-        ]);
-        Alerts::show('success', ['category' => 'Category is created successfully']);
+        ])->first();
+        return Response::json([
+            'message' => 'category is created successfully',
+            'category' => $category,
+        ], 201);
     }
 
-        /**
+    /**
      * update category
      *
      * @param CategoryUpdateRequest $request
@@ -63,56 +70,34 @@ class CategoryController
      */
     public function update(CategoryUpdateRequest $request)
     {
-        $checkCredentials = new CheckApiCredentials;
-        $checkCredentials->handle();
-
         $validatedData = $request->validated();
-        $post = new Category();
-        $post->update([
-            'name' => $validatedData['name'],
-            'description' => $validatedData['description'],
-        ], $validatedData['categoryId']);
-        return Response::json([
-            'message' => 'category is updated successfully',
-        ], 201);
+        $params = $request->get_route_params();
+        $category = new Category();
+        $category = $category->update([
+            "name" => $validatedData["name"],
+            "description" => $validatedData["description"],
+        ], $params['id'])->first();
+        return Response::json(['message' => 'category updated successfully', 'category' => $category], 206);
     }
 
     /**
-     * delete a post
+     * delete category
      *
      * @param deleteCategoryRequest $request
      * @param integer $pluginId
      * @return void
      */
-     public function destroy(deleteCategoryRequest $request)
+    public function destroy(Request $request)
     {
-        $validatedData = $request->validated();
+        $params = $request->get_route_params();
         $category = new Category();
-        $category->delete($validatedData['categoryId']);
-        return Response::json([
-            'message' => 'category is deleted successfully',
-        ], 201);
-    }
+        $post = new Post;
+         $posts = $post->select('id')->where('tec_see_category_id', $params['id'])->get();
+        if (count($posts) > 0) {
+            return Response::json(['error' => 'there is data related to this has category'], 422);
+        }
+        $category->delete($params['id']);
+        return Response::json([], 204);
 
-    /**
-     * get post data
-     *
-     * @param getPostDetailsRequest $request
-     * @param integer $pluginId
-     * @return void
-     */    public function getPostData(getCategoryDetailsRequest $request)
-    {
-        $validatedData = $request->validated();
-        $category = new Category();
-        $categoryData = $category->select('id', 'name', 'description')
-            ->where('id', $validatedData['categoryId'])
-            ->get();
-
-        $category = (object)$categoryData[0];
-        //category_id
-
-        return Response::json([
-            'category' => $category,
-        ], 200);
     }
 }
