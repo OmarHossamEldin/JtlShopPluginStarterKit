@@ -1,7 +1,6 @@
 <section>
-    <form class="tecSee-form store-category"  method="POST" autocomplete="off"
+    <form class="tecSee-form create-category"  method="POST" autocomplete="off"
             enctype="multipart/form-data">
-            {$jtl_token}
             <div>
                 <label>name</label>
                 <input type="text" name="name" placeholder="Write post title" required>

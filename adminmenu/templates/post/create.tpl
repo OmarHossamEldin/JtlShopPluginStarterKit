@@ -1,7 +1,6 @@
 <section>
-    <form class="tecSee-form store-post"" action=" ?kPlugin={$pluginId}&fetch=posts" method="POST" autocomplete="off"
+    <form class="tecSee-form create-post"" action=" ?kPlugin={$pluginId}&fetch=posts" method="POST" autocomplete="off"
             enctype="multipart/form-data">
-            {$jtl_token}
             <div>
                 <label>Title</label>
                 <input type="text" name="title" placeholder="Write post title" required>

@@ -3,11 +3,14 @@
 {include file="./create.tpl"}
 {include file="./index.tpl"}
 {include file="./update.tpl"}
-<script src="{$pluginPath}js/email/store.js" type="text/javascript"></script>
-<script src="{$pluginPath}js/email/get.js" type="text/javascript"></script>
-<script src="{$pluginPath}js/email/update.js" type="text/javascript"></script>
-<script src="{$pluginPath}js/email/delete.js" type="text/javascript"></script>
-
-
+{include file="./popup.tpl"}
+<script src="{$pluginPath}js/email/createEmailCredentials.js" type="text/javascript"></script>
+<script src="{$pluginPath}js/email/updateEmailCredentials.js" type="text/javascript"></script>
+<script src="{$pluginPath}js/email/index.js" type="text/javascript"></script>
+<script src="{$pluginPath}js/email/deleteEmailCredentials.js" type="text/javascript"></script>
+<script src="{$pluginPath}js/email/confirmDeleteEmailCredentials.js" type="text/javascript"></script>
+<script src="{$pluginPath}js/email/getEmailCredentials.js" type="text/javascript"></script>
+<script src="{$pluginPath}js/email/drawEmailCredentialsTable.js" type="text/javascript"></script>
+<script src="{$pluginPath}js/email/paginate.js" type="text/javascript"></script>
 
 

@@ -2,9 +2,8 @@
     <h2 class="trainer-name">
         Send a test message:
     </h2>
-    <form class="tecSee-form send-test-email" action="?kPlugin={$pluginId}&fetch=test-email-credentials" method="POST" autocomplete="off"
+    <form class="tecSee-form send-test-email" method="POST" autocomplete="off"
         enctype="multipart/form-data">
-        {$jtl_token}
         <div>
             <label>Sender</label>
             <input type="email" name="sender"  placeholder="Write sender email" required>

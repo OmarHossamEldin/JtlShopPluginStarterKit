@@ -1,7 +1,6 @@
 <section>
-    <form class="tecSee-form store-email-credentials"  method="POST" autocomplete="off"
+    <form class="tecSee-form create-email-credentials"  method="POST" autocomplete="off"
         enctype="multipart/form-data">
-        {$jtl_token}
         <div>
             <label>Sender</label>
             <input type="email" name="email" placeholder="Write sender email" required>

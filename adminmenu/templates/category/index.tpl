@@ -1,40 +1,34 @@
 <section>
-    {if (isset($categories)) && (count($categories) > 0)}
-
-
         <div class="tecSee-table-parent">
             <div class='tecSee-table-container'>
+                <div class="tecSee-loading-container">
+                    <div class="loading-categories" style="display: none;">
+                        <img src='{$pluginURL}/mediafiles/Resources/images/loading.gif' width="150px;" />
+                    </div>
+                </div>
+                <div class="tecSee-table-container d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary btn-sm prev-categories"
+                        style="font-weight: bold; width:70px; margin-bottom: 3px; display:none;">Prev</button>
+                    <button type="submit" class="btn btn-primary btn-sm next-categories"
+                        style="font-weight: bold; width:70px; margin-bottom: 3px; display:none;">Next</button>
+                </div>
                 <div class="tecSee-remove-padding">
                     <table class="tecSee-table">
-                        <tr>
-                            <th>select</th>
-                            <th>id</th>
-                            <th>name</th>
-                            <th>description</th>
-                            <th>delete</th>
-                        <tr>
-                            {foreach from=$categories item=category}
+                        <thead>
                             <tr>
-                                <td>
-                                    <button class="fas fa-edit text-dark update-this-category" category-attributes='{$category->id}'
-                                        plugin-url='{$pluginURL}'>
-                                    </button>
-                                </td>
-                                <td>{$category->id}</td>
-                                <td>{$category->name}</td>
-                                <td>{$category->description}</td>
-                                <td>
-                                    <button class="btn btn-danger tecSee-button-delete delete-this-category"
-                                    delete-category-attributes='{$category->id}'>
-                                   Delete </button>
-                                </td>
+                                <th>id</th>
+                                <th>name</th>
+                                <th>description</th>
+                                <th>Actions</th>
                             </tr>
-                        {/foreach}
+                        </thead>
+                        <tbody class="results-categories">
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
-    {/if}
+
 
 
 

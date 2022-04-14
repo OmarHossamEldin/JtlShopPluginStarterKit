@@ -4,53 +4,51 @@
     </h2>
     <div class="full-width">
         <label>Success Payment</label>
-        <input type="text" value="{$successUrl}" style="background: lightgrey;" readonly>
+        <input type="text" value="{$pluginURL}io.php/ressource?return=success" style="background: lightgrey;" readonly>
     </div>
 
     <div class="full-width">
         <label>Canceled Payment</label>
-        <input type="text" value="{$cancelUrl}" style="background: lightgrey;" readonly>
+        <input type="text" value="{$pluginURL}io.php/ressource?return=cancel" style="background: lightgrey;" readonly>
     </div>
 
 </form>
 
 <hr />
-{if (isset($credentials))}
 
     <div class="tecSee-table-parent">
+    <div class='tecSee-table-container'>
+    <div class="tecSee-loading-container">
+        <div class="loading-api-credentials" style="display: none;">
+            <img src='{$pluginURL}/mediafiles/Resources/images/loading.gif' width="150px;" />
+        </div>
+    </div>
+    <div class="tecSee-table-container d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary btn-sm prev-api-credentials"
+            style="font-weight: bold; width:70px; margin-bottom: 3px; display:none;">Prev</button>
+        <button type="submit" class="btn btn-primary btn-sm next-api-credentials"
+            style="font-weight: bold; width:70px; margin-bottom: 3px; display:none;">Next</button>
+    </div>
         <div class='tecSee-table-container'>
             <div class="tecSee-remove-padding">
                 <table class="tecSee-table">
+                <thead>
                     <tr>
-                        <td>select</td>
                         <th>id</th>
                         <th>Business account/Business-Konto</th>
                         <th>Client Id/Kunden-ID</th>
                         <th>Secret Key/Geheimcode</th>
-                        <th>delete</th>
-                    <tr>
-                        {foreach from=$credentials item=credential}
-                        <tr>
-                            <td>
-                                <button class="fas fa-edit text-dark update-api-credentials"
-                                    api-attributes="{$credential->id}"></button>
-                            </td>3
-                            <td>{$credential->id}</td>
-                            <td>{$credential->business_account}</td>
-                            <td>{$credential->client_id}</td>
-                            <td>{$credential->secret_key}</td>
-                            <td>
-                                <button class="btn btn-danger tecSee-button-delete delete-api-credential"
-                                delete-api-attributes='{$credential->id}'>
-                                    Delete </button>
-                            </td>
-                        </tr>
-                    {/foreach}
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody class="results-api-credentials">
+                </tbody>
+
                 </table>
             </div>
         </div>
     </div>
-{/if}
 
 
 
