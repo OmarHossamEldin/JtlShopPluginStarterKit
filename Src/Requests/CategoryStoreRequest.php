@@ -15,7 +15,7 @@ class CategoryStoreRequest extends Request
     {
         return [
             'name' => 'required',
-            'description' => 'nullable',
+            'description' => 'required',
         ];
     }
     
