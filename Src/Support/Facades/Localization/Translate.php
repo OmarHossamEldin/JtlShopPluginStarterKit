@@ -9,16 +9,16 @@ class Translate
     public static function translate($fileName, $key): string
     {
         $lang = Lang::get();
-        $directory = new DirectoryComposer();
-        $fileName = require("{$directory->pluginRoot}/Src/Langs/{$lang}/{$fileName}.php");
+        $directoryComposer = new DirectoryComposer();
+        $fileName = require("{$directoryComposer->plugin_root()}/Src/Langs/{$lang}/{$fileName}.php");
         return $fileName[$key];
     }
 
     public static function getTranslations($fileName): array
     {
         $lang = Lang::get();
-        $directory = new DirectoryComposer();
-        $fileName = require("{$directory->pluginRoot}/Src/Langs/{$lang}/{$fileName}.php");
+        $directoryComposer = new DirectoryComposer();
+        $fileName = require("{$directoryComposer->plugin_root()}/Src/Langs/{$lang}/{$fileName}.php");
         return $fileName;
     }
 }
