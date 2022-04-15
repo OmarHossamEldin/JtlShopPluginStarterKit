@@ -19,7 +19,7 @@ class RoutesService
     {
         MiddlewaresService::load();
 
-        Route::group(['CheckApiCredentials'], function () {
+        Route::group(['Localization', 'Ajax',  'CsrfAuthentication','CheckApiCredentials'], function () {
 
             Route::post('/get/categories', 'Admin\CategoryController@index');
             Route::post('/categories', 'Admin\CategoryController@store');
