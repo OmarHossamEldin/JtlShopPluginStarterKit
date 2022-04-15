@@ -61,8 +61,8 @@ const createApiCredential = (form,loading, popUpContainer,popUpContent,popUpIcon
     popUpContent.classList.add("active");
   });
 
-  const popUpClose = document.querySelector(".dismiss-popup.api-credential");
-  popUpClose.addEventListener("click", () => {
+  const api_popUpClose = document.querySelector(".dismiss-popup.api-credential");
+  api_popUpClose.addEventListener("click", () => {
     popUpContainer.classList.remove("active");
     popUpContent.classList.remove("active");
   });

@@ -16,22 +16,21 @@
 
 <hr />
 
-    <div class="tecSee-table-parent">
+<div class="tecSee-table-parent">
     <div class='tecSee-table-container'>
-    <div class="tecSee-loading-container">
-        <div class="loading-api-credentials" style="display: none;">
-            <img src='{$pluginURL}/mediafiles/Resources/images/loading.gif' width="150px;" />
+        <div class="tecSee-loading-container">
+            <div class="loading-api-credentials" style="display: none;">
+                <img src='{$pluginURL}/mediafiles/Resources/images/loading.gif' width="150px;" />
+            </div>
         </div>
-    </div>
-    <div class="tecSee-table-container d-flex justify-content-end">
-        <button type="submit" class="btn btn-primary btn-sm prev-api-credentials"
-            style="font-weight: bold; width:70px; margin-bottom: 3px; display:none;">Prev</button>
-        <button type="submit" class="btn btn-primary btn-sm next-api-credentials"
-            style="font-weight: bold; width:70px; margin-bottom: 3px; display:none;">Next</button>
-    </div>
-        <div class='tecSee-table-container'>
-            <div class="tecSee-remove-padding">
-                <table class="tecSee-table">
+        <div class="tecSee-table-container d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary btn-sm prev-api-credentials"
+                style="font-weight: bold; width:70px; margin-bottom: 3px; display:none;">Prev</button>
+            <button type="submit" class="btn btn-primary btn-sm next-api-credentials"
+                style="font-weight: bold; width:70px; margin-bottom: 3px; display:none;">Next</button>
+        </div>
+        <div class="tecSee-remove-padding">
+            <table class="tecSee-table">
                 <thead>
                     <tr>
                         <th>id</th>
@@ -45,12 +44,7 @@
                 <tbody class="results-api-credentials">
                 </tbody>
 
-                </table>
-            </div>
+            </table>
         </div>
     </div>
-
-
-
-<button type="button" hidden class="btn btn-info btn-lg" id="credentialmodeledit" data-toggle="modal"
-data-target="#credentialModal"></button>
+</div>
