@@ -11,7 +11,7 @@ class Localization
     {
         $smarty        = Shop::Smarty();
 
-        $translations = Translate::getTranslations('frontend');
+        $translations['frontend'] = Translate::getTranslations('frontend');
 
         $smarty->assign('translations', $translations);
     }
