@@ -11,6 +11,7 @@ window.addEventListener("load", async () => {
     const form = document.querySelector(".create-post");  
     const information = await getPosts();
     drawPostsTable(result,prev, next, loading, information, information.data);
+    drawCategoriesSelectBox();
     createPost(form, loading, popUpContainer, popUpContent, popUpIcon, popUpMessage,popUpConfirm, result, prev, next);
     confirmDeletePost(result, loading, popUpContainer, popUpContent, popUpIcon, popUpMessage, popUpConfirm);
   });
