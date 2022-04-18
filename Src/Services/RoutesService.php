@@ -25,6 +25,8 @@ class RoutesService
             Route::post('/categories', 'Admin\CategoryController@store');
             Route::post('/update/categories/{id}', 'Admin\CategoryController@update');
             Route::post('/delete/categories/{id}', 'Admin\CategoryController@destroy');
+            Route::post('/get/categories/all', 'Admin\CategoryController@all');
+
 
             Route::post('/get/posts', 'Admin\PostController@index');
             Route::post('/posts', 'Admin\PostController@store');
