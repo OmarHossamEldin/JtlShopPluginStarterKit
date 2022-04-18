@@ -100,4 +100,17 @@ class CategoryController
         return Response::json([], 204);
 
     }
+
+        /**
+     * list categories
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function all(Request $request)
+    {
+        $category = new Category();
+        $categories = $category->select('id', 'name')->get();
+        return Response::json($categories, 200);
+    }
 }
