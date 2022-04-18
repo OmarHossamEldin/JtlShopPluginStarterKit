@@ -15,7 +15,7 @@ class CheckApiCredentials
         $request = new Request;
         $data = $request->all();
 
-        if(!isset($data['page'])){
+        if(count($data) > 3){
             $credential     = new ApiCredentials;
 
             $searchForCredentials    = $credential->select('client_id')->get();
