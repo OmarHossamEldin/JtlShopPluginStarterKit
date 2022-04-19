@@ -72,6 +72,62 @@ abstract class Model extends Connection
         return $this;
     }
 
+
+    public function selectUnion(String $column, String $firstTable, String $secondTable)
+    {
+        $this->query = <<<QUERY
+        SELECT $column FROM $firstTable
+        UNION
+        SELECT $column FROM $secondTable
+        QUERY;
+        return $this;
+    }
+
+    public function Having(String $condition)
+    {
+        $this->query = <<<QUERY
+          HAVING $condition
+        QUERY;
+        return $this;
+    }
+
+    public function SelectInto(String $newTable, String ...$columns)
+    {
+        $this->columns .= implode(',', $columns);
+
+        $this->query = <<<QUERY
+        SELECT $this->columns INTO $newTable FROM $this->table
+        QUERY;
+        return $this;
+    }
+
+
+    public function SelectCase(array $conditions,String $defaultCase, String ...$columns)
+    {
+
+        $cases = [];
+        foreach ($conditions as $key => $value) {
+            $cases[] = "WHEN" . " " . $key . " THEN" .  " '" . $value . "'";
+        }
+
+        $cases =  implode(" \r\n ", $cases);
+
+        $this->columns .= implode(',', $columns);
+
+        $this->query = <<<QUERY
+        SELECT $this->columns,
+         CASE
+           $cases
+           ELSE "$defaultCase"
+         END AS result
+         FROM $this->table
+        QUERY;
+        return $this;
+    }
+
+
+
+
     public function groupBy($table, String $column)
     {
         $this->query .= <<<QUERY
