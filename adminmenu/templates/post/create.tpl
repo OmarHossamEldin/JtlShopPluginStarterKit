@@ -9,10 +9,14 @@
             <label>Description</label>
             <textarea type="text" name="Body" placeholder="Write post's description" required></textarea>
         </div>
-        <div class="full-width">
+        <div>
             <label>Category</label>
             <select name='tec_see_category_id' class="input-post-category" required>
             </select>
+        </div>
+        <div>
+            <label>Quantity</label>
+            <input type="number" name="quantity" placeholder="Write post quantity" required>
         </div>
         <input type="submit" value="Create">
     </form>

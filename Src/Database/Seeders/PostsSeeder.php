@@ -16,7 +16,8 @@ class PostsSeeder
             $post->create([
                 'title' => 'title' . $i,
                 'body' => 'body' . $i,
-                'tec_see_category_id' => $i
+                'tec_see_category_id' => $i,
+                'quantity' => $i * 20,
                 //'image_path' => "picture$i.jpg"
             ]);
         }

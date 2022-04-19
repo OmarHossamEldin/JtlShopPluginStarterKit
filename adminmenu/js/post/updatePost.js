@@ -30,10 +30,14 @@ const updatePost = () => {
     updateIcon.onclick = () => {
       const id = updateIcon.getAttribute("meta");
       const trow = updateIcon.parentElement.parentElement;
-       const title = trow.children[1].textContent;
-      const description = trow.children[2].textContent;
+      const title = trow.children[1].textContent;
+      const body = trow.children[2].textContent;
+      const quantity = trow.children[4].textContent;
+
       form.elements[0].value = title;
       form.elements[1].value = body;  
+      form.elements[3].value = quantity;  
+
 
       openModel.click();
 

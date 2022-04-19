@@ -13,8 +13,8 @@ class Post extends Model
     protected $fillable = [
         'title',
         'body',
-        'tec_see_category_id'
-        //'image_path'
+        'tec_see_category_id',
+        'quantity'
     ];
 
     public function category()

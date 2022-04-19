@@ -26,16 +26,16 @@
                             required></textarea>
                     </div>
 
-                    {if (isset($categories)) && (count($categories) > 0)}
-                        <div class="full-width">
-                            <label>Category</label>
-                            <select name="tec_see_category_id" id="category-name">
-                                {foreach from=$categories item=category}
-                                    <option value="{($category->id)}"> {$category->name} </option>
-                                {/foreach}>
-                            </select>
-                        </div>
-                    {/if}
+                    <div>
+                        <label>Category</label>
+                        <select name='tec_see_category_id' class="input-post-category" required>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label>Quantity</label>
+                        <input type="number" name="quantity" placeholder="Write post quantity" required>
+                    </div>
                     <input type="submit" value="Edit">
                 </form>
             </div>

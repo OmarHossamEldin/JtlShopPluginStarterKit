@@ -13,6 +13,7 @@ const drawPostsTable = (
                           <td>${newRow.title}</td>
                           <td>${newRow.body}</td>
                           <td>${newRow.category}</td>
+                          <td>${newRow.quantity}</td>
                           <td style='display:flex; justify-content: space-evenly;'>
                             </button>
                             <button class='update-posts' meta="${newRow.id}">
@@ -33,8 +34,8 @@ const drawPostsTable = (
       const trowData = `<td>${posts.indexOf(item) + 1}</td>
                                       <td>${item.title}</td>
                                       <td>${item.body}</td>
-                                    <td>${item.category}</td>
-
+                                      <td>${item.category}</td>
+                                      <td>${item.quantity}</td>
                                       <td style='display:flex; justify-content: space-evenly;'>
                                       <button class='update-posts' meta="${
                                         item.id

@@ -32,8 +32,11 @@ class PostController
             'id',
             'title',
             'body',
+            'quantity'
         )->with('category:name AS category,description')
             ->paginate(10, $currentPage);
+
+           // $posts = $post->SelectCase($conditions,'Quantity is normal', 'title','quantity')->get();
 
         return Response::json($posts, 200);
     }
@@ -56,6 +59,8 @@ class PostController
             'title' => $validatedData['title'],
             'body' => $validatedData['body'],
             'tec_see_category_id' => $validatedData['tec_see_category_id'],
+            'quantity' => $validatedData['quantity'],
+
         ])->first();
         return Response::json([
             'message' => 'post is created successfully',
@@ -82,6 +87,7 @@ class PostController
             'title' => $validatedData['title'],
             'body' => $validatedData['body'],
             'tec_see_category_id' => $validatedData['tec_see_category_id'],
+            'quantity' => $validatedData['quantity'],
         ], $params['id'])->first();
         return Response::json(['message' => 'post updated successfully', 'post' => $post], 206);
     }

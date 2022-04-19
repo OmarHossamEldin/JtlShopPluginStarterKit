@@ -21,6 +21,7 @@
                             <th>title</th>
                             <th>body</th>
                             <th>category</th>
+                            <th>quantity</th>
                             <th>Actions</th>
 
                         </tr>
