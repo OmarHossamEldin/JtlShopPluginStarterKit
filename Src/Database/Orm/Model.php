@@ -64,15 +64,6 @@ abstract class Model extends Connection
         return $this;
     }
 
-    public function selectMinimum(String $column)
-    {
-        $this->query = <<<QUERY
-        SELECT min($column) AS minimumValue FROM $this->table
-        QUERY;
-        return $this;
-    }
-
-
     public function selectUnion(String $column, String $firstTable, String $secondTable)
     {
         $this->query = <<<QUERY
@@ -102,7 +93,7 @@ abstract class Model extends Connection
     }
 
 
-    public function SelectCase(array $conditions,String $defaultCase, String ...$columns)
+    public function SelectCase(array $conditions, String $defaultCase, String ...$columns)
     {
 
         $cases = [];
@@ -125,8 +116,113 @@ abstract class Model extends Connection
         return $this;
     }
 
+    public function index(String $column)
+    {
+
+        $index = 'IX_' . $column;
+        $this->query = <<<QUERY
+        CREATE INDEX  $index
+        ON $this->table ($column);
+        QUERY;
+        return $this;
+    }
 
 
+    public function ifNull(String $column, String $value)
+    {
+        $this->query = <<<QUERY
+          IFNULL($column, $value)
+        QUERY;
+        return $this;
+    }
+
+    public function rand()
+    {
+        $this->query = <<<QUERY
+        SELECT RAND();
+        QUERY;
+        return $this;
+    }
+
+    public function length($string)
+    {
+        $this->query = <<<QUERY
+        SELECT CHAR_LENGTH($string) AS LengthOfString
+        QUERY;
+        return $this;
+    }
+
+    public function view($view_name)
+    {
+        $this->query = <<<QUERY
+        CREATE VIEW $view_name AS
+        QUERY;
+        return $this;
+    }
+
+    public function averageValue($column)
+    {
+        $this->query = <<<QUERY
+        SELECT AVG($column) AS AverageValue FROM $this->table
+        QUERY;
+        return $this;
+    }  
+
+    public function ceiling($value)
+    {
+        $this->query = <<<QUERY
+        SELECT CEILING($value)
+        QUERY;
+        return $this;
+    } 
+
+    public function floor($value)
+    {
+        $this->query = <<<QUERY
+        SELECT FLOOR($value)
+        QUERY;
+        return $this;
+    } 
+    
+    public function selectMinimum(String $column)
+    {
+        $this->query = <<<QUERY
+        SELECT min($column) AS minimumValue FROM $this->table
+        QUERY;
+        return $this;
+    }
+
+    public function selectMaximum(String $column)
+    {
+        $this->query = <<<QUERY
+        SELECT MAX($column) AS maximumValue FROM $this->table
+        QUERY;
+        return $this;
+    }
+
+    public function currentDate()
+    {
+        $this->query = <<<QUERY
+        SELECT CURRENT_DATE()
+        QUERY;
+        return $this;
+    } 
+    
+    public function currentTime()
+    {
+        $this->query = <<<QUERY
+        SELECT CURRENT_TIME()
+        QUERY;
+        return $this;
+    }  
+
+    public function currentTimeStamp()
+    {
+        $this->query = <<<QUERY
+        SELECT CURRENT_TIMESTAMP()
+        QUERY;
+        return $this;
+    }  
 
     public function groupBy($table, String $column)
     {
@@ -286,6 +382,7 @@ abstract class Model extends Connection
 
         $date = new \DateTime();
         $values['created_at'] = $date->format('Y-m-d H:i:s');
+
         $values['updated_at'] = $date->format('Y-m-d H:i:s');
 
         $values['id'] = $static->db->queryPrepared($static->query, $values, ReturnType::LAST_INSERTED_ID);
