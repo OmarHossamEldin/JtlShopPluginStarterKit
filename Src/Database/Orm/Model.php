@@ -166,7 +166,7 @@ abstract class Model extends Connection
         SELECT AVG($column) AS AverageValue FROM $this->table
         QUERY;
         return $this;
-    }  
+    }
 
     public function ceiling($value)
     {
@@ -174,7 +174,7 @@ abstract class Model extends Connection
         SELECT CEILING($value)
         QUERY;
         return $this;
-    } 
+    }
 
     public function floor($value)
     {
@@ -182,8 +182,8 @@ abstract class Model extends Connection
         SELECT FLOOR($value)
         QUERY;
         return $this;
-    } 
-    
+    }
+
     public function selectMinimum(String $column)
     {
         $this->query = <<<QUERY
@@ -206,15 +206,15 @@ abstract class Model extends Connection
         SELECT CURRENT_DATE()
         QUERY;
         return $this;
-    } 
-    
+    }
+
     public function currentTime()
     {
         $this->query = <<<QUERY
         SELECT CURRENT_TIME()
         QUERY;
         return $this;
-    }  
+    }
 
     public function currentTimeStamp()
     {
@@ -222,7 +222,7 @@ abstract class Model extends Connection
         SELECT CURRENT_TIMESTAMP()
         QUERY;
         return $this;
-    }  
+    }
 
     public function groupBy($table, String $column)
     {
@@ -380,10 +380,10 @@ abstract class Model extends Connection
             ($columns) VALUES ($binds)
         QUERY;
 
-        $date = new \DateTime();
-        $values['created_at'] = $date->format('Y-m-d H:i:s');
 
-        $values['updated_at'] = $date->format('Y-m-d H:i:s');
+        $values['created_at'] = self::currentTimeStamp();
+
+        $values['updated_at'] = self::currentTimeStamp();
 
         $values['id'] = $static->db->queryPrepared($static->query, $values, ReturnType::LAST_INSERTED_ID);
         $collection = new Collection($values);
@@ -624,9 +624,9 @@ abstract class Model extends Connection
             $values['ForeignKeyValue'] = $attachedIds[$i];
             $values['foreignKey'] = $id;
 
-            $date = new \DateTime();
-            $values['created_at'] = $date->format('Y-m-d H:i:s');
-            $values['updated_at'] = $date->format('Y-m-d H:i:s');
+
+            $values['created_at'] = self::currentTimeStamp();
+            $values['updated_at'] = self::currentTimeStamp();
 
             $result = $this->db->queryPrepared($this->query, $values, ReturnType::QUERYSINGLE);
 
@@ -680,9 +680,9 @@ abstract class Model extends Connection
 
         $additionalValues['foreignKey'] = $id;
 
-        $date = new \DateTime();
-        $additionalValues['created_at'] = $date->format('Y-m-d H:i:s');
-        $additionalValues['updated_at'] = $date->format('Y-m-d H:i:s');
+
+        $additionalValues['created_at'] = self::currentTimeStamp();
+        $additionalValues['updated_at'] = self::currentTimeStamp();
 
         try {
             $rows = $this->db->queryPrepared(
