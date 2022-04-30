@@ -2,12 +2,14 @@
 
 namespace Plugin\JtlShopPluginStarterKit\Src\Database\Seeders;
 
-
-class DatabaseSeeder
+use Plugin\JtlShopPluginStarterKit\Src\Database\Initialization\Seeder;
+class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        $postSeeder = new PostsSeeder();
-        $postSeeder->create();
+        $this->call([
+            CategoriesSeeder::class,
+            PostsSeeder::class,
+        ]);
     }
 }

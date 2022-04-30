@@ -44,7 +44,7 @@ class HttpRequest
      * @param array $headers
      * @return void
      */
-    public function get(string $url, array $data = [], array $headers = ['Content-type' => 'application/json'], string $authType)
+    public function get(string $url, string $authType, array $data = [], array $headers = ['Content-type' => 'application/json'])
     {
         $url = $this->baseUrl . $url;
         $this->headers = $headers;
@@ -59,7 +59,7 @@ class HttpRequest
      * @param array $headers
      * @return void
      */
-    public function post(string $url, array $data = [], array $headers = ['Content-type' => 'application/json'], string $authType)
+    public function post(string $url, string $authType, array $data = [], array $headers = ['Content-type' => 'application/json'])
     {
         $url = $this->baseUrl . $url;
         $this->headers = $headers;
@@ -74,7 +74,7 @@ class HttpRequest
      * @param array $headers
      * @return void
      */
-    public function patch(string $url, array $data = [], array $headers = ['Content-type' => 'application/json'], string $authType)
+    public function patch(string $url, string $authType, array $data = [], array $headers = ['Content-type' => 'application/json'])
     {
         $url = $this->baseUrl . $url;
         $this->headers = $headers;
@@ -89,7 +89,7 @@ class HttpRequest
      * @param array $headers
      * @return void
      */
-    public function put(string $url, array $data = [], array $headers = ['Content-type' => 'application/json'], string $authType)
+    public function put(string $url, string $authType, array $data = [], array $headers = ['Content-type' => 'application/json'])
     {
         $url = $this->baseUrl . $url;
         $this->headers = $headers;
@@ -104,7 +104,7 @@ class HttpRequest
      * @param array $headers
      * @return void
      */
-    public function delete(string $url, array $data = [], array $headers = ['Content-type' => 'application/json'], string $authType)
+    public function delete(string $url, string $authType, array $data = [], array $headers = ['Content-type' => 'application/json'])
     {
         $url = $this->baseUrl . $url;
         $this->headers = $headers;

@@ -2,17 +2,16 @@
 
 namespace Plugin\JtlShopPluginStarterKit\Src\Database\Initialization;
 
-
 class Migration
 {
     public function call(array $tables, string $type)
     {
         foreach ($tables as $table) {
             $table = new $table();
-            if ($type === 'up') {
-                $table->up();
-            } else if ($type === 'down') {
-                $table->down();
+            if ($type === 'run_up') {
+                $table->run_up();
+            } else if ($type === 'run_down') {
+                $table->run_down();
             }
         }
     }

@@ -1,7 +1,6 @@
-class HttpRequest {
-  constructor(basUrl = "", headers = { "Content-Type": "application/json" }) {
-    this.basUrl = basUrl;
-    this.headers = headers;
+class Fiber {
+  constructor(baseURL = "") {
+    this.baseURL = baseURL;
   }
 
   set_headers(headers) {
@@ -29,31 +28,34 @@ class HttpRequest {
   }
 
   async request(url, method, data) {
+    url = this.baseURL + url;
     let response = null;
     switch (method) {
       case "POST":
       case "PATCH":
       case "PUT":
-        if (!!data) {
-          url = this.basUrl + url;
+        if ((typeof data === 'object') && (!!data)) {
           response = await fetch(url, {
             method,
             headers: this.headers,
-            body: JSON.stringify(data),
+            body: data,
+          });
+        } else if (!!data === false) {
+          response = await fetch(url, {
+            method,
+            headers: this.headers
           });
         } else {
           console.error("passed data should be not empty object");
         }
         break;
       case "GET":
-        url = this.basUrl + url;
         response = await fetch(url, {
           method,
           headers: this.headers,
         });
         break;
       case "DELETE":
-        url = this.basUrl + url;
         response = await fetch(url, {
           method,
           headers: this.headers,
@@ -62,7 +64,7 @@ class HttpRequest {
       default:
         console.error("un support request type");
     }
-    return {
+    return response.status === 204 ? response.status : {
       status: response.status,
       data: await response.json(),
     };

@@ -2,19 +2,23 @@
 
 namespace Plugin\JtlShopPluginStarterKit\Src\Middlewares;
 
+use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Middleware\BaseMiddleware;
+use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Localization\Translate;
 use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Header;
-use Plugin\JtlShopPluginStarterKit\Src\Helpers\Redirect;
 use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Server;
+use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
 
-class VerifyAjaxRequest
+class VerifyAjaxRequest extends BaseMiddleware
 {
-    public static function handle()
+    public function handle()
     {
         if (!!stripos(Server::previous_url(), 'paypal')) {
             return;
         }
-        if (!(Header::has('Content-Type') && Header::get('Content-Type') === 'application/json')) {
-            Redirect::to('/404');
+        if (!(Header::has('Accept') && Header::get('Accept') === 'application/json')) {
+            return Response::json([
+                'message' => Translate::translate('messages', 'unauthenticated'),
+            ], 403);
         }
-    }     
+    }
 }

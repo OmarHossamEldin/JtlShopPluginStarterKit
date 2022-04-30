@@ -16,7 +16,16 @@
                 <Name>Api_Credentials</Name>
             </Customlink>
             <Customlink sort="2">
+                <Name>Email_Credentials</Name>
+            </Customlink>
+            <Customlink sort="3">
+                <Name>Test_Email_Credentials</Name>
+            </Customlink>
+            <Customlink sort="4">
                 <Name>All_Posts</Name>
+            </Customlink>
+            <Customlink sort="5">
+                <Name>All_Categories</Name>
             </Customlink>
         </Adminmenu>
         <FrontendLink>

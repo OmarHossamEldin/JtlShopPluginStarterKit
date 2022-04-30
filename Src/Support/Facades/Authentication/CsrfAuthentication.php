@@ -32,4 +32,9 @@ class CsrfAuthentication
     {
         return $token ? $token === AbstractSession::get('jtl_token') :  false;
     }
+
+    public static function get_token(): string
+    {
+        return AbstractSession::get('jtl_token');
+    }
 }

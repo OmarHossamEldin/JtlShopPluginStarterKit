@@ -2,7 +2,7 @@
 
 namespace Plugin\JtlShopPluginStarterKit\Src\Support\Debug;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Filesystem\Directory;
+use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Filesystem\DirectoryComposer;
 use Carbon\Carbon;
 
 class Debugger
@@ -11,7 +11,7 @@ class Debugger
 
     public function __construct()
     {
-        $this->directory = new Directory();
+        $this->directory = new DirectoryComposer();
     }
     public static function die_and_dump($variable): void
     {
@@ -32,7 +32,7 @@ class Debugger
     public function log($text): void
     {
         $today = Carbon::today()->toDateString();
-        $filename = "{$this->directory->pluginRoot}/Logs/{$today}.log";
+        $filename = "{$this->directory->get_logs()}{$today}.log";
         if (file_exists($filename)) {
             $data = file_get_contents($filename);
             if (!is_array($text)) {

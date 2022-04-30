@@ -15,7 +15,8 @@ class PostStoreRequest extends Request
     {
         return [
             'title' => 'required',
-            'body' => 'nullable'
+            'body' => 'nullable',
+            'tec_see_category_id' => 'required'
         ];
     }
     

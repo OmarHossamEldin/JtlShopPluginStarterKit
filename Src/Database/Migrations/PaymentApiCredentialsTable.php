@@ -7,7 +7,7 @@ use Plugin\JtlShopPluginStarterKit\Src\Database\Initialization\Table;
 
 class PaymentApiCredentialsTable
 {
-    public function up()
+    public function run_up()
     {
         Schema::create('tec_see_api_credentials', function (Table $table) {
             $table->id();
@@ -18,7 +18,7 @@ class PaymentApiCredentialsTable
         });
     }
 
-    public function down()
+    public function run_down()
     {
         Schema::dropIfExists('tec_see_api_credentials');
     }

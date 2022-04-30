@@ -9,11 +9,13 @@ class DataBaseMigrations extends Migration
     public function run_up()
     {
         $this->call([
+            CategoriesTable::class,
             PostsTable::class,
             PaymentApiCredentialsTable::class,
             TokenParametersTable::class,
             OrderLinksTable::class,
-        ], 'up');
+            EmailCredentialsTable::class,
+        ], 'run_up');
     }
 
     public function run_down()
@@ -23,6 +25,8 @@ class DataBaseMigrations extends Migration
             TokenParametersTable::class,
             PaymentApiCredentialsTable::class,
             PostsTable::class,
-        ], 'down');
+            CategoriesTable::class,
+            EmailCredentialsTable::class,
+        ], 'run_down');
     }
 }

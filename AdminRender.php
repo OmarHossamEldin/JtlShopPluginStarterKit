@@ -46,12 +46,23 @@ class AdminRender
 
         $smarty->assign('pluginURL', $this->plugin->getPaths()->getShopURL());
 
+        $smarty->assign('pluginId', $this->plugin->getId());
+
         switch ($template) {
             case "Api_Credentials":
                 $template = 'apiCredentials/layout.tpl';
                 break;
             case "All_Posts":
                 $template = 'post/layout.tpl';
+                break;
+            case "All_Categories":
+                $template = 'category/layout.tpl';
+                break;
+            case "Email_Credentials":
+                $template = 'emailCredential/layout.tpl';
+                break;
+            case "Test_Email_Credentials":
+                $template = 'testCredentials/layout.tpl';
                 break;
             default:
                 throw new InvalidArgumentException('Cannot render tab ' . $template);

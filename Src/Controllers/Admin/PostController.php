@@ -10,6 +10,7 @@ use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
 use Plugin\JtlShopPluginStarterKit\Src\Middlewares\CheckApiCredentials;
 use Plugin\JtlShopPluginStarterKit\Src\Requests\getPostDetailsRequest;
 use Plugin\JtlShopPluginStarterKit\Src\Requests\PostDeleteRequest;
+use Plugin\JtlShopPluginStarterKit\Src\Requests\PostUpdateRequest;
 use Plugin\JtlShopPluginStarterKit\Src\Support\Debug\Debugger;
 use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Session;
 use Plugin\JtlShopPluginStarterKit\Src\Validations\Alerts;
@@ -23,13 +24,21 @@ class PostController
      * @param integer $pluginId
      * @return void
      */
-    public function index(Request $request, int $pluginId)
+    public function index(Request $request)
     {
-        $smarty   = Shop::Smarty();
+        $currentPage = isset($request->all()['page']) ? $request->all()['page'] : 1;
         $post     = new Post();
-        $posts    = $post->all();
-        $smarty->assign('pluginId', $pluginId);
-        $smarty->assign('posts', $posts);
+        $posts    = $post->select(
+            'id',
+            'title',
+            'body',
+            'quantity'
+        )->with('category:name AS category,description')
+            ->paginate(10, $currentPage);
+
+           // $posts = $post->SelectCase($conditions,'Quantity is normal', 'title','quantity')->get();
+
+        return Response::json($posts, 200);
     }
 
     /**
@@ -39,15 +48,48 @@ class PostController
      * @param integer $pluginId
      * @return void
      */
-    public function store(PostStoreRequest $request, int $pluginId)
+    public function store(PostStoreRequest $request)
     {
-        $checkCredentials = new CheckApiCredentials;
-        $checkCredentials->handle();
+        /*         $checkCredentials = new CheckApiCredentials;
+        $checkCredentials->handle(); */
 
         $validatedData = $request->validated();
         $post = new Post();
-        $post->create($validatedData);
-        Alerts::show('success', ['post' => 'is created successfully']);
+        $post->create([
+            'title' => $validatedData['title'],
+            'body' => $validatedData['body'],
+            'tec_see_category_id' => $validatedData['tec_see_category_id'],
+            'quantity' => $validatedData['quantity'],
+
+        ])->first();
+        return Response::json([
+            'message' => 'post is created successfully',
+            'post' => $post,
+        ], 201);
+    }
+
+    /**
+     * update a post
+     *
+     * @param PostUpdateRequest $request
+     * @param integer $pluginId
+     * @return void
+     */
+    public function update(PostUpdateRequest $request)
+    {
+        /*         $checkCredentials = new CheckApiCredentials;
+        $checkCredentials->handle(); */
+
+        $validatedData = $request->validated();
+        $params = $request->get_route_params();
+        $post = new Post();
+        $post = $post->update([
+            'title' => $validatedData['title'],
+            'body' => $validatedData['body'],
+            'tec_see_category_id' => $validatedData['tec_see_category_id'],
+            'quantity' => $validatedData['quantity'],
+        ], $params['id'])->first();
+        return Response::json(['message' => 'post updated successfully', 'post' => $post], 206);
     }
 
     /**
@@ -57,34 +99,12 @@ class PostController
      * @param integer $pluginId
      * @return void
      */
-    public function destroy(PostDeleteRequest $request, int $pluginId)
+    public function destroy(PostDeleteRequest $request)
     {
-        $validatedData = $request->validated();
         $post = new Post();
-        $post->delete($validatedData['postId']);
-        Alerts::show('success', ['post' => 'is deleted successfully']);
+        $params = $request->get_route_params();
+        $post->delete($params['id']);
+        return Response::json([], 204);
     }
 
-    /**
-     * get post data
-     *
-     * @param getPostDetailsRequest $request
-     * @param integer $pluginId
-     * @return void
-     */
-    public function getPostData(getPostDetailsRequest $request, int $pluginId)
-    {
-        $validatedData = $request->validated();
-        $post = new Post();
-        $postData = $post->select('id', 'title', 'body')
-            ->where('id', $validatedData['post_id'])
-            ->get();
-
-        $post = (object)$postData[0];
-        //post_id
-
-        return Response::json([
-            'post' => $post,
-        ], 200);
-    }
 }
