@@ -2,7 +2,7 @@
 
 namespace MvcCore\Jtl\Controllers\Admin;
 
-use MvcCore\Jtl\Requests\PostStoreRequest;
+use MvcCore\Jtl\Requests\Backend\Post\PostStoreRequest;
 use MvcCore\Jtl\Support\Http\Request;
 use MvcCore\Jtl\Models\Post;
 use JTL\Shop;

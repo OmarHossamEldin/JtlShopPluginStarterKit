@@ -21,8 +21,6 @@ class ApiCredentialsController
 {
     public function index(Request $request)
     {
-        $smarty   = Shop::Smarty();
-
         $currentPage = isset($request->all()['page']) ? $request->all()['page'] : 1;
         $credential     = new ApiCredentials;
         $credentials    = $credential->select(
@@ -36,7 +34,7 @@ class ApiCredentialsController
 
     }
 
-    public function store(RequestsApiCredentialsStoreRequest $request)
+    public function store(ApiCredentialsStoreRequest $request)
     {
         $validatedData = $request->validated();
 
