@@ -19,7 +19,11 @@ class getDataFromShop
     {
 
         $product     = new Product();
-        $products    = $product->select('kArtikel', 'CName','fStandardpreisNetto as taxPrice')->whereLike('cName', 'schloss')->orLike('cName', 'lock')->get();
+        $products    = $product->
+        select('kArtikel', 'CName','fStandardpreisNetto as taxPrice')
+        ->whereLike('cName', 'schloss')
+        ->orLike('cName', 'lock')
+        ->get();
         $shopUrl = Shop::getURL();
         $uploads = $shopUrl . '/media/image/storage/';
         array_walk($products, function ($product) use ($image, $uploads) {
