@@ -1,21 +1,18 @@
 <?php
 
-namespace MvcCore\Jtl\Requests;
+namespace MvcCore\Jtl\Backend\Email\Requests;
 
 use MvcCore\Jtl\Traits\ValidationTrait;
 use MvcCore\Jtl\Support\Http\Request;
 
-class CategoryStoreRequest extends Request
+class deleteEmailCredentialsRequest extends Request
 {
     use ValidationTrait;
-
-    public string $type = 'form';
     
     public function rules()
     {
         return [
-            'name' => 'required',
-            'description' => 'required',
+            'emailCredentialId' => 'required',
         ];
     }
     

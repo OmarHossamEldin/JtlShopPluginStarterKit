@@ -1,11 +1,11 @@
 <?php
 
-namespace MvcCore\Jtl\Requests;
+namespace MvcCore\Jtl\Backend\Email\Requests;
 
 use MvcCore\Jtl\Traits\ValidationTrait;
 use MvcCore\Jtl\Support\Http\Request;
 
-class CategoryUpdateRequest extends Request
+class TestEmailCredentialRequest extends Request
 {
     use ValidationTrait;
 
@@ -14,8 +14,8 @@ class CategoryUpdateRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required',
-            'description' => 'nullable',
+            'sender' => 'required',
+            'reciever' => 'required',
         ];
     }
     

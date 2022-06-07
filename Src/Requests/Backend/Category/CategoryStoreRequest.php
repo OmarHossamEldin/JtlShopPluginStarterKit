@@ -1,11 +1,11 @@
 <?php
 
-namespace MvcCore\Jtl\Requests;
+namespace MvcCore\Jtl\Backend\Category\Requests;
 
 use MvcCore\Jtl\Traits\ValidationTrait;
 use MvcCore\Jtl\Support\Http\Request;
 
-class PostStoreRequest extends Request
+class CategoryStoreRequest extends Request
 {
     use ValidationTrait;
 
@@ -14,9 +14,8 @@ class PostStoreRequest extends Request
     public function rules()
     {
         return [
-            'title' => 'required',
-            'body' => 'nullable',
-            'tec_see_category_id' => 'required'
+            'name' => 'required',
+            'description' => 'required',
         ];
     }
     

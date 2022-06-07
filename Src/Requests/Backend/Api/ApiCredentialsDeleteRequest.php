@@ -1,21 +1,18 @@
 <?php
 
-namespace MvcCore\Jtl\Requests;
+namespace MvcCore\Jtl\Backend\Api\Requests;
 
 use MvcCore\Jtl\Traits\ValidationTrait;
 use MvcCore\Jtl\Support\Http\Request;
 
-class PostDeleteRequest extends Request
+class ApiCredentialsDeleteRequest extends Request
 {
     use ValidationTrait;
 
-    public string $type = 'form';
-    
     public function rules()
     {
         return [
-            'postId' => 'required',
+            'apiCredentialId' => 'required',
         ];
     }
-    
 }

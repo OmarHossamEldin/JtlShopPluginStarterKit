@@ -1,11 +1,11 @@
 <?php
 
-namespace MvcCore\Jtl\Requests;
+namespace MvcCore\Jtl\Backend\Post\Requests;
 
 use MvcCore\Jtl\Traits\ValidationTrait;
 use MvcCore\Jtl\Support\Http\Request;
 
-class PostUpdateRequest extends Request
+class PostStoreRequest extends Request
 {
     use ValidationTrait;
 

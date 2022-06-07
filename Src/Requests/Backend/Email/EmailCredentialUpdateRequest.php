@@ -1,16 +1,14 @@
 <?php
 
-namespace MvcCore\Jtl\Requests;
+namespace MvcCore\Jtl\Backend\Email\Requests;
 
 use MvcCore\Jtl\Traits\ValidationTrait;
 use MvcCore\Jtl\Support\Http\Request;
 
-class EmailCredentialStoreRequest extends Request
+class EmailCredentialUpdateRequest extends Request
 {
     use ValidationTrait;
 
-    public string $type = 'form';
-    
     public function rules()
     {
         return [
@@ -21,5 +19,4 @@ class EmailCredentialStoreRequest extends Request
             'port' => 'required'
         ];
     }
-    
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace MvcCore\Jtl\Requests;
+namespace MvcCore\Jtl\Backend\Requests;
 
 use MvcCore\Jtl\Traits\ValidationTrait;
 use MvcCore\Jtl\Support\Http\Request;
 
-class ApiCredentialsStoreRequest extends Request
+class ApiCredentialsUpdateRequest extends Request
 {
     use ValidationTrait;
 
