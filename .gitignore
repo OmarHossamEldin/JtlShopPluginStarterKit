@@ -1,5 +1,2 @@
 /vendor/
 .phpunit,result.cache
-/Src/Resources/*.png
-/Src/Resources/*.jpg
-/Src/Resources/*.jpeg

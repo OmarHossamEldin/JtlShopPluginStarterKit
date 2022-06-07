@@ -29,5 +29,8 @@
             "name": "Mohammed-fathy",
             "email": "Mohamedfathy573@gmail.com"
         }
-    ]
+    ],
+    "require": {
+        "phpmailer/phpmailer": "dev-master"
+    }
 }
