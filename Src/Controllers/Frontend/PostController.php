@@ -1,10 +1,10 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Controllers\Frontend;
+namespace MvcCore\Jtl\Controllers\Frontend;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Request;
-use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
-use Plugin\JtlShopPluginStarterKit\Src\Models\Post;
+use MvcCore\Jtl\Support\Http\Request;
+use MvcCore\Jtl\Helpers\Response;
+use MvcCore\Jtl\Models\Post;
 use JTL\Shop;
 
 class PostController

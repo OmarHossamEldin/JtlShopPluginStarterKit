@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Support\Http;
+namespace MvcCore\Jtl\Support\Http;
 
 class Request
 {

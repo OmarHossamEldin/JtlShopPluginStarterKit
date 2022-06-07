@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Mail;
+namespace MvcCore\Jtl\Mail;
 
 //Load Composer's autoloader
 require '../../vendor/autoload.php';
@@ -10,8 +10,8 @@ require '../../vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-use Plugin\JtlShopPluginStarterKit\Src\Models\EmailCredential;
-use Plugin\JtlShopPluginStarterKit\Src\Validations\Alerts;
+use MvcCore\Jtl\Models\EmailCredential;
+use MvcCore\Jtl\Validations\Alerts;
 
 class Mail
 {

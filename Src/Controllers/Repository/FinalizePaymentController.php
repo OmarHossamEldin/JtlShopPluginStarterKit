@@ -1,17 +1,17 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Controllers\Repository;
+namespace MvcCore\Jtl\Controllers\Repository;
 
-use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
-use Plugin\JtlShopPluginStarterKit\Src\Models\TokenParameter;
+use MvcCore\Jtl\Helpers\Response;
+use MvcCore\Jtl\Models\TokenParameter;
 use Carbon\Carbon;
-use Plugin\JtlShopPluginStarterKit\Src\Models\ApiCredentials;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\HttpRequest;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Server;
-use Plugin\JtlShopPluginStarterKit\Src\Helpers\Redirect;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Request;
+use MvcCore\Jtl\Models\ApiCredentials;
+use MvcCore\Jtl\Support\Http\HttpRequest;
+use MvcCore\Jtl\Support\Http\Server;
+use MvcCore\Jtl\Helpers\Redirect;
+use MvcCore\Jtl\Support\Http\Request;
 use JTL\Session\AbstractSession;
-use Plugin\JtlShopPluginStarterKit\Src\Models\OrderLink;
+use MvcCore\Jtl\Models\OrderLink;
 
 class FinalizePaymentController
 {

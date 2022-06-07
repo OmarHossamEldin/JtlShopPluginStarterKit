@@ -1,14 +1,14 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Controllers\Admin;
+namespace MvcCore\Jtl\Controllers\Admin;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Request;
-use Plugin\JtlShopPluginStarterKit\Src\Models\EmailCredential;
+use MvcCore\Jtl\Support\Http\Request;
+use MvcCore\Jtl\Models\EmailCredential;
 use JTL\Shop;
-use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
-use Plugin\JtlShopPluginStarterKit\Src\Mail\Mail;
-use Plugin\JtlShopPluginStarterKit\Src\Requests\TestEmailCredentialRequest;
-use Plugin\JtlShopPluginStarterKit\Src\Validations\Alerts;
+use MvcCore\Jtl\Helpers\Response;
+use MvcCore\Jtl\Mail\Mail;
+use MvcCore\Jtl\Requests\TestEmailCredentialRequest;
+use MvcCore\Jtl\Validations\Alerts;
 
 
 class TestEmailCredentialsController

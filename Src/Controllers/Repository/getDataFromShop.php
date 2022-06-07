@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Controllers\Repository;
+namespace MvcCore\Jtl\Controllers\Repository;
 
 use JTL\Shop;
 use JTL\Session\Frontend;

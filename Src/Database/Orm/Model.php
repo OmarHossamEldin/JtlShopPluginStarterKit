@@ -1,13 +1,13 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Database\Orm;
+namespace MvcCore\Jtl\Database\Orm;
 
 use JTL\DB\ReturnType;
-use Plugin\JtlShopPluginStarterKit\Src\Database\Initialization\Connection;
-use Plugin\JtlShopPluginStarterKit\Src\Exceptions\DatabaseQueryException;
-use Plugin\JtlShopPluginStarterKit\Src\Exceptions\RelationClassException;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Collections\Collection;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Debug\Debugger;
+use MvcCore\Jtl\Database\Initialization\Connection;
+use MvcCore\Jtl\Exceptions\DatabaseQueryException;
+use MvcCore\Jtl\Exceptions\RelationClassException;
+use MvcCore\Jtl\Support\Collections\Collection;
+use MvcCore\Jtl\Support\Debug\Debugger;
 
 abstract class Model extends Connection
 {

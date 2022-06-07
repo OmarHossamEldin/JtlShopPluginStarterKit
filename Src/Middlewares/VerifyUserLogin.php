@@ -1,8 +1,8 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Middlewares;
+namespace MvcCore\Jtl\Middlewares;
 
-use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
+use MvcCore\Jtl\Helpers\Response;
 use JTL\Session\Frontend;
 
 class VerifyUserLogin

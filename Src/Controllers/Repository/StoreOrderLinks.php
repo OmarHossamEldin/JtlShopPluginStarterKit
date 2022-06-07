@@ -1,8 +1,8 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Controllers\Repository;
+namespace MvcCore\Jtl\Controllers\Repository;
 
-use Plugin\JtlShopPluginStarterKit\Src\Models\OrderLink;
+use MvcCore\Jtl\Models\OrderLink;
 
 class StoreOrderLinks
 {

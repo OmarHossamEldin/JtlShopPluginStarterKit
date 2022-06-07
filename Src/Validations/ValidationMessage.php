@@ -1,8 +1,8 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Validations;
+namespace MvcCore\Jtl\Validations;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Localization\Lang;
+use MvcCore\Jtl\Support\Facades\Localization\Lang;
 
 class ValidationMessage
 {

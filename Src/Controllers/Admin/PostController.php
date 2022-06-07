@@ -1,19 +1,19 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Controllers\Admin;
+namespace MvcCore\Jtl\Controllers\Admin;
 
-use Plugin\JtlShopPluginStarterKit\Src\Requests\PostStoreRequest;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Request;
-use Plugin\JtlShopPluginStarterKit\Src\Models\Post;
+use MvcCore\Jtl\Requests\PostStoreRequest;
+use MvcCore\Jtl\Support\Http\Request;
+use MvcCore\Jtl\Models\Post;
 use JTL\Shop;
-use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
-use Plugin\JtlShopPluginStarterKit\Src\Middlewares\CheckApiCredentials;
-use Plugin\JtlShopPluginStarterKit\Src\Requests\getPostDetailsRequest;
-use Plugin\JtlShopPluginStarterKit\Src\Requests\PostDeleteRequest;
-use Plugin\JtlShopPluginStarterKit\Src\Requests\PostUpdateRequest;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Debug\Debugger;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Session;
-use Plugin\JtlShopPluginStarterKit\Src\Validations\Alerts;
+use MvcCore\Jtl\Helpers\Response;
+use MvcCore\Jtl\Middlewares\CheckApiCredentials;
+use MvcCore\Jtl\Requests\getPostDetailsRequest;
+use MvcCore\Jtl\Requests\PostDeleteRequest;
+use MvcCore\Jtl\Requests\PostUpdateRequest;
+use MvcCore\Jtl\Support\Debug\Debugger;
+use MvcCore\Jtl\Support\Http\Session;
+use MvcCore\Jtl\Validations\Alerts;
 
 class PostController
 {

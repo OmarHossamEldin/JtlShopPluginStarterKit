@@ -1,12 +1,12 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Services;
+namespace MvcCore\Jtl\Services;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Middleware\RegisterMiddlewares;
+use MvcCore\Jtl\Support\Facades\Middleware\RegisterMiddlewares;
 
 class MiddlewaresService
 {
-    private const MIDDLEWARES_NAMESPACE = 'Plugin\JtlShopPluginStarterKit\Src\Middlewares\\';
+    private const MIDDLEWARES_NAMESPACE = 'MvcCore\Jtl\Middlewares\\';
 
     public static function load(): void
     {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Helpers;
+namespace MvcCore\Jtl\Helpers;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Header;
+use MvcCore\Jtl\Support\Http\Header;
 
 class Response
 {

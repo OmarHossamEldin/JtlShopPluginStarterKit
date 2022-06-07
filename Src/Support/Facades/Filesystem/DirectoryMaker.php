@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Filesystem;
+namespace MvcCore\Jtl\Support\Facades\Filesystem;
 
 class DirectoryMaker
 {

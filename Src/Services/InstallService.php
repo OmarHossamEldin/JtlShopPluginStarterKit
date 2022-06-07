@@ -1,11 +1,11 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Services;
+namespace MvcCore\Jtl\Services;
 
-use Plugin\JtlShopPluginStarterKit\Src\Database\Migrations\DataBaseMigrations;
-use Plugin\JtlShopPluginStarterKit\Src\Database\Seeders\DatabaseSeeder;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Debug\Debugger;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Filesystem\Storage;
+use MvcCore\Jtl\Database\Migrations\DataBaseMigrations;
+use MvcCore\Jtl\Database\Seeders\DatabaseSeeder;
+use MvcCore\Jtl\Support\Debug\Debugger;
+use MvcCore\Jtl\Support\Facades\Filesystem\Storage;
 
 class InstallService
 {

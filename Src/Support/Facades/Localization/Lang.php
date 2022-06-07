@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Localization;
+namespace MvcCore\Jtl\Support\Facades\Localization;
 
 use JTL\Shop;
 

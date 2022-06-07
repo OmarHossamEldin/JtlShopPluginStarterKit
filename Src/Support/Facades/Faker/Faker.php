@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Faker;
+namespace MvcCore\Jtl\Support\Facades\Faker;
 
 class Faker
 {

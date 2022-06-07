@@ -1,19 +1,19 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Controllers\Admin;
+namespace MvcCore\Jtl\Controllers\Admin;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Request;
-use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
-use Plugin\JtlShopPluginStarterKit\Src\Models\EmailCredential;
-use Plugin\JtlShopPluginStarterKit\Src\Requests\EmailCredentialStoreRequest;
-use Plugin\JtlShopPluginStarterKit\Src\Requests\EmailCredentialUpdateRequest;
+use MvcCore\Jtl\Support\Http\Request;
+use MvcCore\Jtl\Helpers\Response;
+use MvcCore\Jtl\Models\EmailCredential;
+use MvcCore\Jtl\Requests\EmailCredentialStoreRequest;
+use MvcCore\Jtl\Requests\EmailCredentialUpdateRequest;
 use JTL\Shop;
-use Plugin\JtlShopPluginStarterKit\Src\Database\Migrations\EmailCredentialsTable;
-use Plugin\JtlShopPluginStarterKit\Src\Middlewares\CheckApiCredentials;
-use Plugin\JtlShopPluginStarterKit\Src\Requests\deleteEmailCredentialsRequest;
-use Plugin\JtlShopPluginStarterKit\Src\Requests\getEmailCredentialsRequest;
-use Plugin\JtlShopPluginStarterKit\Src\Validations\Alerts;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Debug\Debugger;
+use MvcCore\Jtl\Database\Migrations\EmailCredentialsTable;
+use MvcCore\Jtl\Middlewares\CheckApiCredentials;
+use MvcCore\Jtl\Requests\deleteEmailCredentialsRequest;
+use MvcCore\Jtl\Requests\getEmailCredentialsRequest;
+use MvcCore\Jtl\Validations\Alerts;
+use MvcCore\Jtl\Support\Debug\Debugger;
 
 
 class EmailCredentialsController

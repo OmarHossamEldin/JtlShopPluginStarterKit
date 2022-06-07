@@ -1,8 +1,8 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Support\Debug;
+namespace MvcCore\Jtl\Support\Debug;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Filesystem\DirectoryComposer;
+use MvcCore\Jtl\Support\Facades\Filesystem\DirectoryComposer;
 use Carbon\Carbon;
 
 class Debugger

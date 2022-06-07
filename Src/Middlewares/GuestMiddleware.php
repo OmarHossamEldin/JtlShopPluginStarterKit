@@ -1,12 +1,12 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Middlewares;
+namespace MvcCore\Jtl\Middlewares;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Authentication\CsrfAuthentication;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Middleware\BaseMiddleware;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Localization\Translate;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Faker\Faker;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Header;
+use MvcCore\Jtl\Support\Facades\Authentication\CsrfAuthentication;
+use MvcCore\Jtl\Support\Facades\Middleware\BaseMiddleware;
+use MvcCore\Jtl\Support\Facades\Localization\Translate;
+use MvcCore\Jtl\Support\Facades\Faker\Faker;
+use MvcCore\Jtl\Support\Http\Header;
 
 class GuestMiddleware extends BaseMiddleware
 {

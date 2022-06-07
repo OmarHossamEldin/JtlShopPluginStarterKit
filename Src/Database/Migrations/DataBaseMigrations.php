@@ -1,8 +1,8 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Database\Migrations;
+namespace MvcCore\Jtl\Database\Migrations;
 
-use Plugin\JtlShopPluginStarterKit\Src\Database\Initialization\Migration;
+use MvcCore\Jtl\Database\Initialization\Migration;
 
 class DataBaseMigrations extends Migration
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Router;
+namespace MvcCore\Jtl\Support\Facades\Router;
 
 class RouteHandler
 {

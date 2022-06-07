@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Middleware;
+namespace MvcCore\Jtl\Support\Facades\Middleware;
 
 class RegisterMiddlewares
 {
