@@ -3,7 +3,9 @@
 {include file="./index.tpl"}
 {include file="./update.tpl"}
 {include file="./popup.tpl"}
-<script src="{$pluginPath}js/Fiber.js" type="text/javascript"></script>
+<script src="{$pluginPath}js/Fiberjs/JsonParseException.js" type="text/javascript"></script>
+<script src="{$pluginPath}js/Fiberjs/ResponseException.js" type="text/javascript"></script>
+<script src="{$pluginPath}js/Fiberjs/Fiber.js" type="text/javascript"></script>
 <script src="{$pluginPath}js/api-credential/createApiCredential.js" type="text/javascript"></script>
 <script src="{$pluginPath}js/api-credential/updateApiCredential.js" type="text/javascript"></script>
 <script src="{$pluginPath}js/api-credential/index.js" type="text/javascript"></script>
