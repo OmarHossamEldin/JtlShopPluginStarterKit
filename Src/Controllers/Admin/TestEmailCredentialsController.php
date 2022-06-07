@@ -7,7 +7,7 @@ use MvcCore\Jtl\Models\EmailCredential;
 use JTL\Shop;
 use MvcCore\Jtl\Helpers\Response;
 use MvcCore\Jtl\Mail\Mail;
-use MvcCore\Jtl\Requests\TestEmailCredentialRequest;
+use MvcCore\Jtl\Requests\Backend\Email\TestEmailCredentialRequest;
 use MvcCore\Jtl\Validations\Alerts;
 
 

@@ -8,13 +8,9 @@ use JTL\Shop;
 use MvcCore\Jtl\Helpers\Response;
 use MvcCore\Jtl\Middlewares\CheckApiCredentials;
 use MvcCore\Jtl\Models\Post;
-use MvcCore\Jtl\Requests\CategoryStoreRequest;
-use MvcCore\Jtl\Requests\CategoryUpdateRequest;
-use MvcCore\Jtl\Requests\deleteCategoryRequest;
-use MvcCore\Jtl\Requests\getCategoryDetailsRequest;
-use MvcCore\Jtl\Support\Debug\Debugger;
-use MvcCore\Jtl\Support\Http\Session;
-use MvcCore\Jtl\Validations\Alerts;
+use MvcCore\Jtl\Requests\Backend\Category\CategoryStoreRequest;
+use MvcCore\Jtl\Requests\Backend\Category\CategoryUpdateRequest;
+use MvcCore\Jtl\Requests\Backend\Category\deleteCategoryRequest;
 
 class CategoryController
 {

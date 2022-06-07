@@ -1,6 +1,6 @@
 <?php
 
-namespace MvcCore\Jtl\Backend\Api\Requests;
+namespace MvcCore\Jtl\Requests\Requests\Backend\Api;
 
 use MvcCore\Jtl\Traits\ValidationTrait;
 use MvcCore\Jtl\Support\Http\Request;

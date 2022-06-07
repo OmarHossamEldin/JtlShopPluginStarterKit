@@ -1,6 +1,6 @@
 <?php
 
-namespace MvcCore\Jtl\Backend\Email\Requests;
+namespace MvcCore\Jtl\Requests\Backend\Email;
 
 use MvcCore\Jtl\Traits\ValidationTrait;
 use MvcCore\Jtl\Support\Http\Request;

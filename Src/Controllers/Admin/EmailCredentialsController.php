@@ -5,15 +5,14 @@ namespace MvcCore\Jtl\Controllers\Admin;
 use MvcCore\Jtl\Support\Http\Request;
 use MvcCore\Jtl\Helpers\Response;
 use MvcCore\Jtl\Models\EmailCredential;
-use MvcCore\Jtl\Requests\EmailCredentialStoreRequest;
-use MvcCore\Jtl\Requests\EmailCredentialUpdateRequest;
+use MvcCore\Jtl\Requests\Backend\Email\EmailCredentialStoreRequest;
+use MvcCore\Jtl\Requests\Backend\Email\EmailCredentialUpdateRequest;
 use JTL\Shop;
 use MvcCore\Jtl\Database\Migrations\EmailCredentialsTable;
 use MvcCore\Jtl\Middlewares\CheckApiCredentials;
-use MvcCore\Jtl\Requests\deleteEmailCredentialsRequest;
-use MvcCore\Jtl\Requests\getEmailCredentialsRequest;
+use MvcCore\Jtl\Requests\Backend\Email\deleteEmailCredentialsRequest;
+use MvcCore\Jtl\Requests\Backend\Email\getEmailCredentialsRequest;
 use MvcCore\Jtl\Validations\Alerts;
-use MvcCore\Jtl\Support\Debug\Debugger;
 
 
 class EmailCredentialsController

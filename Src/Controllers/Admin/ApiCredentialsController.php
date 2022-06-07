@@ -5,8 +5,8 @@ namespace MvcCore\Jtl\Controllers\Admin;
 use MvcCore\Jtl\Helpers\Redirect;
 use MvcCore\Jtl\Models\ApiCredentials;
 use MvcCore\Jtl\Models\TokenParameter;
-use MvcCore\Jtl\Requests\ApiCredentialsStoreRequest;
-use MvcCore\Jtl\Requests\ApiCredentialsUpdateRequest;
+use MvcCore\Jtl\Requests\Backend\Api\ApiCredentialsStoreRequest;
+use MvcCore\Jtl\Requests\Backend\Api\ApiCredentialsUpdateRequest;
 use MvcCore\Jtl\Validations\Alerts;
 use MvcCore\Jtl\Support\Http\HttpRequest;
 use MvcCore\Jtl\Support\Http\Request;
@@ -36,7 +36,7 @@ class ApiCredentialsController
 
     }
 
-    public function store(ApiCredentialsStoreRequest $request)
+    public function store(RequestsApiCredentialsStoreRequest $request)
     {
         $validatedData = $request->validated();
 
