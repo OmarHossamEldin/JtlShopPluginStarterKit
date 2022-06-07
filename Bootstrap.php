@@ -8,8 +8,8 @@ use JTL\Events\Dispatcher;
 use JTL\Link\LinkInterface;
 use JTL\Plugin\Bootstrapper;
 use JTL\Smarty\JTLSmarty;
-use Plugin\JtlShopPluginStarterKit\Src\Services\InstallService;
-use Plugin\JtlShopPluginStarterKit\Src\Services\RoutesService;
+use MvcCore\Jtl\Services\InstallService;
+use MvcCore\Jtl\Services\RoutesService;
 use JTL\Shop;
 /**
  * Class Bootstrap
