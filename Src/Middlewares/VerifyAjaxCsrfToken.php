@@ -1,10 +1,10 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Middlewares;
+namespace MvcCore\Jtl\Middlewares;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Authentication\CsrfAuthentication;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Request;
-use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
+use MvcCore\Jtl\Support\Facades\Authentication\CsrfAuthentication;
+use MvcCore\Jtl\Support\Http\Request;
+use MvcCore\Jtl\Helpers\Response;
 
 class VerifyAjaxCsrfToken
 {

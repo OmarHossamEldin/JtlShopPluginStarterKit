@@ -1,20 +1,16 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Controllers\Admin;
+namespace MvcCore\Jtl\Controllers\Admin;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Request;
-use Plugin\JtlShopPluginStarterKit\Src\Models\Category;
+use MvcCore\Jtl\Support\Http\Request;
+use MvcCore\Jtl\Models\Category;
 use JTL\Shop;
-use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
-use Plugin\JtlShopPluginStarterKit\Src\Middlewares\CheckApiCredentials;
-use Plugin\JtlShopPluginStarterKit\Src\Models\Post;
-use Plugin\JtlShopPluginStarterKit\Src\Requests\CategoryStoreRequest;
-use Plugin\JtlShopPluginStarterKit\Src\Requests\CategoryUpdateRequest;
-use Plugin\JtlShopPluginStarterKit\Src\Requests\deleteCategoryRequest;
-use Plugin\JtlShopPluginStarterKit\Src\Requests\getCategoryDetailsRequest;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Debug\Debugger;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Session;
-use Plugin\JtlShopPluginStarterKit\Src\Validations\Alerts;
+use MvcCore\Jtl\Helpers\Response;
+use MvcCore\Jtl\Middlewares\CheckApiCredentials;
+use MvcCore\Jtl\Models\Post;
+use MvcCore\Jtl\Requests\Backend\Category\CategoryStoreRequest;
+use MvcCore\Jtl\Requests\Backend\Category\CategoryUpdateRequest;
+use MvcCore\Jtl\Requests\Backend\Category\deleteCategoryRequest;
 
 class CategoryController
 {

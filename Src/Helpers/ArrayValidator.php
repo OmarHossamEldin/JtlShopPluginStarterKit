@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Helpers;
+namespace MvcCore\Jtl\Helpers;
 class ArrayValidator
 {
     private array $array;

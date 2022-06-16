@@ -1,9 +1,9 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Database\Seeders;
+namespace MvcCore\Jtl\Database\Seeders;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Faker\Faker;
-use Plugin\JtlShopPluginStarterKit\Src\Models\Post;
+use MvcCore\Jtl\Support\Facades\Faker\Faker;
+use MvcCore\Jtl\Models\Post;
 
 class PostsSeeder
 {

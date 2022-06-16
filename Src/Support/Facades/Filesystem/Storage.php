@@ -1,8 +1,8 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Filesystem;
+namespace MvcCore\Jtl\Support\Facades\Filesystem;
 
-use Plugin\JtlShopPluginStarterKit\Src\Validations\Alerts;
+use MvcCore\Jtl\Validations\Alerts;
 
 class Storage
 {

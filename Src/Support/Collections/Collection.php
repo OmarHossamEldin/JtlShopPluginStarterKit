@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Support\Collections;
+namespace MvcCore\Jtl\Support\Collections;
 
 use ArrayAccess;
 use ArrayIterator;

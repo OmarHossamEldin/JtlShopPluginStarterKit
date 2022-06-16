@@ -1,0 +1,36 @@
+{
+    "name": "reneknox/mvc-core-jtl",
+    "description": "mvc-core",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "MvcCore\\Jtl\\": "Src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+      },
+    "minimum-stability": "dev",
+    "require-dev": {
+        "phpunit/phpunit": "9.5"
+    },
+    "authors": [
+        {
+            "name": "OmarHossamEl-din",
+            "email": "okandil273@gmail.com"
+        },
+        {
+            "name": "Mohammed-fathy",
+            "email": "Mohamedfathy573@gmail.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "dev-master"
+    }
+}

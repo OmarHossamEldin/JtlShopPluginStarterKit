@@ -1,8 +1,8 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Middlewares;
+namespace MvcCore\Jtl\Middlewares;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Localization\Translate;
+use MvcCore\Jtl\Support\Facades\Localization\Translate;
 use JTL\Shop;
 
 class Localization

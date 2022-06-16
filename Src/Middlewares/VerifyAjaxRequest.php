@@ -1,12 +1,12 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Middlewares;
+namespace MvcCore\Jtl\Middlewares;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Middleware\BaseMiddleware;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Localization\Translate;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Header;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Server;
-use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
+use MvcCore\Jtl\Support\Facades\Middleware\BaseMiddleware;
+use MvcCore\Jtl\Support\Facades\Localization\Translate;
+use MvcCore\Jtl\Support\Http\Header;
+use MvcCore\Jtl\Support\Http\Server;
+use MvcCore\Jtl\Helpers\Response;
 
 class VerifyAjaxRequest extends BaseMiddleware
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Database\Seeders;
+namespace MvcCore\Jtl\Database\Seeders;
 
-use Plugin\JtlShopPluginStarterKit\Src\Database\Initialization\Seeder;
+use MvcCore\Jtl\Database\Initialization\Seeder;
 class DatabaseSeeder extends Seeder
 {
     public function run()

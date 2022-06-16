@@ -1,10 +1,10 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Router;
+namespace MvcCore\Jtl\Support\Facades\Router;
 
-use Plugin\JtlShopPluginStarterKit\Src\Exceptions\RouteNotFoundException;
-use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Request;
+use MvcCore\Jtl\Exceptions\RouteNotFoundException;
+use MvcCore\Jtl\Helpers\Response;
+use MvcCore\Jtl\Support\Http\Request;
 
 class Route
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Localization;
+namespace MvcCore\Jtl\Support\Facades\Localization;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Session;
+use MvcCore\Jtl\Support\Http\Session;
 
 class Currency
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Models;
+namespace MvcCore\Jtl\Models;
 
-use Plugin\JtlShopPluginStarterKit\Src\Database\Orm\Model;
+use MvcCore\Jtl\Database\Orm\Model;
 
 class Category extends Model
 {

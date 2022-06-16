@@ -1,8 +1,8 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Localization;
+namespace MvcCore\Jtl\Support\Facades\Localization;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Filesystem\DirectoryComposer;
+use MvcCore\Jtl\Support\Facades\Filesystem\DirectoryComposer;
 
 class Translate
 {

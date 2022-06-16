@@ -1,8 +1,8 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Router;
+namespace MvcCore\Jtl\Support\Facades\Router;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Debug\Debugger;
+use MvcCore\Jtl\Support\Debug\Debugger;
 
 class MiddlewareHandler
 {

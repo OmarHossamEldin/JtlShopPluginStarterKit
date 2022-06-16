@@ -1,11 +1,11 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Requests;
+namespace MvcCore\Jtl\Requests\Backend\Api;
 
-use Plugin\JtlShopPluginStarterKit\Src\Traits\ValidationTrait;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Request;
+use MvcCore\Jtl\Traits\ValidationTrait;
+use MvcCore\Jtl\Support\Http\Request;
 
-class ApiCredentialsStoreRequest extends Request
+class ApiCredentialsUpdateRequest extends Request
 {
     use ValidationTrait;
 

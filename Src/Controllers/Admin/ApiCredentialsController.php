@@ -1,28 +1,26 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Controllers\Admin;
+namespace MvcCore\Jtl\Controllers\Admin;
 
-use Plugin\JtlShopPluginStarterKit\Src\Helpers\Redirect;
-use Plugin\JtlShopPluginStarterKit\Src\Models\ApiCredentials;
-use Plugin\JtlShopPluginStarterKit\Src\Models\TokenParameter;
-use Plugin\JtlShopPluginStarterKit\Src\Requests\ApiCredentialsStoreRequest;
-use Plugin\JtlShopPluginStarterKit\Src\Requests\ApiCredentialsUpdateRequest;
-use Plugin\JtlShopPluginStarterKit\Src\Validations\Alerts;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\HttpRequest;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Request;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Server;
+use MvcCore\Jtl\Helpers\Redirect;
+use MvcCore\Jtl\Models\ApiCredentials;
+use MvcCore\Jtl\Models\TokenParameter;
+use MvcCore\Jtl\Requests\Backend\Api\ApiCredentialsStoreRequest;
+use MvcCore\Jtl\Requests\Backend\Api\ApiCredentialsUpdateRequest;
+use MvcCore\Jtl\Validations\Alerts;
+use MvcCore\Jtl\Support\Http\HttpRequest;
+use MvcCore\Jtl\Support\Http\Request;
+use MvcCore\Jtl\Support\Http\Server;
 use JTL\Shop;
-use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
-use Plugin\JtlShopPluginStarterKit\Src\Requests\ApiCredentialsDeleteRequest;
-use Plugin\JtlShopPluginStarterKit\Src\Requests\getCredentialRequest;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Debug\Debugger;
+use MvcCore\Jtl\Helpers\Response;
+use MvcCore\Jtl\Requests\ApiCredentialsDeleteRequest;
+use MvcCore\Jtl\Requests\getCredentialRequest;
+use MvcCore\Jtl\Support\Debug\Debugger;
 
 class ApiCredentialsController
 {
     public function index(Request $request)
     {
-        $smarty   = Shop::Smarty();
-
         $currentPage = isset($request->all()['page']) ? $request->all()['page'] : 1;
         $credential     = new ApiCredentials;
         $credentials    = $credential->select(

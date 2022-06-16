@@ -1,12 +1,12 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Services;
+namespace MvcCore\Jtl\Services;
 
-use Plugin\JtlShopPluginStarterKit\Src\Exceptions\DatabaseQueryException;
-use Plugin\JtlShopPluginStarterKit\Src\Exceptions\RouteNotFoundException;
-use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Router\Route;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Request;
+use MvcCore\Jtl\Exceptions\DatabaseQueryException;
+use MvcCore\Jtl\Exceptions\RouteNotFoundException;
+use MvcCore\Jtl\Helpers\Response;
+use MvcCore\Jtl\Support\Facades\Router\Route;
+use MvcCore\Jtl\Support\Http\Request;
 
 class RoutesService
 {

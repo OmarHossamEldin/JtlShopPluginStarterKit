@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Authentication;
+namespace MvcCore\Jtl\Support\Facades\Authentication;
 
 use JTL\Session\AbstractSession;
 use JTL\Shop;

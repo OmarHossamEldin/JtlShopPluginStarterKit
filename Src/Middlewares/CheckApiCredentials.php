@@ -1,12 +1,12 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Middlewares;
+namespace MvcCore\Jtl\Middlewares;
 
-use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Middleware\BaseMiddleware;
-use Plugin\JtlShopPluginStarterKit\Src\Models\ApiCredentials;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Debug\Debugger;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Request;
+use MvcCore\Jtl\Helpers\Response;
+use MvcCore\Jtl\Support\Facades\Middleware\BaseMiddleware;
+use MvcCore\Jtl\Models\ApiCredentials;
+use MvcCore\Jtl\Support\Debug\Debugger;
+use MvcCore\Jtl\Support\Http\Request;
 
 class CheckApiCredentials
 {

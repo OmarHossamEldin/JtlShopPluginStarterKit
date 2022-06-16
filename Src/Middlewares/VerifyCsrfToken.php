@@ -1,13 +1,13 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Middlewares;
+namespace MvcCore\Jtl\Middlewares;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Authentication\CsrfAuthentication;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Middleware\BaseMiddleware;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Localization\Translate;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Request;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Header;
-use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
+use MvcCore\Jtl\Support\Facades\Authentication\CsrfAuthentication;
+use MvcCore\Jtl\Support\Facades\Middleware\BaseMiddleware;
+use MvcCore\Jtl\Support\Facades\Localization\Translate;
+use MvcCore\Jtl\Support\Http\Request;
+use MvcCore\Jtl\Support\Http\Header;
+use MvcCore\Jtl\Helpers\Response;
 
 class VerifyCsrfToken extends BaseMiddleware
 {

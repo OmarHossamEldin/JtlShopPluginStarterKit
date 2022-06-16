@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Database\Initialization;
+namespace MvcCore\Jtl\Database\Initialization;
 
 class Seeder
 {

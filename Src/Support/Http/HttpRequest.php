@@ -1,10 +1,10 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Support\Http;
+namespace MvcCore\Jtl\Support\Http;
 
-use Plugin\JtlShopPluginStarterKit\Src\Exceptions\InvalidRequestException;
-use Plugin\JtlShopPluginStarterKit\Src\Exceptions\UnsupportedAuthenticationType;
-use Plugin\JtlShopPluginStarterKit\Src\Exceptions\UnsupportedRequestType;
+use MvcCore\Jtl\Exceptions\InvalidRequestException;
+use MvcCore\Jtl\Exceptions\UnsupportedAuthenticationType;
+use MvcCore\Jtl\Exceptions\UnsupportedRequestType;
 
 class HttpRequest
 {
