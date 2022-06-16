@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Cli;
+namespace MvcCore\Jtl\Support\Facades\Cli;
 
 class JtlArtisan
 {

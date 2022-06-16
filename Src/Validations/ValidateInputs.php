@@ -1,10 +1,10 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Validations;
+namespace MvcCore\Jtl\Validations;
 
-use Plugin\JtlShopPluginStarterKit\Src\Exceptions\UnsupportedValidationRuleException;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Localization\Translate;
-use Plugin\JtlShopPluginStarterKit\Src\Helpers\ArrayValidator;
+use MvcCore\Jtl\Exceptions\UnsupportedValidationRuleException;
+use MvcCore\Jtl\Support\Facades\Localization\Translate;
+use MvcCore\Jtl\Helpers\ArrayValidator;
 
 class ValidateInputs
 {

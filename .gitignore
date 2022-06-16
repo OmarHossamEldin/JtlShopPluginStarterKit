@@ -1,5 +1,2 @@
-.vscode
-.idea
-/Src/Resources/*.png
-/Src/Resources/*.jpg
-/Src/Resources/*.jpeg
+/vendor/
+.phpunit,result.cache

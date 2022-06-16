@@ -1,20 +1,26 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Controllers\Repository;
+namespace MvcCore\Jtl\Controllers\Repository;
 
-use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
-use Plugin\JtlShopPluginStarterKit\Src\Models\TokenParameter;
+use MvcCore\Jtl\Helpers\Response;
+use MvcCore\Jtl\Models\TokenParameter;
 use Carbon\Carbon;
-use Plugin\JtlShopPluginStarterKit\Src\Models\ApiCredentials;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\HttpRequest;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Server;
-use Plugin\JtlShopPluginStarterKit\Src\Helpers\Redirect;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Request;
+use MvcCore\Jtl\Models\ApiCredentials;
+use MvcCore\Jtl\Support\Http\HttpRequest;
+use MvcCore\Jtl\Support\Http\Server;
+use MvcCore\Jtl\Helpers\Redirect;
+use MvcCore\Jtl\Support\Http\Request;
 use JTL\Session\AbstractSession;
-use Plugin\JtlShopPluginStarterKit\Src\Models\OrderLink;
+use MvcCore\Jtl\Models\OrderLink;
 
 class FinalizePaymentController
 {
+        private TokenValidatorRepository $tokenValidatorRepository;
+
+        public function __construct()
+        {
+                $this->tokenValidatorRepository = new TokenValidatorRepository();
+        }
 
         public function confirm_payment(Request $request, $smarty)
         {
@@ -34,11 +40,8 @@ class FinalizePaymentController
                         if ($link['link_name'] === 'self') {
                                 $orderUrl = $link['order_link'];
                                 // send request 
-                                $checkToken = new CheckTokenExpiration;
-                                $results = $checkToken->check();
 
-                                $tokenName = $results['tokenName'];
-                                $tokenType = $results['tokenType'];
+                                [$tokenName, $tokenType] = $this->tokenValidatorRepository->get_token_data();
 
 
                                 $curl = new HttpRequest(
@@ -47,12 +50,12 @@ class FinalizePaymentController
 
                                 $requestSent = $curl->get(
                                         '',
+                                        $tokenType,
                                         [],
                                         [
                                                 "Content-Type: application/json",
                                                 "Authorization: $tokenType $tokenName"
-                                        ],
-                                        $tokenType
+                                        ]   
                                 );
 
                                 /** remember to save links in database */
@@ -72,24 +75,20 @@ class FinalizePaymentController
                                 $completeUrl = $link['order_link'];
                                 //send post request to this url intent CAPTURE / POST request
 
-                                $checkToken = new CheckTokenExpiration;
-                                $results = $checkToken->check();
-
-                                $tokenName = $results['tokenName'];
-                                $tokenType = $results['tokenType'];
+                                [$tokenName, $tokenType] = $this->tokenValidatorRepository->get_token_data();
 
                                 $curl = new HttpRequest($completeUrl);
 
                                 $completePaymentUrl = $curl->post(
                                         '',
+                                        $tokenType,
                                         [
                                                 "intent" => "CAPTURE",
                                         ],
                                         [
                                                 "Content-Type: application/json",
                                                 "Authorization: $tokenType $tokenName"
-                                        ],
-                                        $tokenType
+                                        ]
                                 );
 
                                 $orderId = $completePaymentUrl['id'];

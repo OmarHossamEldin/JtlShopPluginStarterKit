@@ -1,7 +1,6 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Database\Initialization;
-
+namespace MvcCore\Jtl\Database\Initialization;
 
 class Migration
 {
@@ -9,10 +8,10 @@ class Migration
     {
         foreach ($tables as $table) {
             $table = new $table();
-            if ($type === 'up') {
-                $table->up();
-            } else if ($type === 'down') {
-                $table->down();
+            if ($type === 'run_up') {
+                $table->run_up();
+            } else if ($type === 'run_down') {
+                $table->run_down();
             }
         }
     }

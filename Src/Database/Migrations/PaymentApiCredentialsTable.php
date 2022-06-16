@@ -1,13 +1,13 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Database\Migrations;
+namespace MvcCore\Jtl\Database\Migrations;
 
-use Plugin\JtlShopPluginStarterKit\Src\Database\Initialization\Schema;
-use Plugin\JtlShopPluginStarterKit\Src\Database\Initialization\Table;
+use MvcCore\Jtl\Database\Initialization\Schema;
+use MvcCore\Jtl\Database\Initialization\Table;
 
 class PaymentApiCredentialsTable
 {
-    public function up()
+    public function run_up()
     {
         Schema::create('tec_see_api_credentials', function (Table $table) {
             $table->id();
@@ -18,7 +18,7 @@ class PaymentApiCredentialsTable
         });
     }
 
-    public function down()
+    public function run_down()
     {
         Schema::dropIfExists('tec_see_api_credentials');
     }

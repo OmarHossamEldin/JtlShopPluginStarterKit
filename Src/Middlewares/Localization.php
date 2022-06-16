@@ -1,8 +1,8 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Middlewares;
+namespace MvcCore\Jtl\Middlewares;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Localization\Translate;
+use MvcCore\Jtl\Support\Facades\Localization\Translate;
 use JTL\Shop;
 
 class Localization
@@ -11,7 +11,7 @@ class Localization
     {
         $smarty        = Shop::Smarty();
 
-        $translations = Translate::getTranslations('frontend');
+        $translations['frontend'] = Translate::getTranslations('frontend');
 
         $smarty->assign('translations', $translations);
     }

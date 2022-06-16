@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Exceptions;
+namespace MvcCore\Jtl\Exceptions;
 
 class UnsupportedValidationRuleException extends \Exception
 {

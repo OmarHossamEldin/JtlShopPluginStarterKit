@@ -1,9 +1,9 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Database\Initialization;
+namespace MvcCore\Jtl\Database\Initialization;
 
-use Plugin\JtlShopPluginStarterKit\Src\Database\Initialization\Connection;
-use Plugin\JtlShopPluginStarterKit\Src\Exceptions\DatabaseQueryException;
+use MvcCore\Jtl\Database\Initialization\Connection;
+use MvcCore\Jtl\Exceptions\DatabaseQueryException;
 
 class Schema extends Connection
 {

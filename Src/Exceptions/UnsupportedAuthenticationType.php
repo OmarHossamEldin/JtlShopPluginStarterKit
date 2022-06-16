@@ -1,8 +1,8 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Exceptions;
+namespace MvcCore\Jtl\Exceptions;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Debug\Debugger;
+use MvcCore\Jtl\Support\Debug\Debugger;
 
 class UnsupportedAuthenticationType extends \Exception
 {

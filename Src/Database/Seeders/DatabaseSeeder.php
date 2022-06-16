@@ -1,13 +1,15 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Database\Seeders;
+namespace MvcCore\Jtl\Database\Seeders;
 
-
-class DatabaseSeeder
+use MvcCore\Jtl\Database\Initialization\Seeder;
+class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        $postSeeder = new PostsSeeder();
-        $postSeeder->create();
+        $this->call([
+            CategoriesSeeder::class,
+            PostsSeeder::class,
+        ]);
     }
 }

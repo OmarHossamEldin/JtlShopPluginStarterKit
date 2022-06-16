@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Authentication;
+namespace MvcCore\Jtl\Support\Facades\Authentication;
 
 use JTL\Session\AbstractSession;
 use JTL\Shop;
@@ -31,5 +31,10 @@ class CsrfAuthentication
     public static function validate_token(?string $token = null): bool
     {
         return $token ? $token === AbstractSession::get('jtl_token') :  false;
+    }
+
+    public static function get_token(): string
+    {
+        return AbstractSession::get('jtl_token');
     }
 }

@@ -1,22 +1,24 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Database\Seeders;
+namespace MvcCore\Jtl\Database\Seeders;
 
-use Plugin\JtlShopPluginStarterKit\Src\Support\Facades\Faker\Faker;
-use Plugin\JtlShopPluginStarterKit\Src\Models\Post;
+use MvcCore\Jtl\Support\Facades\Faker\Faker;
+use MvcCore\Jtl\Models\Post;
 
 class PostsSeeder
 {
     public function create()
     {
         $faker = new Faker();
-        for ($i = 0; $i <= 7; $i++) {
+        for ($i = 1; $i <= 7; $i++) {
             $post     = new Post();
-            $faker->fakerImage('posts', "picture$i.jpg");
+            //$faker->fakerImage('posts', "picture$i.jpg");
             $post->create([
                 'title' => 'title' . $i,
                 'body' => 'body' . $i,
-                'image_path' => "picture$i.jpg"
+                'tec_see_category_id' => $i,
+                'quantity' => $i * 20,
+                //'image_path' => "picture$i.jpg"
             ]);
         }
     }

@@ -1,25 +1,31 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Middlewares;
+namespace MvcCore\Jtl\Middlewares;
 
-use Plugin\JtlShopPluginStarterKit\Src\Validations\Alerts;
-use Plugin\JtlShopPluginStarterKit\Src\Models\ApiCredentials;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Request;
+use MvcCore\Jtl\Helpers\Response;
+use MvcCore\Jtl\Support\Facades\Middleware\BaseMiddleware;
+use MvcCore\Jtl\Models\ApiCredentials;
+use MvcCore\Jtl\Support\Debug\Debugger;
+use MvcCore\Jtl\Support\Http\Request;
 
 class CheckApiCredentials
 {
     public static function handle()
     {
-
         $request = new Request;
-        if (count($request->all()) > 1) {
+        $data = $request->all();
+
+        if(count($data) > 3){
             $credential     = new ApiCredentials;
 
-            $searchForCredentials    = $credential->select('business_account','client_id','secret_key')->get();
+            $searchForCredentials    = $credential->select('client_id')->get();
 
             if (empty($searchForCredentials)) {
-                Alerts::show('warning', ['Note: You have to store Api crderntials first.']);
+                return Response::json([
+                    'message' => 'Note: You have to store Api credentials first.',
+                ], 422);
             }
         }
+        
     }
 }

@@ -1,10 +1,12 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Support\Http;
+namespace MvcCore\Jtl\Support\Http;
 
 class Request
 {
     private static array $data = [];
+
+    private static array $routeParams = [];
 
     public function __construct()
     {
@@ -51,6 +53,21 @@ class Request
     public function all()
     {
         return self::$data;
+    }
+
+    public function set_route_params($params): self
+    {
+        foreach ($params as  &$param) {
+            filter_var($param,  FILTER_SANITIZE_SPECIAL_CHARS);
+        }
+        unset($param);
+        self::$routeParams = $params;
+        return $this;
+    }
+
+    public function get_route_params(): array
+    {
+        return self::$routeParams;
     }
 
     public function unset(...$elements)

@@ -1,13 +1,13 @@
 <?php
 
-namespace Plugin\JtlShopPluginStarterKit\Src\Traits;
+namespace MvcCore\Jtl\Traits;
 
-use Plugin\JtlShopPluginStarterKit\Src\Validations\ValidateInputs;
-use Plugin\JtlShopPluginStarterKit\Src\Helpers\ArrayValidator;
-use Plugin\JtlShopPluginStarterKit\Src\Validations\Alerts;
-use Plugin\JtlShopPluginStarterKit\Src\Helpers\Response;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Debug\Debugger;
-use Plugin\JtlShopPluginStarterKit\Src\Support\Http\Header;
+use MvcCore\Jtl\Validations\ValidateInputs;
+use MvcCore\Jtl\Helpers\ArrayValidator;
+use MvcCore\Jtl\Validations\Alerts;
+use MvcCore\Jtl\Helpers\Response;
+use MvcCore\Jtl\Support\Debug\Debugger;
+use MvcCore\Jtl\Support\Http\Header;
 
 trait ValidationTrait
 {
