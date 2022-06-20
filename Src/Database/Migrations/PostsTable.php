@@ -2,15 +2,14 @@
 
 namespace MvcCore\Jtl\Database\Migrations;
 
-use MvcCore\Jtl\Database\Initialization\Schema;
-use MvcCore\Jtl\Database\Initialization\Table;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 class PostsTable
 {
     public function run_up()
     {
-        Schema::create('tec_see_posts', function (Table $table) {
-            $table->id();
+        Capsule::schema()->create('tec_see_posts', function ($table) {
+            $table->increments('id');
             $table->string('title');
             $table->string('body');
             $table->string('quantity');
@@ -21,6 +20,6 @@ class PostsTable
 
     public function run_down()
     {
-        Schema::dropIfExists('tec_see_posts');
+        Capsule::schema()->dropIfExists('tec_see_posts');
     }
 }

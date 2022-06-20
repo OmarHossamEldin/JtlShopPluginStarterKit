@@ -2,7 +2,7 @@
 
 namespace MvcCore\Jtl\Models;
 
-use MvcCore\Jtl\Database\Orm\Model;
+use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
@@ -12,8 +12,7 @@ class Category extends Model
 
     protected $fillable = [
         'name',
-        'description',
-        //'image_path'
+        'description'
     ];
 
     public function posts()

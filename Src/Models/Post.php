@@ -2,7 +2,7 @@
 
 namespace MvcCore\Jtl\Models;
 
-use MvcCore\Jtl\Database\Orm\Model;
+use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {

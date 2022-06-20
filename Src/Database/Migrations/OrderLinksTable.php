@@ -2,15 +2,14 @@
 
 namespace MvcCore\Jtl\Database\Migrations;
 
-use MvcCore\Jtl\Database\Initialization\Schema;
-use MvcCore\Jtl\Database\Initialization\Table;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 class OrderLinksTable
 {
     public function run_up()
     {
-        Schema::create('tec_see_order_links', function (Table $table) {
-            $table->id();
+        Schema::create('tec_see_order_links', function ($table) {
+            $table->increments('id');
             $table->string('order_id');
             $table->string('order_status');
             $table->string('order_link');
@@ -22,6 +21,6 @@ class OrderLinksTable
 
     public function run_down()
     {
-        Schema::dropIfExists('tec_see_order_links');
+        Capsule::schema()->dropIfExists('tec_see_order_links');
     }
 }

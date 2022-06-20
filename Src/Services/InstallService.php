@@ -3,14 +3,17 @@
 namespace MvcCore\Jtl\Services;
 
 use MvcCore\Jtl\Database\Migrations\DataBaseMigrations;
+use MvcCore\Jtl\Support\Facades\Filesystem\Storage;
+use MvcCore\Jtl\Database\Initialization\Database;
 use MvcCore\Jtl\Database\Seeders\DatabaseSeeder;
 use MvcCore\Jtl\Support\Debug\Debugger;
-use MvcCore\Jtl\Support\Facades\Filesystem\Storage;
 
 class InstallService
 {
 
     private Storage $storage;
+
+    private Database $database;
 
     private DataBaseMigrations $dataBaseMigrations;
 
@@ -21,6 +24,7 @@ class InstallService
         $this->storage = new Storage();
         $this->dataBaseMigrations = new DataBaseMigrations();
         $this->databaseSeeder = new DatabaseSeeder();
+        $this->database = new Database();
     }
     /**
      * * it's migrate database tables  and create seeders when plugin installed
@@ -29,6 +33,9 @@ class InstallService
     public function install()
     {
         $start = microtime(true);
+        
+        $this->database->connect();
+       
         $this->dataBaseMigrations->run_up();
 
         $this->databaseSeeder->run();
