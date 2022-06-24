@@ -1,6 +1,6 @@
 <?php
 
-namespace MvcCore\Jtl\Controllers\Repository;
+namespace MvcCore\Jtl\Controllers\Repository\Subscription;
 
 use MvcCore\Jtl\Support\Http\HttpRequest;
 use MvcCore\Jtl\Helpers\Response;
