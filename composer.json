@@ -3,6 +3,11 @@
     "description": "mvc-core",
     "type": "project",
     "license": "MIT",
+    "require": {
+        "php": ">=7.4",
+        "phpmailer/phpmailer": "dev-master",
+        "illuminate/database": "9.x-dev"
+    },
     "autoload": {
         "psr-4": {
             "MvcCore\\Jtl\\": "Src/"
@@ -29,9 +34,5 @@
             "name": "Mohammed-fathy",
             "email": "Mohamedfathy573@gmail.com"
         }
-    ],
-    "require": {
-        "phpmailer/phpmailer": "dev-master",
-        "illuminate/database": "9.x-dev"
-    }
+    ]
 }

@@ -10,26 +10,30 @@ use JTL\Plugin\Bootstrapper;
 use JTL\Smarty\JTLSmarty;
 use MvcCore\Jtl\Services\InstallService;
 use MvcCore\Jtl\Services\RoutesService;
-use JTL\Shop;
+use Shop;
+
+require_once __DIR__ . '/vendor/autoload.php';
 /**
  * Class Bootstrap
  * @package Plugin\JtlShopPluginStarterKit
  */
 class Bootstrap extends Bootstrapper
 {
+    private RoutesService $routesService;
+    private InstallService $installService;
     /**
      * @inheritdoc
      */
     public function boot(Dispatcher $dispatcher)
     {
         parent::boot($dispatcher);
+        $this->routesService = new RoutesService();
+        $this->installService = new InstallService();
         if (Shop::isFrontend()) {
-            $routes = new RoutesService();
-            $dispatcher->listen('shop.hook.' . \HOOK_IO_HANDLE_REQUEST, fn (array $args) => $routes->frontend_endpoints(), 1);
-            $dispatcher->listen('shop.hook.' . \HOOK_SMARTY_FETCH_TEMPLATE, fn () => $routes->frontend_executions(), 1);
+            $dispatcher->listen('shop.hook.' . \HOOK_IO_HANDLE_REQUEST, fn (array $args) => $this->routesService->frontend_endpoints(), 1);
+            $dispatcher->listen('shop.hook.' . \HOOK_SMARTY_FETCH_TEMPLATE, fn () => $this->routesService->frontend_executions(), 1);
         } else {
-            $routes = new RoutesService();
-            $dispatcher->listen('shop.hook.' . \HOOK_IO_HANDLE_REQUEST_ADMIN, fn (array $args) => $routes->backend_endpoints(), 1);
+            $dispatcher->listen('shop.hook.' . \HOOK_IO_HANDLE_REQUEST_ADMIN, fn (array $args) => $this->routesService->backend_endpoints(), 1);
         }
     }
 
@@ -39,9 +43,7 @@ class Bootstrap extends Bootstrapper
     public function installed()
     {
         parent::installed();
-
-        $withInstall = new InstallService;
-        $withInstall->install();
+        $this->installService->install();
     }
 
     /**
@@ -56,8 +58,7 @@ class Bootstrap extends Bootstrapper
     public function uninstalled(bool $deleteData = false)
     {
         if ($deleteData === true) {
-            $deleteTables = new InstallService;
-            $deleteTables->unInstall();
+            $this->installService->unInstall();
         }
     }
     /**
@@ -67,10 +68,9 @@ class Bootstrap extends Bootstrapper
      */
     public function renderAdminMenuTab(string $template, int $menuID, JTLSmarty $smarty): string
     {
-       $routes = new RoutesService();
-        $routes->backend_executions(); 
-        $render = new AdminRender($this->getPlugin());
-        return $render->renderPage($template, $smarty);
+        $this->routesService->backend_executions();
+        $adminRender = new AdminRender($this->getPlugin());
+        return $adminRender->renderPage($template, $smarty);
     }
 
     /**

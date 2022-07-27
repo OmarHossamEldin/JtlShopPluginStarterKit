@@ -3,6 +3,7 @@
 namespace MvcCore\Jtl\Database\Initialization;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
+use MvcCore\Jtl\Support\Debug\Debugger;
 
 class Database
 {
@@ -13,6 +14,10 @@ class Database
 
     public function __construct()
     {
+        (new Debugger)->log(\DB_HOST);
+        (new Debugger)->log(\DB_NAME);
+        (new Debugger)->log(\DB_USER);
+        (new Debugger)->log(\DB_PASS);
         $this->host = \DB_HOST;
         $this->name = \DB_NAME;
         $this->user = \DB_USER;
