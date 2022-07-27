@@ -1,6 +1,6 @@
 <?php
 
-namespace MvcCore\Jtl\Controllers\Repository;
+namespace MvcCore\Jtl\Controllers\Repository\Checkout;
 
 use JTL\Shop;
 use JTL\Session\Frontend;
