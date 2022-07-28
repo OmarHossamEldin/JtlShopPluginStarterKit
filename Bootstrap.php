@@ -43,6 +43,7 @@ class Bootstrap extends Bootstrapper
     public function installed()
     {
         parent::installed();
+        $this->installService = new InstallService();
         $this->installService->install();
     }
 
@@ -58,6 +59,7 @@ class Bootstrap extends Bootstrapper
     public function uninstalled(bool $deleteData = false)
     {
         if ($deleteData === true) {
+            $this->installService = new InstallService();
             $this->installService->unInstall();
         }
     }

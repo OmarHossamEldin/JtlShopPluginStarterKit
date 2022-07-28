@@ -6,9 +6,9 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 class OrderLinksTable
 {
-    public function run_up()
+    public function up()
     {
-        Schema::create('tec_see_order_links', function ($table) {
+        Capsule::schema()->create('order_links', function ($table) {
             $table->increments('id');
             $table->string('order_id');
             $table->string('order_status');
@@ -19,8 +19,8 @@ class OrderLinksTable
         });
     }
 
-    public function run_down()
+    public function down()
     {
-        Capsule::schema()->dropIfExists('tec_see_order_links');
+        Capsule::schema()->dropIfExists('order_links');
     }
 }

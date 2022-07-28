@@ -6,9 +6,9 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 class TokenParametersTable
 {
-    public function run_up()
+    public function up()
     {
-        Capsule::schema()->create('tec_see_token_parameters', function ($table) {
+        Capsule::schema()->create('token_parameters', function ($table) {
             $table->increments('id');
             $table->string('token_name');
             $table->string('token_type');
@@ -17,8 +17,8 @@ class TokenParametersTable
         });
     }
 
-    public function run_down()
+    public function down()
     {
-        Capsule::schema()->dropIfExists('tec_see_token_parameters');
+        Capsule::schema()->dropIfExists('token_parameters');
     }
 }

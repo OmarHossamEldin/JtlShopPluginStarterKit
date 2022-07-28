@@ -6,9 +6,9 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 class CategoriesTable
 {
-    public function run_up()
+    public function up()
     {
-        Capsule::schema()->create('tec_see_categories', function ($table) {
+        Capsule::schema()->create('categories', function ($table) {
             $table->increments('id');
             $table->string('name');
             $table->string('description');
@@ -16,8 +16,8 @@ class CategoriesTable
         });
     }
 
-    public function run_down()
+    public function down()
     {
-        Capsule::schema()->dropIfExists('tec_see_categories');
+        Capsule::schema()->dropIfExists('categories');
     }
 }

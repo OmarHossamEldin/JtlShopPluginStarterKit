@@ -6,9 +6,9 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 class PostsTable
 {
-    public function run_up()
+    public function up()
     {
-        Capsule::schema()->create('tec_see_posts', function ($table) {
+        Capsule::schema()->create('posts', function ($table) {
             $table->increments('id');
             $table->string('title');
             $table->string('body');
@@ -18,8 +18,8 @@ class PostsTable
         });
     }
 
-    public function run_down()
+    public function down()
     {
-        Capsule::schema()->dropIfExists('tec_see_posts');
+        Capsule::schema()->dropIfExists('posts');
     }
 }

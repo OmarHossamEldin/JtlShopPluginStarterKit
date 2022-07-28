@@ -6,9 +6,9 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 class EmailCredentialsTable 
 {
-    public function run_up()
+    public function up()
     {
-        Capsule::schema()->create('tec_see_email_credentials', function ($table) {
+        Capsule::schema()->create('email_credentials', function ($table) {
             $table->increments('id');
             $table->string('email')->unique('email');
             $table->string('mail_host');
@@ -19,8 +19,8 @@ class EmailCredentialsTable
         });
     }
 
-    public function run_down()
+    public function down()
     {
-        Capsule::schema()->dropIfExists('tec_see_email_credentials');
+        Capsule::schema()->dropIfExists('email_credentials');
     }
 }

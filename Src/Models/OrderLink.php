@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderLink extends Model
 {
-    protected $table    = 'tec_see_order_links';
+    protected $table    = 'order_links';
 
     protected $primaryKey  = 'id';
 

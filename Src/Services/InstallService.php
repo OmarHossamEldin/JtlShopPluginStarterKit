@@ -36,11 +36,11 @@ class InstallService
         
         $this->database->connect();
        
-        $this->dataBaseMigrations->run_up();
+        $this->dataBaseMigrations->up();
 
         $this->databaseSeeder->run();
 
-        $this->storage->load_resources('Resources', 'images');
+        //$this->storage->load_resources('Resources', 'images');
 
         $end = microtime(true);
         $debugger = new Debugger();
@@ -50,7 +50,8 @@ class InstallService
 
     public function unInstall()
     {
-        $this->dataBaseMigrations->run_down();
-        $this->storage->unload_resources('Resources/images');
+        $this->database->connect();
+        $this->dataBaseMigrations->down();
+        //$this->storage->unload_resources('Resources/images');
     }
 }

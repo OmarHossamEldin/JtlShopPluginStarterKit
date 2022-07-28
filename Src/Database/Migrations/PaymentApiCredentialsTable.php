@@ -6,9 +6,9 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 class PaymentApiCredentialsTable
 {
-    public function run_up()
+    public function up()
     {
-        Capsule::schema()->create('tec_see_api_credentials', function ($table) {
+        Capsule::schema()->create('api_credentials', function ($table) {
             $table->increments('id');
             $table->string('business_account');
             $table->string('client_id');
@@ -17,8 +17,8 @@ class PaymentApiCredentialsTable
         });
     }
 
-    public function run_down()
+    public function down()
     {
-        Capsule::schema()->dropIfExists('tec_see_api_credentials');
+        Capsule::schema()->dropIfExists('api_credentials');
     }
 }

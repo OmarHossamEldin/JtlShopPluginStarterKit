@@ -1,6 +1,6 @@
 <?php
 
-namespace MvcCore\Jtl\Controllers\Repository\Checkout;
+namespace MvcCore\Jtl\Controllers\Repository;
 
 use MvcCore\Jtl\Support\Http\HttpRequest;
 use MvcCore\Jtl\Support\Http\Server;

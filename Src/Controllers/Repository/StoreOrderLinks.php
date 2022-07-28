@@ -1,6 +1,6 @@
 <?php
 
-namespace MvcCore\Jtl\Controllers\Repository\Checkout;
+namespace MvcCore\Jtl\Controllers\Repository;
 
 use MvcCore\Jtl\Models\OrderLink;
 
