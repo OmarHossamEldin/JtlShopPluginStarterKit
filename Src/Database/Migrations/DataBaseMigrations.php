@@ -6,7 +6,7 @@ use MvcCore\Jtl\Database\Initialization\Migration;
 
 class DataBaseMigrations extends Migration
 {
-    public function run_up()
+    public function up()
     {
         $this->call([
             CategoriesTable::class,
@@ -15,10 +15,10 @@ class DataBaseMigrations extends Migration
             TokenParametersTable::class,
             OrderLinksTable::class,
             EmailCredentialsTable::class,
-        ], 'run_up');
+        ], 'up');
     }
 
-    public function run_down()
+    public function down()
     {
         $this->call([
             OrderLinksTable::class,
@@ -27,6 +27,6 @@ class DataBaseMigrations extends Migration
             PostsTable::class,
             CategoriesTable::class,
             EmailCredentialsTable::class,
-        ], 'run_down');
+        ], 'down');
     }
 }

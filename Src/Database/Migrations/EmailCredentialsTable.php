@@ -2,16 +2,14 @@
 
 namespace MvcCore\Jtl\Database\Migrations;
 
-use MvcCore\Jtl\Database\Initialization\Migration;
-use MvcCore\Jtl\Database\Initialization\Schema;
-use MvcCore\Jtl\Database\Initialization\Table;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
-class EmailCredentialsTable extends Migration
+class EmailCredentialsTable 
 {
-    public function run_up()
+    public function up()
     {
-        Schema::create('tec_see_email_credentials', function (Table $table) {
-            $table->id();
+        Capsule::schema()->create('email_credentials', function ($table) {
+            $table->increments('id');
             $table->string('email')->unique('email');
             $table->string('mail_host');
             $table->string('username');
@@ -21,8 +19,8 @@ class EmailCredentialsTable extends Migration
         });
     }
 
-    public function run_down()
+    public function down()
     {
-        Schema::dropIfExists('tec_see_email_credentials');
+        Capsule::schema()->dropIfExists('email_credentials');
     }
 }

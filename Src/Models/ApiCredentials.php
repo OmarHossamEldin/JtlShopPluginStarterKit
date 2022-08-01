@@ -2,11 +2,11 @@
 
 namespace MvcCore\Jtl\Models;
 
-use MvcCore\Jtl\Database\Orm\Model;
+use Illuminate\Database\Eloquent\Model;
 
 class ApiCredentials extends Model
 {
-    protected $table    = 'tec_see_api_credentials';
+    protected $table    = 'api_credentials';
 
     protected $primaryKey  = 'id';
 

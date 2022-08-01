@@ -2,15 +2,14 @@
 
 namespace MvcCore\Jtl\Database\Migrations;
 
-use MvcCore\Jtl\Database\Initialization\Schema;
-use MvcCore\Jtl\Database\Initialization\Table;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 class TokenParametersTable
 {
-    public function run_up()
+    public function up()
     {
-        Schema::create('tec_see_token_parameters', function (Table $table) {
-            $table->id();
+        Capsule::schema()->create('token_parameters', function ($table) {
+            $table->increments('id');
             $table->string('token_name');
             $table->string('token_type');
             $table->string('token_expiration');
@@ -18,8 +17,8 @@ class TokenParametersTable
         });
     }
 
-    public function run_down()
+    public function down()
     {
-        Schema::dropIfExists('tec_see_token_parameters');
+        Capsule::schema()->dropIfExists('token_parameters');
     }
 }

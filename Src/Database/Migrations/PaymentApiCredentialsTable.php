@@ -2,15 +2,14 @@
 
 namespace MvcCore\Jtl\Database\Migrations;
 
-use MvcCore\Jtl\Database\Initialization\Schema;
-use MvcCore\Jtl\Database\Initialization\Table;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 class PaymentApiCredentialsTable
 {
-    public function run_up()
+    public function up()
     {
-        Schema::create('tec_see_api_credentials', function (Table $table) {
-            $table->id();
+        Capsule::schema()->create('api_credentials', function ($table) {
+            $table->increments('id');
             $table->string('business_account');
             $table->string('client_id');
             $table->string('secret_key');
@@ -18,8 +17,8 @@ class PaymentApiCredentialsTable
         });
     }
 
-    public function run_down()
+    public function down()
     {
-        Schema::dropIfExists('tec_see_api_credentials');
+        Capsule::schema()->dropIfExists('api_credentials');
     }
 }
